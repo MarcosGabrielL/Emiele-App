@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/linearLayout5"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_weight=".50"
+        android:background="@drawable/arredondado_vermelho_gradient"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/activity_vertical_margin">
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@android:color/transparent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_baseline_favorite_24" />
+
+
+        <ImageView
+            android:id="@+id/lista_curso_personalizada_imagem"
+            android:layout_width="0dp"
+            android:layout_height="120dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginStart="30dp"
+            android:adjustViewBounds="false"
+            android:background="@drawable/rounded"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageButton"
+            app:srcCompat="@drawable/pizzaconchorizo" />
+
+        <ImageView
+            android:id="@+id/imageView14"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="4dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="@+id/lista_curso_personalizada_nome"
+            app:layout_constraintStart_toEndOf="@+id/lista_curso_personalizada_nome"
+            app:layout_constraintTop_toTopOf="@+id/lista_curso_personalizada_nome"
+            app:srcCompat="@drawable/rating" />
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/lista_curso_personalizada_descricao" />
+
+        <TextView
+            android:id="@+id/lista_curso_personalizada_descricao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="8dp"
+            android:text="Pizza Calabresa"
+            android:textColor="#333"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/lista_curso_personalizada_nome"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lista_curso_personalizada_imagem" />
+
+        <TextView
+            android:id="@+id/lista_curso_personalizada_descricao2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="30dp"
+            android:text="R$19,90"
+            android:textColor="#333"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/lista_curso_personalizada_nome"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/lista_curso_personalizada_nome" />
+
+        <TextView
+            android:id="@+id/lista_curso_personalizada_nome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginStart="30dp"
+            android:text="4.0"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/lista_curso_personalizada_nome2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginStart="4dp"
+            android:text="425"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView14"
+            app:layout_constraintTop_toTopOf="@+id/imageView14" />
+
+
+    </android.support.constraint.ConstraintLayout>
+
+
+</LinearLayout>

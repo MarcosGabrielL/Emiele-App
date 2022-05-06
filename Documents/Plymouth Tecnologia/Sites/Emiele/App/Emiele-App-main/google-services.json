@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "190834021118",
+    "firebase_url": "https://resonant-ward-241706.firebaseio.com",
+    "project_id": "resonant-ward-241706",
+    "storage_bucket": "resonant-ward-241706.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:190834021118:android:4ee401fec282cd45",
+        "android_client_info": {
+          "package_name": "br.com.softsaj.gibgasbeta"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "190834021118-158j03mfprua5mrokvlv5vkucaj9ffg2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.com.softsaj.gibgasbeta",
+            "certificate_hash": "f1e6e27a0cdfe01b701fa8c867f43f8c0db57561"
+          }
+        },
+        {
+          "client_id": "190834021118-r6mjeg3is9jca8ga0fdaa6j9sbjtquap.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBr4tTk3VebmGsBQxNVUQpxZxV-HfMm9RY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "190834021118-r6mjeg3is9jca8ga0fdaa6j9sbjtquap.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

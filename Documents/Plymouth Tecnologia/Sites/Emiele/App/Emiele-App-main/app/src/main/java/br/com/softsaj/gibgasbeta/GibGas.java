@@ -3,6 +3,7 @@ package br.com.softsaj.gibgasbeta;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,7 +13,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.json.JSONException;
 
 import Bean.Remetentes;
 import Bean.StoreManager;
@@ -32,6 +36,8 @@ public class GibGas extends AppCompatActivity
     public static boolean chamou;
 
     String tip;
+    FloatingActionButton fab;
+    public static TextView quantidade;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,13 +49,33 @@ public class GibGas extends AppCompatActivity
         //toolbar.set
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        quantidade = (TextView) findViewById(R.id.textView54123);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                alert("Notificações");
+                fab.hide();
+                quantidade.setVisibility(View.INVISIBLE);
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container, new Cart()).commit();
+
             }
         });
+
+
+
+        StoreManager a = new StoreManager(GibGas.this);
+        try {
+            Log.i("Tracee","0: ");
+            int i = a.getCountCart();
+            Log.i("Tracee","1: ");
+            setQuantidade(i);
+            Log.i("Tracee","2");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -115,7 +141,7 @@ public class GibGas extends AppCompatActivity
         if(id == R.id.nav_inicio){
             //Volta ao inicio
             getSupportFragmentManager().beginTransaction().replace(R.id.container, new CardapioFragment()).commit();
-
+            fab.show();
         }else if (id == R.id.nav_perfil) {
             //Chama Perfil
 
@@ -174,5 +200,22 @@ public class GibGas extends AppCompatActivity
 
     public static Transportador getTransportador(){
         return  transportador;
+    }
+
+    public static void setQuantidade(int q){
+        Log.i("Tracee","getHeight[]: "+q);
+        if(q>=1) {
+            if(q>=10) {
+                quantidade.setVisibility(View.VISIBLE);
+                quantidade.setText("" + q);
+            }else{
+                quantidade.setVisibility(View.VISIBLE);
+                quantidade.setText(" " + q+" ");
+            }
+        }else{
+            quantidade.setVisibility(View.INVISIBLE);
+
+        }
+
     }
 }

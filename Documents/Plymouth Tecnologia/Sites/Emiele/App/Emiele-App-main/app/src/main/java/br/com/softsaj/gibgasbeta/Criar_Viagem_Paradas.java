@@ -197,12 +197,11 @@ public class Criar_Viagem_Paradas extends Fragment {
             paradas.add(p);
             viagem.setParadas(paradas);
 
-            adapterparadas = new AdapterParadas(paradas, getActivity());
-            listaDeParadas.setAdapter(adapterparadas);
-
+          //  adapterparadas = new AdapterParadas(paradas, getActivity());
+//
         }else {
-            adapterparadas = new AdapterParadas(viagem.getParadas(), getActivity());
-            listaDeParadas.setAdapter(adapterparadas);
+            //adapterparadas = new AdapterParadas(viagem.getParadas(), getActivity());
+            //listaDeParadas.setAdapter(adapterparadas);
 
         }
 

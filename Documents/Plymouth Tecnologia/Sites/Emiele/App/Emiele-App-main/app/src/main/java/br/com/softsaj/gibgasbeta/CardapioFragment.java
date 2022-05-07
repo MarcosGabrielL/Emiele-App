@@ -59,11 +59,16 @@ public class CardapioFragment extends Fragment {
                 // TODO Auto-generated method stub
                 //alert("Escolheu");
                 //Remessa remessa = (Remessa) adapter.getItemAtPosition(posicao);
+
                 ProdutoDTO produtoDTO = adapterProdutoDTO.getItem(posicao);
-                //alert("Remessa idChamada: "+ produtoDTO.getIdChamada());
+                //alert("Prodto: "+ new Gson().toJson(produtoDTO));
 
                 //Pega quantidade
-                produtoDTO.setQuantidade(1);
+                produtoDTO.setQuantidade(3);
+                //calcula subtotal
+                float total = produtoDTO.getQuantidade()*Float.parseFloat(produtoDTO.getPrecoun().replace(",","."));
+                produtoDTO.setSubTotal(total);
+
 
                 //Adiciona produto ao Carrinho
                 StoreManager a = new StoreManager(getActivity().getApplicationContext());
@@ -124,11 +129,12 @@ public class CardapioFragment extends Fragment {
                     for (int i =0; i < myResponse.length(); i++){
                         JSONObject obj = myResponse.getJSONObject(i);
                         ProdutoDTO produto = new ProdutoDTO();
+                        produto.setId(obj.getLong("id"));
                         produto.setCodigo(obj.getString("codigo"));
                         produto.setPrecoun(obj.getString("precoun"));
                        // produto.setBitmap(new JSONArray(obj.getString("files")).getJSONObject(0).get("data"),0,  );
                         produto.setData(new JSONArray(obj.getString("files")).getJSONObject(0).getString("data"));
-                        Log.i("Tracee",produto.getData());
+                        //Log.i("Tracee",produto.getData());
                         lista_de_produtos.add(produto);
                     }
 

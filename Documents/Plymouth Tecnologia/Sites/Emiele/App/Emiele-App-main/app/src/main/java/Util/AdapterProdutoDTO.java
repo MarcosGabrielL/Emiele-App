@@ -75,39 +75,7 @@ public class AdapterProdutoDTO extends BaseAdapter {
         quantidadevotos.setText(""+new Random().nextInt(100-10)+10);
         preço.setText("R$ "+remessa.getPrecoun());
 
-        /**
-        Bitmap bmp = null;
 
-        try {
-            bmp = BitmapFactory.decodeByteArray(remessa.getData().getBytes("UTF-8"), 0, remessa.getData().getBytes("UTF-8").length);
-            Log.i("Tracee","Byte[]: "+remessa.getData().getBytes("UTF-8"));
-            Log.i("Tracee","Length: : "+remessa.getData().getBytes("UTF-8").length);
-            Log.i("Tracee","Bitmap: "+remessa.getData().getBytes("UTF-8").length);
-            //imagem.setImageBitmap(bit);
-            //ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            //stream.write(remessa.getData().getBytes("UTF-8"));
-            //bmp.compress(Bitmap.CompressFormat.PNG, 100, stream );
-            //Bitmap decoded =BitmapFactory.decodeStream(new ByteArrayInputStream(stream.toByteArray()));
-            //imagem.setImageBitmap(decoded);
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
-
-         /*try {
-           // Bitmap bit = BitmapFactory.decodeByteArray(remessa.getData().getBytes("UTF-8"), 0, remessa.getData().getBytes("UTF-8").length);
-            Bitmap bit = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888);
-            ByteBuffer buffer = ByteBuffer.wrap(remessa.getData().getBytes("UTF-8"));
-            bit.copyPixelsFromBuffer(buffer);
-
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            bit.compress(Bitmap.CompressFormat.PNG, 100, stream );
-
-            imagem.setImageBitmap(BitmapFactory.decodeStream(new ByteArrayInputStream(stream.toByteArray())));
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }*/
 
 
         try {
@@ -121,8 +89,8 @@ public class AdapterProdutoDTO extends BaseAdapter {
             //byte[] byteArrayImage = baos.toByteArray();
             byte[]  byteArray = Base64.decode(base64, Base64.DEFAULT);
             Bitmap bmp1 = BitmapFactory.decodeByteArray(byteArray, 0 , byteArray.length);
-            Log.i("Tracee","getHeight[]: "+bmp1.getHeight());
-            Log.i("Tracee","getWidth[]: "+bmp1.getWidth());
+            //Log.i("Tracee","getHeight[]: "+bmp1.getHeight());
+            //Log.i("Tracee","getWidth[]: "+bmp1.getWidth());
             String encodedImage = Base64.encodeToString(byteArray, Base64.DEFAULT);
                 imagem.setImageBitmap(bmp1);
 

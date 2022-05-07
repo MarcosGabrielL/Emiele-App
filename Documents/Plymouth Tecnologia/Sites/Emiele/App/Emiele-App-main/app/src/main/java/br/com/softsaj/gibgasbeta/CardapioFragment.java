@@ -1,5 +1,7 @@
 package br.com.softsaj.gibgasbeta;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -45,12 +48,16 @@ public class CardapioFragment extends Fragment {
     ListView listaView;
     AdapterProdutoDTO adapterProdutoDTO;
 
+    ProdutoDTO produtoDTOSelected;
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         Carregar_Lista();
+
+
 
         listaView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -60,24 +67,8 @@ public class CardapioFragment extends Fragment {
                 //alert("Escolheu");
                 //Remessa remessa = (Remessa) adapter.getItemAtPosition(posicao);
 
-                ProdutoDTO produtoDTO = adapterProdutoDTO.getItem(posicao);
-                //alert("Prodto: "+ new Gson().toJson(produtoDTO));
-
-                //Pega quantidade
-                produtoDTO.setQuantidade(3);
-                //calcula subtotal
-                float total = produtoDTO.getQuantidade()*Float.parseFloat(produtoDTO.getPrecoun().replace(",","."));
-                produtoDTO.setSubTotal(total);
-
-
-                //Adiciona produto ao Carrinho
-                StoreManager a = new StoreManager(getActivity().getApplicationContext());
-                try {
-                    a.setProductOnCart(produtoDTO);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
+                produtoDTOSelected = adapterProdutoDTO.getItem(posicao);
+                alertDialogDemo();
 
             }
         });
@@ -182,5 +173,59 @@ public class CardapioFragment extends Fragment {
 
     private void alert(String msg){
         Toast.makeText(getActivity().getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+    }
+
+    void alertDialogDemo() {
+        // get alert_dialog.xml view
+        LayoutInflater li = LayoutInflater.from(getActivity());
+        View promptsView = li.inflate(R.layout.alert_dialog, null);
+
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                getActivity());
+
+        // set alert_dialog.xml to alertdialog builder
+        alertDialogBuilder.setView(promptsView);
+
+        final EditText userInput = (EditText) promptsView.findViewById(R.id.etUserInput);
+
+        // set dialog message
+        alertDialogBuilder
+                .setCancelable(false)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // get user input and set it to result
+                        // edit text
+                        //Toast.makeText(getActivity(), "Entered: "+userInput.getText().toString(), Toast.LENGTH_LONG).show();
+
+                        //Pega quantidade
+                        produtoDTOSelected.setQuantidade(Integer.parseInt(userInput.getText().toString()));
+                        //calcula subtotal
+                        float total = produtoDTOSelected.getQuantidade()*Float.parseFloat(produtoDTOSelected.getPrecoun().replace(",","."));
+                        produtoDTOSelected.setSubTotal(total);
+
+
+                        //Adiciona produto ao Carrinho
+                        StoreManager a = new StoreManager(getActivity().getApplicationContext());
+                        try {
+                            a.setProductOnCart(produtoDTOSelected);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                })
+                .setNegativeButton("Cancel",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+        // create alert dialog
+        AlertDialog alertDialog = alertDialogBuilder.create();
+
+        // show it
+        alertDialog.show();
     }
 }

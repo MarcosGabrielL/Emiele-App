@@ -32,12 +32,14 @@ public class Cart extends Fragment {
     AdapterParadas adapterProdutoDTO;
     TextView total;
     TextView subtotal;
+    static String adress = "Selecionar Endereço no Mapa";
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         final TextView endereço = (TextView)  view.findViewById(R.id.textView113);
+        endereço.setText(adress);
         final Button  BRetirar = (Button) getView().findViewById(R.id.button32);
         final Button BEntregar = (Button) getView().findViewById(R.id.button31);
         produtos = (ListView) getView().findViewById(R.id.hu);
@@ -48,7 +50,16 @@ public class Cart extends Fragment {
         final Button finalizar =  (Button) getView().findViewById(R.id.button12);
         final ImageButton icon =  (ImageButton) getView().findViewById(R.id.imageButton2);
 
+        icon.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View arg0) {
 
+                //Go To Payment
+                GibGas.setTela("escolheendereço");
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new Maps_Principal_Fragemnt()).commit();
+
+
+            }
+        });
 
         finalizar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View arg0) {
@@ -132,6 +143,8 @@ public class Cart extends Fragment {
     }
 
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -166,6 +179,10 @@ public class Cart extends Fragment {
         total.setText("R$ "+sbtotal);
         subtotal.setText("R$ "+sbtotal);
 
+    }
+
+    public static void setAddress(String a){
+        adress = a;
     }
 
 }

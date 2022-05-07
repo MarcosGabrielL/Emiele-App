@@ -7,216 +7,198 @@
     android:layout_height="match_parent"
     tools:context=".Cart" >
 
-    <ScrollView
-        android:id="@+id/scrollView2"
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#fff"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+
+        <Button
+            android:id="@+id/button12"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginBottom="72dp"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/arredondado_vermelho"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            android:text="Finalizar Compra"
+            android:textColor="#fff"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView111" />
+
+        <ImageButton
+            android:id="@+id/imageButton2"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="#fff"
+            android:scaleType="centerCrop"
+            android:src="@drawable/marker"
+            app:layout_constraintBottom_toBottomOf="@+id/textView113"
+            app:layout_constraintStart_toEndOf="@+id/textView113"
+            app:layout_constraintTop_toTopOf="@+id/textView113" />
+
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            tools:layout_conversion_absoluteHeight="0dp"
-            tools:layout_conversion_absoluteWidth="411dp"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="0dp">
+            android:id="@+id/linearLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="64dp"
+            android:layout_marginStart="64dp"
+            android:layout_marginTop="50dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView6">
 
-            <android.support.constraint.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#fff">
+            <Button
+                android:id="@+id/button31"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/button_quadrado_escuro"
+                android:text="Entregar"
+                android:textColor="#ffffff"
+                android:textSize="10sp" />
 
+            <Button
+                android:id="@+id/button32"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/button_quadrado_borda_branco"
+                android:text="Retirar"
+                android:textColor="@color/colorAccent"
+                android:textSize="10sp" />
 
-                <Button
-                    android:id="@+id/button12"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:layout_marginBottom="72dp"
-                    android:layout_marginTop="32dp"
-                    android:background="@drawable/arredondado_vermelho"
-                    android:paddingLeft="50dp"
-                    android:paddingRight="50dp"
-                    android:text="Finalizar Compra"
-                    android:textColor="#fff"
-                    android:textSize="14sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView111" />
-
-                <ImageButton
-                    android:id="@+id/imageButton2"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:background="#fff"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/marker"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView113"
-                    app:layout_constraintStart_toEndOf="@+id/textView113"
-                    app:layout_constraintTop_toTopOf="@+id/textView113" />
-
-                <LinearLayout
-                    android:id="@+id/linearLayout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="64dp"
-                    android:layout_marginStart="64dp"
-                    android:layout_marginTop="50dp"
-                    android:orientation="horizontal"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView6">
-
-                    <Button
-                        android:id="@+id/button31"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@drawable/button_quadrado_escuro"
-                        android:text="Entregar"
-                        android:textColor="#ffffff"
-                        android:textSize="10sp" />
-
-                    <Button
-                        android:id="@+id/button32"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@drawable/button_quadrado_borda_branco"
-                        android:text="Retirar"
-                        android:textColor="@color/colorAccent"
-                        android:textSize="10sp" />
-
-                </LinearLayout>
-
-                <ListView
-                    android:id="@+id/hu"
-                    android:layout_width="wrap_content"
-                    android:layout_height="150dp"
-                    android:layout_marginTop="64dp"
-                    android:divider="@null"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView113" />
-
-                <TextView
-                    android:id="@+id/textView13"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="64dp"
-                    android:layout_marginTop="24dp"
-                    android:text="Sub-Total"
-                    android:textSize="14sp"
-                    app:layout_constraintBottom_toTopOf="@+id/textView50"
-                    app:layout_constraintEnd_toStartOf="@+id/textView14"
-                    app:layout_constraintTop_toBottomOf="@+id/hu" />
-
-                <TextView
-                    android:id="@+id/textView14"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="50dp"
-                    android:text="R$ 80,00"
-                    android:textSize="14sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView13"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/textView13" />
-
-                <TextView
-                    android:id="@+id/textView6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:fontFamily="sans-serif-thin"
-                    android:text="Carrinho"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="34sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/textView50"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Frete"
-                    android:textSize="14sp"
-                    app:layout_constraintBottom_toTopOf="@+id/textView102"
-                    app:layout_constraintStart_toStartOf="@+id/textView13"
-                    app:layout_constraintTop_toBottomOf="@+id/textView13" />
-
-                <TextView
-                    android:id="@+id/textView53"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="R$ 0,00"
-                    android:textSize="14sp"
-                    app:layout_constraintEnd_toEndOf="@+id/textView14"
-                    app:layout_constraintTop_toBottomOf="@+id/textView14" />
-
-                <TextView
-                    android:id="@+id/textView102"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:text="Imposto"
-                    android:textSize="14sp"
-                    app:layout_constraintBottom_toTopOf="@+id/textView111"
-                    app:layout_constraintEnd_toEndOf="@+id/textView111"
-                    app:layout_constraintStart_toStartOf="@+id/textView111"
-                    app:layout_constraintTop_toBottomOf="@+id/textView50" />
-
-                <TextView
-                    android:id="@+id/textView110"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="R$ 0,00"
-                    android:textSize="14sp"
-                    app:layout_constraintEnd_toEndOf="@+id/textView53"
-                    app:layout_constraintTop_toBottomOf="@+id/textView53" />
-
-                <TextView
-                    android:id="@+id/textView111"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="63dp"
-                    android:layout_marginTop="16dp"
-                    android:text="TOTAL"
-                    android:textSize="16sp"
-                    app:layout_constraintEnd_toStartOf="@+id/textView112"
-                    app:layout_constraintTop_toBottomOf="@+id/textView102" />
-
-                <TextView
-                    android:id="@+id/textView112"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="R$ 80,00"
-                    android:textSize="16sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView111"
-                    app:layout_constraintEnd_toEndOf="@+id/textView110"
-                    app:layout_constraintTop_toTopOf="@+id/textView111" />
-
-                <TextView
-                    android:id="@+id/textView113"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginTop="24dp"
-                    android:text="Selecionar Endereço no Mapa"
-                    android:textSize="14sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
-
-            </android.support.constraint.ConstraintLayout>
         </LinearLayout>
-    </ScrollView>
+
+        <ListView
+            android:id="@+id/hu"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="32dp"
+            android:divider="@null"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView113" />
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="64dp"
+            android:layout_marginTop="32dp"
+            android:text="Sub-Total"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@+id/textView50"
+            app:layout_constraintEnd_toStartOf="@+id/textView14"
+            app:layout_constraintTop_toBottomOf="@+id/hu" />
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="50dp"
+            android:text="R$ 80,00"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView13"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView13" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:fontFamily="sans-serif-thin"
+            android:text="Carrinho"
+            android:textColor="@color/colorPrimary"
+            android:textSize="34sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView50"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Frete"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@+id/textView102"
+            app:layout_constraintStart_toStartOf="@+id/textView13"
+            app:layout_constraintTop_toBottomOf="@+id/textView13" />
+
+        <TextView
+            android:id="@+id/textView53"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="R$ 0,00"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@+id/textView14"
+            app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
+        <TextView
+            android:id="@+id/textView102"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="Imposto"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@+id/textView111"
+            app:layout_constraintEnd_toEndOf="@+id/textView111"
+            app:layout_constraintStart_toStartOf="@+id/textView111"
+            app:layout_constraintTop_toBottomOf="@+id/textView50" />
+
+        <TextView
+            android:id="@+id/textView110"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="R$ 0,00"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@+id/textView53"
+            app:layout_constraintTop_toBottomOf="@+id/textView53" />
+
+        <TextView
+            android:id="@+id/textView111"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="63dp"
+            android:layout_marginTop="16dp"
+            android:text="TOTAL"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/textView112"
+            app:layout_constraintTop_toBottomOf="@+id/textView102" />
+
+        <TextView
+            android:id="@+id/textView112"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="R$ 80,00"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView111"
+            app:layout_constraintEnd_toEndOf="@+id/textView110"
+            app:layout_constraintTop_toTopOf="@+id/textView111" />
+
+        <TextView
+            android:id="@+id/textView113"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="24dp"
+            android:text="Selecionar Endereço no Mapa"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+
+    </android.support.constraint.ConstraintLayout>
 </android.support.constraint.ConstraintLayout>
 

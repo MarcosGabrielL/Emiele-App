@@ -6,11 +6,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -18,10 +22,14 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.test.mock.MockPackageManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Interpolator;
+import android.view.animation.LinearInterpolator;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -37,6 +45,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -49,21 +58,32 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 import Bean.Local;
 import Bean.Remessa;
 import Dao.Connector;
 import Util.GPSTracker;
 
-public class Maps_Principal_Fragemnt extends Fragment implements OnMapReadyCallback{
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.OnCameraIdleListener;
+import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
+import com.google.android.gms.maps.GoogleMap.OnMapLongClickListener;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+
+public class Maps_Principal_Fragemnt extends Fragment
+        implements OnMapClickListener, OnMapLongClickListener, OnCameraIdleListener,
+        OnMapReadyCallback{
 
 
-    private FirebaseAuth auth ;
-    private FirebaseUser user ;
-    FirebaseDatabase firebaseDatabase;
-    DatabaseReference databaseReference;
+
 
     Local local;
     ArrayList<Local> locais;
@@ -84,12 +104,15 @@ public class Maps_Principal_Fragemnt extends Fragment implements OnMapReadyCallb
     String Id;
     Remessa remessaa;
 
+    TextView endereco;
+
     private Button enviar;
 
         @Nullable
         public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
             return inflater.inflate(R.layout.activity_maps, container, false);
         }
+
 
 
 
@@ -104,14 +127,27 @@ public class Maps_Principal_Fragemnt extends Fragment implements OnMapReadyCallb
         chamou = false;
         local = new Local();
         enviar = (Button) getView().findViewById(R.id.envi);
+        endereco = (TextView) getView().findViewById(R.id.textView77);
 
         enviar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View arg0) {
 
-                //Escolher Destino 1
-               // getChildFragmentManager().beginTransaction().replace(R.id.container, new Destino_Escolhe_1_Reme()).commit();
-                //startActivity(new Intent(getActivity(),Destino_Escolhe_mapa.class));
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new Destino_Escolhe_1_Reme()).commit();
+                //Escolher Destino
+                Geocoder geocoder;
+                List<Address> adresses;
+                geocoder = new Geocoder(getActivity(), Locale.getDefault());
+                String address = "";
+                try {
+                    adresses = geocoder.getFromLocation(Double.valueOf(local.getLatitude()), Double.valueOf(local.getLongitude()), 1);
+                    address = adresses.get(0).getAddressLine(0);
+                    Log.i("Tracee","Endereço: "+ address);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                GibGas.setTela("");
+                Cart.setAddress(address.substring(0,25)+"...");
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new Cart()).commit();
 
             }
         });
@@ -125,13 +161,7 @@ public class Maps_Principal_Fragemnt extends Fragment implements OnMapReadyCallb
             e.printStackTrace();
         }
 
-        //Inicia FireBase
-        FirebaseApp.initializeApp(getActivity());
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference();
-        user = FirebaseAuth.getInstance().getCurrentUser();
-
-        Id = user.getUid();
+        Id = "1";
         locais = new ArrayList<>();
         pegarLocalRemetentes();
 
@@ -153,6 +183,9 @@ public class Maps_Principal_Fragemnt extends Fragment implements OnMapReadyCallb
         gps = new GPSTracker(getActivity());
 
         mMap = googleMap;
+        mMap.setOnMapClickListener(this);
+        mMap.setOnMapLongClickListener(this);
+        mMap.setOnCameraIdleListener(this);
         if (gps.canGetLocation()){
             latitude = gps.getLatitude();
             longitude = gps.getLongitude();
@@ -169,7 +202,7 @@ public class Maps_Principal_Fragemnt extends Fragment implements OnMapReadyCallb
                 googleMap.moveCamera(CameraUpdateFactory.newLatLng(softsaj));
                 googleMap.animateCamera(CameraUpdateFactory.zoomTo(17));
 
-            }else{
+            }else {
 
 
                 //Atualiza posição do Transportador a cada 30 segundos
@@ -177,85 +210,27 @@ public class Maps_Principal_Fragemnt extends Fragment implements OnMapReadyCallb
 
                 int height = 100;
                 int width = 100;
-                BitmapDrawable bitmapdraw=(BitmapDrawable)getResources().getDrawable(R.drawable.marker);
-                Bitmap b=bitmapdraw.getBitmap();
-                Bitmap smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
-                LatLng rem = new LatLng(latitude,longitude);
+                BitmapDrawable bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.marker);
+                Bitmap b = bitmapdraw.getBitmap();
+                final Bitmap smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
+                LatLng rem = new LatLng(latitude, longitude);
                 mMap.addMarker(new MarkerOptions().position(rem)
                         .title("Eu").icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));
                 googleMap.moveCamera(CameraUpdateFactory.newLatLng(rem));
                 googleMap.animateCamera(CameraUpdateFactory.zoomTo(17));
                 local.setLatitude(String.valueOf(latitude));
                 local.setLongitude(String.valueOf(longitude));
-                local.setId(user.getUid());
-                databaseReference.child("Local_Remetentes").child(user.getUid()).setValue(local);
+                local.setId(Id);
+                //databaseReference.child("Local_Remetentes").child(user.getUid()).setValue(local);
 
 
-            /*
-            int height = 100;
-                int width = 100;
-                BitmapDrawable bitmapdraw=(BitmapDrawable)getResources().getDrawable(R.drawable.foguete);
-                Bitmap b=bitmapdraw.getBitmap();
-                Bitmap smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
-
-                LatLng rem = new LatLng(-12.969037, -39.263259);
-                googleMap.addMarker(new MarkerOptions().position(rem)
-                        .title("Remetente").icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));
-                LatLng rem1 = new LatLng(-12.969309, -39.264546);
-                googleMap.addMarker(new MarkerOptions().position(rem1)
-                        .title("Remetente").icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));
-                LatLng rem2 = new LatLng(-12.968807, -39.261188);
-                googleMap.addMarker(new MarkerOptions().position(rem2)
-                        .title("Remetente").icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));
-
-               */
-
-                //Busca Localização dos Transportadores
-                String id = user.getUid();
-                locais.clear();
-                //Query
-                Query query1 = FirebaseDatabase.getInstance().getReference("Local_Transportador");
-                //databaseReference.child("Local_Remetentes").addListenerForSingleValueEvent(new ValueEventListener() {
-                query1.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        //Passa lista de locais dos remetentes pra lista
-                        for(DataSnapshot obj : dataSnapshot.getChildren()){
-                            Local local = obj.getValue(Local.class);
-                            locais.add(local);
-                        }
-
-                        //Percorre os locais
-                        for(Local l : locais){
-                            double lat = Double.parseDouble(l.getLatitude());
-                            double lon = Double.parseDouble(l.getLongitude());
-
-                            //Verifica se é menor que a distancia limite
-                            if(distance(latitude, longitude,lat,lon,"K") < 5){
-                                //Marca Remetente no mapa
-                                int height = 100;
-                                int width = 100;
-                                BitmapDrawable bitmapdraw=(BitmapDrawable)getResources().getDrawable(R.drawable.fogueteaa);
-                                Bitmap b=bitmapdraw.getBitmap();
-                                Bitmap smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
-                                LatLng rem = new LatLng(lat,lon);
-                                mMap.addMarker(new MarkerOptions().position(rem)
-                                        .title("Transportasores").icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));
-                            }
-                        }
-
-
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        //Se ocorrer um erro
-                        alert("Ocorreu um erro ao carregar informações!");
-                        //Query
-                    }
-                });
 
             }
+
+
+
+
+
         }else{
             gps.showSettingsAlert();
         }
@@ -286,7 +261,7 @@ public class Maps_Principal_Fragemnt extends Fragment implements OnMapReadyCallb
 
     public void pegarLocalRemetentes(){
         //Busca Localização dos Remetentes
-        String id = user.getUid();
+        String id = Id;
         locais.clear();
         //Query
         Query query1 = FirebaseDatabase.getInstance().getReference("Local_Transportador")
@@ -441,4 +416,70 @@ public class Maps_Principal_Fragemnt extends Fragment implements OnMapReadyCallb
 
     }
 
+
+    @Override
+    public void onCameraIdle() {
+
+        int height = 100;
+        int width = 100;
+        BitmapDrawable bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.marker);
+        Bitmap b = bitmapdraw.getBitmap();
+        final Bitmap smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
+        LatLng rem =  new LatLng(mMap.getCameraPosition().target.latitude, mMap.getCameraPosition().target.longitude);
+
+        mMap.clear();
+        mMap.addMarker(new MarkerOptions().position(rem)
+                .title("Eu").icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));
+        local.setLatitude(String.valueOf(mMap.getCameraPosition().target.latitude));
+        local.setLongitude(String.valueOf(mMap.getCameraPosition().target.longitude));
+        local.setId(Id);
+
+        Geocoder geocoder;
+        List<Address> adresses;
+        geocoder = new Geocoder(getActivity(), Locale.getDefault());
+        String address = "";
+        try {
+            adresses = geocoder.getFromLocation(Double.valueOf(local.getLatitude()), Double.valueOf(local.getLongitude()), 1);
+            address = adresses.get(0).getAddressLine(0);
+            endereco.setText(address);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
+    public void onMapClick(LatLng latLng) {
+        int height = 100;
+        int width = 100;
+        BitmapDrawable bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.marker);
+        Bitmap b = bitmapdraw.getBitmap();
+        final Bitmap smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
+        LatLng rem =  latLng;
+        mMap.clear();
+        mMap.addMarker(new MarkerOptions().position(rem)
+                .title("Eu").icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));
+        local.setLatitude(String.valueOf(mMap.getCameraPosition().target.latitude));
+        local.setLongitude(String.valueOf(mMap.getCameraPosition().target.longitude));
+        local.setId(Id);
+
+        Geocoder geocoder;
+        List<Address> adresses;
+        geocoder = new Geocoder(getActivity(), Locale.getDefault());
+        String address = "";
+        try {
+            adresses = geocoder.getFromLocation(Double.valueOf(local.getLatitude()), Double.valueOf(local.getLongitude()), 1);
+            address = adresses.get(0).getAddressLine(0);
+            endereco.setText(address);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    @Override
+    public void onMapLongClick(LatLng latLng) {
+
+    }
 }

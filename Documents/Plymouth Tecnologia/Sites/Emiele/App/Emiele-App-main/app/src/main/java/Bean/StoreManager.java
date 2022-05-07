@@ -84,9 +84,12 @@ public class StoreManager {
                 if(tem){
                     lista_de_produtos.remove(index);
                 lista_de_produtos.add(p);
+                }else{
+                    lista_de_produtos.add(p);
                 }
+            }else{
+                lista_de_produtos.add(p);
             }
-
 
         }else {
             lista_de_produtos.add(p);

@@ -31,6 +31,7 @@ public class GibGas extends AppCompatActivity
     public static Remetentes remetente;
 
     static String retorno = "Nada";
+    static String Tela = "";
     String id;
     static Context context;
     public static boolean chamou;
@@ -66,11 +67,11 @@ public class GibGas extends AppCompatActivity
 
         StoreManager a = new StoreManager(GibGas.this);
         try {
-            Log.i("Tracee","0: ");
+
             int i = a.getCountCart();
-            Log.i("Tracee","1: ");
+
             setQuantidade(i);
-            Log.i("Tracee","2");
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -102,11 +103,15 @@ public class GibGas extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
+        if (Tela.equals("")) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.container, new CardapioFragment()).commit();
+            fab.show();
+            quantidade.setVisibility(View.VISIBLE);
+        }if (Tela.equals("escolheendereço")){
+            fab.hide();
+            quantidade.setVisibility(View.INVISIBLE);
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container, new Cart()).commit();
         }
     }
 
@@ -142,6 +147,7 @@ public class GibGas extends AppCompatActivity
             //Volta ao inicio
             getSupportFragmentManager().beginTransaction().replace(R.id.container, new CardapioFragment()).commit();
             fab.show();
+            quantidade.setVisibility(View.VISIBLE);
         }else if (id == R.id.nav_perfil) {
             //Chama Perfil
 
@@ -174,6 +180,7 @@ public class GibGas extends AppCompatActivity
         return true;
     }
 
+
     private static void alert(String msg){
         Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
     }
@@ -203,7 +210,7 @@ public class GibGas extends AppCompatActivity
     }
 
     public static void setQuantidade(int q){
-        Log.i("Tracee","getHeight[]: "+q);
+
         if(q>=1) {
             if(q>=10) {
                 quantidade.setVisibility(View.VISIBLE);
@@ -217,5 +224,9 @@ public class GibGas extends AppCompatActivity
 
         }
 
+    }
+
+    public static void setTela(String a){
+        Tela = a;
     }
 }

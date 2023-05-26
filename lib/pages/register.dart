@@ -6,6 +6,7 @@ import 'package:jurisconexao_cliente/models/auth_request_register.dart';
 import 'package:jurisconexao_cliente/pages/login.dart';
 import 'package:jurisconexao_cliente/pages/register.dart';
 import 'package:jurisconexao_cliente/service/security.dart';
+import 'package:jurisconexao_cliente/service/validating.dart';
 
 import '../main.dart';
 
@@ -24,18 +25,22 @@ class RegisterPage extends StatelessWidget {
     String email = usernameController.value.text;
     String password = passwordController.value.text;
 
-    try {
-      AuthService authManager = AuthService();
-      final ret = await authManager.signUp(context, name, email, password);
-      // Handle the registration success and process the registerModel object
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => MyApp()),
-      );
-      print('11: Registration successful: $ret');
-    } catch (e) {
-      // Handle registration failure and error exceptions
-      print('11: Registration failed: $e');
+    if(Validation.validateFields(context, email,password)) {
+      try {
+        AuthService authManager = AuthService();
+        final ret = await authManager.signUp(context, name, email, password);
+        // Handle the registration success and process the registerModel object
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => MyApp()),
+        );
+        print('11: Registration successful: $ret');
+      } catch (e) {
+        // Handle registration failure and error exceptions
+        print('11: Registration failed: $e');
+      }
+    }else{
+
     }
 
   }

@@ -5,6 +5,7 @@ import 'package:jurisconexao_cliente/components/square_tile.dart';
 import 'package:jurisconexao_cliente/main.dart';
 import 'package:jurisconexao_cliente/pages/register.dart';
 import 'package:jurisconexao_cliente/service/security.dart';
+import 'package:jurisconexao_cliente/service/validating.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
@@ -20,18 +21,22 @@ class LoginPage extends StatelessWidget {
       String email = usernameController.value.text;
       String password = passwordController.value.text;
 
-      try {
-        AuthService authManager = AuthService();
-        final ret = await authManager.authenticate(context, email, password);
-        // Handle the registration success and process the registerModel object
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => MyApp()),
-        );
-        print('12: Authentication successful: $ret');
-      } catch (e) {
-        // Handle registration failure and error exceptions
-        print('12: Authentication failed: $e');
+      if(Validation.validateFields(context, email,password)) {
+        try {
+          AuthService authManager = AuthService();
+          final ret = await authManager.authenticate(context, email, password);
+          // Handle the registration success and process the registerModel object
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => MyApp()),
+          );
+          print('12: Authentication successful: $ret');
+        } catch (e) {
+          // Handle registration failure and error exceptions
+          print('12: Authentication failed: $e');
+        }
+      }else{
+
       }
 
     }

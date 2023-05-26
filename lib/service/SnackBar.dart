@@ -20,6 +20,12 @@ class Message {
       case 400:
         snackBarMessage = 'Requisição Inválida: A solicitação não pôde ser entendida pelo servidor devido à sintaxe inválida';
         break;
+      case 01:
+        snackBarMessage = 'A senha deve ter no mínimo 8 caracteres';
+        break;
+      case 02:
+        snackBarMessage = 'Email inválido';
+        break;
       case 401:
         snackBarMessage = 'Não Autorizado: A solicitação requer autenticação do cliente ou as credenciais fornecidas não são válidas';
         break;

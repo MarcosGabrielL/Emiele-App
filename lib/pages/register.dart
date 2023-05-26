@@ -39,7 +39,7 @@ class RegisterPage extends StatelessWidget {
               ),
 
 
-              const SizedBox(height: 100),
+              const SizedBox(height: 50),
 
               // welcome back, you've been missed!
               Text(
@@ -71,20 +71,48 @@ class RegisterPage extends StatelessWidget {
               const SizedBox(height: 10),
 
               // forgot password?
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text(
-                      'Esqueceu a Senha?',
-                      style: TextStyle(color: Colors.grey[600]),
-                    ),
-                  ],
+              CheckboxListTile(
+                title: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Eu concordo com os ',
+                        style: TextStyle(color: Colors.grey[700], fontSize: 12),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          // Add the navigation logic to open the LoginPage here
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => LoginPage()),
+                          );
+                        },
+                        child: Text(
+                          'Termos e Condições',
+                          style: TextStyle(
+                            color: Color(0xFF011C38),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
+                value: false,
+                onChanged: (value) {
+                  // Add your code here to handle the checkbox value change
+                },
+                controlAffinity: ListTileControlAffinity.leading,
               ),
 
-              const SizedBox(height: 25),
+
+
+
+
+              const SizedBox(height: 20),
 
               // sign in button
               MyButtonPrimary(

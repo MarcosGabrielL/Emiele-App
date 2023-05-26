@@ -77,7 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
           onPressed: () {},
         ),
         title: Text(
-          'jurisconexão',
+          'Jurisconexão',
           style: TextStyle(
             fontSize: 28.0,
             color: Colors.white,

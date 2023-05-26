@@ -49,6 +49,7 @@ class Message {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(snackBarMessage),
+
       ),
     );
   }

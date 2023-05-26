@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:jurisconexao_cliente/components/my_button.dart';
 import 'package:jurisconexao_cliente/components/my_textfield.dart';
 import 'package:jurisconexao_cliente/components/square_tile.dart';
+import 'package:jurisconexao_cliente/main.dart';
 import 'package:jurisconexao_cliente/pages/register.dart';
+import 'package:jurisconexao_cliente/service/security.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
@@ -11,8 +13,30 @@ class LoginPage extends StatelessWidget {
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
 
-  // sign user in method
-  void signUserIn() {}
+
+    // sign user in method
+    Future<void> signUserIn(BuildContext context) async {
+
+      String email = usernameController.value.text;
+      String password = passwordController.value.text;
+
+      try {
+        AuthService authManager = AuthService();
+        final ret = await authManager.authenticate(email, password);
+        // Handle the registration success and process the registerModel object
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => MyApp()),
+        );
+        print('12: Authentication successful: $ret');
+      } catch (e) {
+        // Handle registration failure and error exceptions
+        print('12: Authentication failed: $e');
+      }
+
+    }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +111,7 @@ class LoginPage extends StatelessWidget {
 
               // sign in button
               MyButtonPrimary(
-                onTap: signUserIn,
+                onTap: () => signUserIn(context),
                 text: "Entrar",
               ),
 

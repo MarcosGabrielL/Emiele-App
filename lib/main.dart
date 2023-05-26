@@ -77,7 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
           onPressed: () {},
         ),
         title: Text(
-          '',
+          'jurisconexão',
           style: TextStyle(
             fontSize: 28.0,
             color: Colors.white,
@@ -100,12 +100,20 @@ class _MyHomePageState extends State<MyHomePage> {
           Expanded(
             child: Container(
               decoration: BoxDecoration(
-                color: Theme.of(context).primaryColor,
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomLeft,
+                    colors: [
+                      const Color(0xFF011C38),
+                      Colors.black,
+                    ],
+                  ),
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(30.0),
                   topRight: Radius.circular(30.0),
                 ),
               ),
+
               child: Column(
                 children: <Widget>[
                   FavoriteContacts(),

@@ -18,7 +18,7 @@ class RegisterPage extends StatelessWidget {
   final passwordController = TextEditingController();
 
   // sign user in method
-  Future<void> signUserIn(BuildContext context) async {
+  Future<void> signUserUp(BuildContext context) async {
 
     String name = '';
     String email = usernameController.value.text;
@@ -142,7 +142,7 @@ class RegisterPage extends StatelessWidget {
 
               // sign in button
               MyButtonPrimary(
-                onTap: () => signUserIn(context),
+                onTap: () => signUserUp(context),
                 text: "Cadastrar-se",
               ),
 

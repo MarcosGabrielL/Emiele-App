@@ -5,18 +5,24 @@ import 'package:jurisconexao_cliente/components/square_tile.dart';
 import 'package:jurisconexao_cliente/models/auth_request_register.dart';
 import 'package:jurisconexao_cliente/pages/login.dart';
 import 'package:jurisconexao_cliente/pages/register.dart';
+import 'package:jurisconexao_cliente/service/SnackBar.dart';
 import 'package:jurisconexao_cliente/service/security.dart';
 import 'package:jurisconexao_cliente/service/validating.dart';
 
 import '../main.dart';
 
-class RegisterPage extends StatelessWidget {
-  RegisterPage({super.key});
+class RegisterPage extends StatefulWidget {
 
+  const RegisterPage({Key? key}) : super(key: key);
+
+  @override
+  State<RegisterPage> createState() => _MyFormState();
+}
 
   // text editing controllers
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
+   bool isChecked = false;
 
   // sign user in method
   Future<void> signUserUp(BuildContext context) async {
@@ -25,19 +31,23 @@ class RegisterPage extends StatelessWidget {
     String email = usernameController.value.text;
     String password = passwordController.value.text;
 
-    if(Validation.validateFields(context, email,password)) {
-      try {
-        AuthService authManager = AuthService();
-        final ret = await authManager.signUp(context, name, email, password);
-        // Handle the registration success and process the registerModel object
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => MyApp()),
-        );
-        print('11: Registration successful: $ret');
-      } catch (e) {
-        // Handle registration failure and error exceptions
-        print('11: Registration failed: $e');
+    if(Validation.validateFields(context, email,password) ) {
+      if(isChecked) {
+        try {
+          AuthService authManager = AuthService();
+          final ret = await authManager.signUp(context, name, email, password);
+          // Handle the registration success and process the registerModel object
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => MyApp()),
+          );
+          print('11: Registration successful: $ret');
+        } catch (e) {
+          // Handle registration failure and error exceptions
+          print('11: Registration failed: $e');
+        }
+      }else{
+        Message.showSnackBar(context, 03);
       }
     }else{
 
@@ -45,9 +55,12 @@ class RegisterPage extends StatelessWidget {
 
   }
 
+class _MyFormState extends State<RegisterPage> {
+
+  bool checked = false;
+
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -101,7 +114,6 @@ class RegisterPage extends StatelessWidget {
 
               const SizedBox(height: 10),
 
-              // forgot password?
               CheckboxListTile(
                 title: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
@@ -117,7 +129,8 @@ class RegisterPage extends StatelessWidget {
                           // Add the navigation logic to open the LoginPage here
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => LoginPage()),
+                            MaterialPageRoute(
+                                builder: (context) => LoginPage()),
                           );
                         },
                         child: Text(
@@ -132,15 +145,14 @@ class RegisterPage extends StatelessWidget {
                     ],
                   ),
                 ),
-                value: false,
-                onChanged: (value) {
-                  // Add your code here to handle the checkbox value change
+                value: isChecked,
+                onChanged: (bool? newValue) {
+                  setState(() {
+                    isChecked = newValue ?? false;
+                  });
                 },
                 controlAffinity: ListTileControlAffinity.leading,
               ),
-
-
-
 
 
               const SizedBox(height: 20),
@@ -197,7 +209,6 @@ class RegisterPage extends StatelessWidget {
               ),
 
 
-
               const SizedBox(height: 30),
 
               // not a member? register now
@@ -234,3 +245,4 @@ class RegisterPage extends StatelessWidget {
     );
   }
 }
+

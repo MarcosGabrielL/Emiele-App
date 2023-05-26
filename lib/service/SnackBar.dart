@@ -26,6 +26,9 @@ class Message {
       case 02:
         snackBarMessage = 'Email inválido';
         break;
+      case 03:
+        snackBarMessage = 'Para prosseguir, é necessário que você concorde com os termos e condições.e';
+        break;
       case 401:
         snackBarMessage = 'Não Autorizado: A solicitação requer autenticação do cliente ou as credenciais fornecidas não são válidas';
         break;

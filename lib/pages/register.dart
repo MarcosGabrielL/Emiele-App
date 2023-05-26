@@ -2,21 +2,47 @@ import 'package:flutter/material.dart';
 import 'package:jurisconexao_cliente/components/my_button.dart';
 import 'package:jurisconexao_cliente/components/my_textfield.dart';
 import 'package:jurisconexao_cliente/components/square_tile.dart';
+import 'package:jurisconexao_cliente/models/auth_request_register.dart';
 import 'package:jurisconexao_cliente/pages/login.dart';
 import 'package:jurisconexao_cliente/pages/register.dart';
+import 'package:jurisconexao_cliente/service/security.dart';
+
+import '../main.dart';
 
 class RegisterPage extends StatelessWidget {
   RegisterPage({super.key});
+
 
   // text editing controllers
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
 
   // sign user in method
-  void signUserIn() {}
+  Future<void> signUserIn(BuildContext context) async {
+
+    String name = '';
+    String email = usernameController.value.text;
+    String password = passwordController.value.text;
+
+    try {
+      AuthService authManager = AuthService();
+      final ret = await authManager.signUp(name, email, password);
+      // Handle the registration success and process the registerModel object
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => MyApp()),
+      );
+      print('11: Registration successful: $ret');
+    } catch (e) {
+      // Handle registration failure and error exceptions
+      print('11: Registration failed: $e');
+    }
+
+  }
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -116,7 +142,7 @@ class RegisterPage extends StatelessWidget {
 
               // sign in button
               MyButtonPrimary(
-                onTap: signUserIn,
+                onTap: () => signUserIn(context),
                 text: "Cadastrar-se",
               ),
 

@@ -26,7 +26,7 @@ class RegisterPage extends StatelessWidget {
 
     try {
       AuthService authManager = AuthService();
-      final ret = await authManager.signUp(name, email, password);
+      final ret = await authManager.signUp(context, name, email, password);
       // Handle the registration success and process the registerModel object
       Navigator.push(
         context,

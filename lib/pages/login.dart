@@ -22,7 +22,7 @@ class LoginPage extends StatelessWidget {
 
       try {
         AuthService authManager = AuthService();
-        final ret = await authManager.authenticate(email, password);
+        final ret = await authManager.authenticate(context, email, password);
         // Handle the registration success and process the registerModel object
         Navigator.push(
           context,
@@ -175,6 +175,8 @@ class LoginPage extends StatelessWidget {
                   const SizedBox(width: 4),
                   GestureDetector(
                     onTap: () {
+
+
                       // Add the navigation logic to open the register.dart file here
                       Navigator.push(
                         context,

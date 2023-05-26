@@ -1,8 +1,10 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:jurisconexao_cliente/models/auth_request_auth.dart';
 import 'package:jurisconexao_cliente/models/auth_request_register.dart';
+import 'package:jurisconexao_cliente/service/SnackBar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthService {
@@ -22,6 +24,7 @@ class AuthService {
   Future<bool> checkLoginStatus() async {
     _preferences = await SharedPreferences.getInstance();
 
+
     //Teste para login
     /* _preferences.setBool(isLoggedInKey, false);
      _preferences.setString(loggedUser,"");*/
@@ -29,7 +32,7 @@ class AuthService {
     return _preferences.getBool(isLoggedInKey) ?? false;
   }
 
-  Future<String> authenticate(String email, String password) async {
+  Future<String> authenticate(BuildContext context ,String email, String password) async {
     final url = Uri.parse('$baseUrl/authenticate');
     final body = json.encode({'email': email, 'password': password});
 
@@ -44,18 +47,23 @@ class AuthService {
         SharedPreferences _preferences = await SharedPreferences.getInstance();
         isLoggedIn = true;
         await _preferences.setBool(isLoggedInKey, true);
+
+        Message.showSnackBar(context, response.statusCode);
+
         return responseData;
       } else {
+        Message.showSnackBar(context, response.statusCode);
         print('1: authenticate failed: $responseData');
         throw Exception('Registration failed');
       }
     } catch (e) {
+      Message.showSnackBar(context, 500);
       print('1: authenticate failed: $e');
       throw Exception('Failed to connect to the server: $e');
     }
   }
 
-  Future<String> signUp(String name, String email, String password) async {
+  Future<String> signUp(BuildContext context, String name, String email, String password) async {
     final url = Uri.parse('$baseUrl/process_register');
     final body = json.encode({
       "email": email,
@@ -85,13 +93,16 @@ class AuthService {
           await _preferences.setBool(isLoggedInKey, true);
           await _preferences.setString(loggedUser, email);
 
+          Message.showSnackBar(context, response.statusCode);
           return  responseData;
         } else {
           final responseData = json.decode(response.body);
+          Message.showSnackBar(context, response.statusCode);
           print('2: Registration failed: $responseData');
           throw Exception('Registration failed');
         }
       } catch (e) {
+        Message.showSnackBar(context, 500);
         print('2: Registration failed: $e');
         throw Exception('Failed to connect to the server: $e');
       }

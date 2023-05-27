@@ -122,19 +122,20 @@ List<Message> chats = [
 // EXAMPLE MESSAGES IN CHAT SCREEN
 List<Message> messages = [
   Message(
-    sender: james,
-    time: '5:30 PM',
-    text: 'Hey, how\'s it going? What did you do today?',
-    isLiked: true,
-    unread: true,
-  ),
-  Message(
     sender: currentUser,
-    time: '4:30 PM',
+    time: '5:30 PM',
     text: 'Just walked my doge. She was super duper cute. The best pupper!!',
     isLiked: false,
     unread: true,
   ),
+  Message(
+    sender: james,
+    time: '4:30 PM',
+    text: 'Hey, how\'s it going? What did you do today?',
+    isLiked: true,
+    unread: true,
+  ),
+
   Message(
     sender: james,
     time: '3:45 PM',
@@ -163,4 +164,23 @@ List<Message> messages = [
     isLiked: false,
     unread: true,
   ),
+];
+
+List<Message> solicitacoes = [
+
+  Message(
+    sender: currentUser,
+    time: '4:30 PM',
+    text: 'Just walked my doge. She was super duper cute. The best pupper!!',
+    isLiked: false,
+    unread: true,
+  ),
+  Message(
+    sender: greg,
+    time: '11:30 AM',
+    text: 'Hey, how\'s it going? What did you do today?',
+    isLiked: false,
+    unread: false,
+  ),
+
 ];

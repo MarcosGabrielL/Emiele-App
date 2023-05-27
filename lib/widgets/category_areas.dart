@@ -1,13 +1,22 @@
 import 'package:flutter/material.dart';
 
-class CategorySelector extends StatefulWidget {
+class CategoryAreas extends StatefulWidget {
   @override
-  _CategorySelectorState createState() => _CategorySelectorState();
+  _CategoryAreasState createState() => _CategoryAreasState();
 }
 
-class _CategorySelectorState extends State<CategorySelector> {
+class _CategoryAreasState extends State<CategoryAreas> {
   int selectedIndex = 0;
-  final List<String> categories = ['Solicitações', 'Abertas', 'Fechadas', 'Em Andamento'];
+  final List<String> categories = ['Direito Civil',
+    'Direito Penal',
+    'Direito Trabalhista',
+    'Direito Empresarial',
+    'Direito Tributário',
+    'Direito Ambiental',
+    'Direito Internacional',
+    'Direito Administrativo',
+    'Direito do Consumidor',
+    'Direito Previdenciário',];
 
   @override
   Widget build(BuildContext context) {
@@ -25,10 +34,7 @@ class _CategorySelectorState extends State<CategorySelector> {
               });
             },
             child: Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: 20.0,
-                vertical: 10.0,
-              ),
+              padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
               child: Text(
                 categories[index],
                 style: TextStyle(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jurisconexao_cliente/models/message_model.dart';
 import 'package:jurisconexao_cliente/models/user_model.dart';
+import 'package:jurisconexao_cliente/widgets/filters.dart';
 
 class ChatScreen extends StatefulWidget {
   final User user;
@@ -12,6 +13,8 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
+  bool isOptionsVisible = true;
+
   _buildMessage(Message message, bool isMe) {
     final Container msg = Container(
       margin: isMe
@@ -27,7 +30,7 @@ class _ChatScreenState extends State<ChatScreen> {
       padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
       width: MediaQuery.of(context).size.width * 0.75,
       decoration: BoxDecoration(
-        color: isMe ? Theme.of(context).primaryColor : Color(0xFFFFEFEE),
+        color: isMe ? Colors.white : Colors.white,
         borderRadius: isMe
             ? BorderRadius.only(
           topLeft: Radius.circular(15.0),
@@ -41,10 +44,11 @@ class _ChatScreenState extends State<ChatScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
+
           Text(
             message.time,
             style: TextStyle(
-              color: Colors.blueGrey,
+              color: Theme.of(context).primaryColor,
               fontSize: 16.0,
               fontWeight: FontWeight.w600,
             ),
@@ -66,17 +70,7 @@ class _ChatScreenState extends State<ChatScreen> {
     }
     return Row(
       children: <Widget>[
-        msg,
-        IconButton(
-          icon: message.isLiked
-              ? Icon(Icons.favorite)
-              : Icon(Icons.favorite_border),
-          iconSize: 30.0,
-          color: message.isLiked
-              ? Theme.of(context).primaryColor
-              : Colors.blueGrey,
-          onPressed: () {},
-        )
+        msg
       ],
     );
   }
@@ -89,7 +83,7 @@ class _ChatScreenState extends State<ChatScreen> {
       child: Row(
         children: <Widget>[
           IconButton(
-            icon: Icon(Icons.photo),
+            icon: Icon(Icons.archive_outlined),
             iconSize: 25.0,
             color: Theme.of(context).primaryColor,
             onPressed: () {},
@@ -99,7 +93,7 @@ class _ChatScreenState extends State<ChatScreen> {
               textCapitalization: TextCapitalization.sentences,
               onChanged: (value) {},
               decoration: InputDecoration.collapsed(
-                hintText: 'Send a message...',
+                hintText: 'Mande sua Duvida...',
               ),
             ),
           ),
@@ -110,6 +104,42 @@ class _ChatScreenState extends State<ChatScreen> {
             onPressed: () {},
           ),
         ],
+      ),
+    );
+  }
+
+  _buildFilterSelection() {
+    return AnimatedOpacity(
+      opacity: isOptionsVisible ? 1.0 : 0.0,
+      duration: Duration(milliseconds: 200),
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+        color: Colors.white,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            IconButton(
+              icon: Icon(Icons.filter_list),
+              onPressed: () {
+                setState(() {
+                  isOptionsVisible = !isOptionsVisible;
+                });
+              },
+            ),
+            ElevatedButton(
+              onPressed: () {},
+              child: Text('Button'),
+            ),
+            Checkbox(
+              value: true,
+              onChanged: (bool? value) {},
+            ),
+            ElevatedButton(
+              onPressed: () {},
+              child: Text('SlideButton'),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -140,6 +170,7 @@ class _ChatScreenState extends State<ChatScreen> {
         onTap: () => FocusScope.of(context).unfocus(),
         child: Column(
           children: <Widget>[
+           Filters(),
             Expanded(
               child: Container(
                 decoration: BoxDecoration(
@@ -157,7 +188,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   child: ListView.builder(
                     reverse: true,
                     padding: EdgeInsets.only(top: 15.0),
-                    itemCount: messages.length,
+                    itemCount: 2, //messages.length,
                     itemBuilder: (BuildContext context, int index) {
                       final Message message = messages[index];
                       final bool isMe = message.sender.id == currentUser.id;

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jurisconexao_cliente/pages/login.dart';
+import 'package:jurisconexao_cliente/pages/new_solicitation.dart';
 import 'package:jurisconexao_cliente/service/security.dart';
 import 'package:jurisconexao_cliente/widgets/category_selector.dart';
 import 'package:jurisconexao_cliente/widgets/favorite_contacts.dart';
@@ -158,7 +159,11 @@ class _MyHomePageState extends State<MyHomePage> {
               constraints: BoxConstraints(),
               icon: Icon(Icons.home, size: 25.0),
               onPressed: () {
-                // Add your logic here for the home button
+
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => NewSoliticitacion()),
+                );
               },
               color: Colors.white,
 

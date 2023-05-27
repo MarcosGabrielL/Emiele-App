@@ -13,7 +13,6 @@ class _PriceFilterState extends State<PriceFilter> {
   @override
   void initState() {
     super.initState();
-    selectedOption = '  Direito Civil';
   }
 
   @override

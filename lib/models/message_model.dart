@@ -1,5 +1,6 @@
 
 
+import 'package:jurisconexao_cliente/components/util/date.dart';
 import 'package:jurisconexao_cliente/models/user_model.dart';
 
 class Message {
@@ -77,7 +78,7 @@ List<Message> chats = [
   ),
   Message(
     sender: olivia,
-    time: '4:30 PM',
+    time: DataUtil.getFormattedTime(),
     text: 'Hey, how\'s it going? What did you do today?',
     isLiked: false,
     unread: true,
@@ -130,7 +131,7 @@ List<Message> messages = [
   ),
   Message(
     sender: james,
-    time: '4:30 PM',
+    time: DataUtil.getFormattedTime(),
     text: 'Hey, how\'s it going? What did you do today?',
     isLiked: true,
     unread: true,
@@ -170,7 +171,7 @@ List<Message> solicitacoes = [
 
   Message(
     sender: currentUser,
-    time: '4:30 PM',
+    time: DataUtil.getFormattedTime(),
     text: 'Just walked my doge. She was super duper cute. The best pupper!!',
     isLiked: false,
     unread: true,

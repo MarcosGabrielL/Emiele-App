@@ -1,29 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:jurisconexao_cliente/main.dart';
 import 'package:jurisconexao_cliente/models/message_model.dart';
 import 'package:jurisconexao_cliente/models/user_model.dart';
 
-class ChatScreen extends StatefulWidget {
+import '../components/bottombar.dart';
+import '../pages/new_solicitation.dart';
+
+class NewChatScreen extends StatefulWidget {
   final User user;
 
-  ChatScreen({required this.user});
+  NewChatScreen({required this.user});
 
   @override
-  _ChatScreenState createState() => _ChatScreenState();
+  _NewChatScreenState createState() => _NewChatScreenState();
 }
 
-class _ChatScreenState extends State<ChatScreen> {
-  _buildMessage(Message message, bool isMe) {
-    final Container msg = Container(
+class _NewChatScreenState extends State<NewChatScreen> {
+  Widget _buildMessage(Message message, bool isMe) {
+    final msg = Container(
       margin: isMe
-          ? EdgeInsets.only(
-        top: 8.0,
-        bottom: 8.0,
-        left: 80.0,
-      )
-          : EdgeInsets.only(
-        top: 8.0,
-        bottom: 8.0,
-      ),
+          ? EdgeInsets.only(top: 8.0, bottom: 8.0, left: 80.0)
+          : EdgeInsets.only(top: 8.0, bottom: 8.0),
       padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
       width: MediaQuery.of(context).size.width * 0.75,
       decoration: BoxDecoration(
@@ -81,7 +78,7 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 
-  _buildMessageComposer() {
+  Widget _buildMessageComposer() {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 8.0),
       height: 70.0,
@@ -161,13 +158,63 @@ class _ChatScreenState extends State<ChatScreen> {
                     itemBuilder: (BuildContext context, int index) {
                       final Message message = messages[index];
                       final bool isMe = message.sender.id == currentUser.id;
-                      return _buildMessage(message, isMe);
+                      //return _buildMessage(message, isMe);
                     },
                   ),
                 ),
               ),
             ),
             _buildMessageComposer(),
+          ],
+        ),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        shape: CircularNotchedRectangle(),
+        color: Theme.of(context).primaryColor,
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            IconButton(
+              padding: EdgeInsets.zero,
+              constraints: BoxConstraints(),
+              icon: Icon(Icons.home, size: 25.0),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MyApp()),
+                );
+              },
+              color: Colors.white,
+            ),
+            IconButton(
+              padding: EdgeInsets.zero,
+              constraints: BoxConstraints(),
+              icon: Icon(Icons.search, size: 25.0),
+              onPressed: () {
+                // Add your logic here for the search button
+              },
+              color: Colors.white,
+            ),
+            SizedBox(width: 25.0),
+            IconButton(
+              padding: EdgeInsets.zero,
+              constraints: BoxConstraints(),
+              icon: Icon(Icons.favorite, size: 25.0),
+              onPressed: () {
+                // Add your logic here for the favorite button
+              },
+              color: Colors.white,
+            ),
+            IconButton(
+              padding: EdgeInsets.zero,
+              constraints: BoxConstraints(),
+              icon: Icon(Icons.settings, size: 25.0),
+              onPressed: () {
+                // Add your logic here for the settings button
+              },
+              color: Colors.white,
+            ),
           ],
         ),
       ),

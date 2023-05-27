@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jurisconexao_cliente/components/bottombar.dart';
 import 'package:jurisconexao_cliente/models/message_model.dart';
 import 'package:jurisconexao_cliente/models/user_model.dart';
 import 'package:jurisconexao_cliente/widgets/filters.dart';
@@ -149,14 +150,19 @@ class _ChatScreenState extends State<ChatScreen> {
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
+        backgroundColor: Theme.of(context).primaryColor,
+
         title: Text(
           widget.user.name,
           style: TextStyle(
             fontSize: 28.0,
             fontWeight: FontWeight.bold,
+            color: Colors.white,
           ),
         ),
         elevation: 0.0,
+        iconTheme: IconThemeData(color: Colors.white), // Define a cor da seta de volta
+
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.more_horiz),
@@ -202,6 +208,7 @@ class _ChatScreenState extends State<ChatScreen> {
           ],
         ),
       ),
+        bottomNavigationBar: CustomBottomNavigationBar(),
     );
   }
 }

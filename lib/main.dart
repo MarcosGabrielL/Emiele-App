@@ -89,7 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
       body: Column(
         children: <Widget>[
-          SizedBox(height: getProportionateScreenHeight(30)),
+          SizedBox(height: getProportionateScreenHeight(40)),
           HomeHeader(),
           CategorySelector(),
           CategoriesGuield(),

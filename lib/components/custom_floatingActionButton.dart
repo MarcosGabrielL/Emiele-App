@@ -1,10 +1,20 @@
 import 'package:flutter/material.dart';
 
+import '../models/message_model.dart';
+import '../pages/new_solicitation.dart';
+import '../screens/chat_screen.dart';
+import '../widgets/new_chat.dart';
+
 class CustomFloatingActionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-      onPressed: () {},
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ChatScreen(user: currentUser,)),
+        );
+      },
       tooltip: 'Increment',
       child: Icon(Icons.question_mark, size: 35.0),
       elevation: 1.0,

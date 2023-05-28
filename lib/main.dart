@@ -171,7 +171,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => OtpScreen()),// NewSoliticitacion()),
+                        builder: (context) => Home()),// NewSoliticitacion()),
                   );
                 },
                 color: Colors.white,
@@ -197,9 +197,13 @@ class _MyHomePageState extends State<MyHomePage> {
               IconButton(
                 padding: EdgeInsets.zero,
                 constraints: BoxConstraints(),
-                icon: Icon(Icons.favorite, size: 25.0),
+                icon: Icon(Icons.chat, size: 25.0),
                 onPressed: () {
-                  // Add your logic here for the favorite button
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => MyApp()),
+                  );
                 },
                 color: Colors.white,
               ),

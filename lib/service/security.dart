@@ -13,6 +13,7 @@ class AuthService {
   final String isLoggedInKey = 'isLoggedIn';
   final String loggedUser = 'LoggedUser';
   final String isFirstTimeKey = 'isFirstTime';
+  final String PhoneKey = 'phone';
   late SharedPreferences _preferences;
 
   bool isLoggedIn = false;
@@ -72,7 +73,7 @@ class AuthService {
     final body = json.encode({
       "email": email,
       "password": password,
-      "firstName": "",
+      "firstName": name,
       "lastName": "",
       "tipo": "3"
     });
@@ -91,6 +92,7 @@ class AuthService {
 
         await _preferences.setBool(isLoggedInKey, true);
         await _preferences.setString(loggedUser, email);
+        await _preferences.setString(PhoneKey, name);
 
         Message.showSnackBar(context, response.statusCode);
         return responseData;
@@ -154,4 +156,57 @@ class AuthService {
       throw Exception('Failed to connect to the server: $e');
     }
   }
+
+  Future<String> reSendEmailCode(BuildContext context, String email) async {
+    final url = Uri.parse('$baseUrl/send_email');
+    final body = {'email': email}; // Não precisa codificar para JSON usando json.encode()
+
+    try {
+      final response = await http.post(url, body: body, headers: {
+        'Content-Type': 'application/json',
+      });
+
+      final responseData = response.body;
+      print('Recuperar Senha: $responseData');
+
+      SharedPreferences _preferences = await SharedPreferences.getInstance();
+      bool isLoggedIn = true;
+      await _preferences.setBool('isLoggedInKey', isLoggedIn);
+
+      Message.showSnackBar(context, response.statusCode);
+
+      return responseData;
+    } catch (e) {
+      Message.showSnackBar(context, 500);
+      print('1: authenticate failed: $e');
+      throw Exception('Failed to connect to the server: $e');
+    }
+  }
+
+  Future<bool> isCodeValid(BuildContext context, String email, String code) async {
+    final url = Uri.parse('$baseUrl/checkRegistrationCode');
+    final body = {'email': email, 'code':code};
+
+    try {
+      final response = await http.post(url, body: body, headers: {
+        'Content-Type': 'application/json',
+      });
+
+      final responseData = response.body;
+      print('Registration Code: $responseData');
+
+      SharedPreferences _preferences = await SharedPreferences.getInstance();
+      bool isLoggedIn = response.statusCode == 200; // Verifica se o status é 200
+      await _preferences.setBool('isLoggedInKey', isLoggedIn);
+
+      Message.showSnackBar(context, response.statusCode);
+
+      return isLoggedIn;
+    } catch (e) {
+      Message.showSnackBar(context, 500);
+      print('1: authenticate failed: $e');
+      throw Exception('Failed to connect to the server: $e');
+    }
+  }
+
 }

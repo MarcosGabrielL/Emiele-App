@@ -25,7 +25,7 @@ class LoginPage extends StatelessWidget {
       String email = usernameController.value.text;
       String password = passwordController.value.text;
 
-      if(Validation.validateFields(context, email,password)) {
+      if(Validation.validateFields(context, email,password, '', 01)) {
         try {
           AuthService authManager = AuthService();
           final ret = await authManager.authenticate(context, email, password);

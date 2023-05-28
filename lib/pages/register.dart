@@ -1,12 +1,17 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:jurisconexao_cliente/components/my_button.dart';
 import 'package:jurisconexao_cliente/components/my_textfield.dart';
 import 'package:jurisconexao_cliente/components/square_tile.dart';
 import 'package:jurisconexao_cliente/pages/login.dart';
+import 'package:jurisconexao_cliente/screens/otp/otp_screen.dart';
 import 'package:jurisconexao_cliente/service/SnackBar.dart';
 import 'package:jurisconexao_cliente/service/security.dart';
 import 'package:jurisconexao_cliente/service/validating.dart';
 
+import '../components/config/size_config.dart';
+import '../components/constant.dart';
+import '../components/custom_surfix_icon.dart';
 import '../main.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -20,24 +25,28 @@ class RegisterPage extends StatefulWidget {
   // text editing controllers
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
+final phonedController = TextEditingController();
+  List<String> errors = [];
    bool isChecked = false;
+
 
   // sign user in method
   Future<void> signUserUp(BuildContext context) async {
 
-    String name = '';
+
     String email = usernameController.value.text;
+    String phone = phonedController.value.text;
     String password = passwordController.value.text;
 
-    if(Validation.validateFields(context, email,password) ) {
+    if(Validation.validateFields(context, email,password,phone, 02) ) {
       if(isChecked) {
         try {
           AuthService authManager = AuthService();
-          final ret = await authManager.signUp(context, name, email, password);
+          final ret = await authManager.signUp(context, phone, email, password);
           // Handle the registration success and process the registerModel object
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => MyApp()),
+            MaterialPageRoute(builder: (context) => OtpScreen()),
           );
           print('11: Registration successful: $ret');
         } catch (e) {
@@ -56,7 +65,7 @@ class RegisterPage extends StatefulWidget {
 class _MyFormState extends State<RegisterPage> {
 
   bool checked = false;
-
+  late String number;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,10 +75,13 @@ class _MyFormState extends State<RegisterPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const SizedBox(height: 50),
 
-              // logo
-              Row(
+
+              const SizedBox(height: 10),
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 10.0),
+            child:
+            Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(
@@ -79,9 +91,9 @@ class _MyFormState extends State<RegisterPage> {
                   ),
                 ],
               ),
+          ),
 
-
-              const SizedBox(height: 50),
+              const SizedBox(height: 70),
 
               // welcome back, you've been missed!
               Text(
@@ -92,26 +104,44 @@ class _MyFormState extends State<RegisterPage> {
                 ),
               ),
 
-              const SizedBox(height: 25),
 
-              // username textfield
+              const SizedBox(height: 10),
+
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30.0),
+            child:
               MyTextField(
                 controller: usernameController,
                 hintText: 'Email',
                 obscureText: false,
               ),
-
+          ),
               const SizedBox(height: 10),
 
-              // password textfield
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30.0),
+            child:
               MyTextField(
                 controller: passwordController,
                 hintText: 'Senha',
                 obscureText: true,
               ),
-
+          ),
               const SizedBox(height: 10),
 
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30.0),
+            child:
+              MyTextField(
+                controller: phonedController,
+                hintText: '+00 00000000',
+                obscureText: false,
+              ),
+          ),
+              const SizedBox(height: 5),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30.0),
+            child:
               CheckboxListTile(
                 title: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
@@ -119,7 +149,7 @@ class _MyFormState extends State<RegisterPage> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
-                        'Eu concordo com os ',
+                        'Concordo com os ',
                         style: TextStyle(color: Colors.grey[700], fontSize: 12),
                       ),
                       GestureDetector(
@@ -132,7 +162,7 @@ class _MyFormState extends State<RegisterPage> {
                           );
                         },
                         child: Text(
-                          'Termos e Condições',
+                          'Termos',
                           style: TextStyle(
                             color: Color(0xFF011C38),
                             fontWeight: FontWeight.bold,
@@ -151,16 +181,18 @@ class _MyFormState extends State<RegisterPage> {
                 },
                 controlAffinity: ListTileControlAffinity.leading,
               ),
+          ),
 
-
-              const SizedBox(height: 20),
-
+              const SizedBox(height: 40),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 55.0),
+            child:
               // sign in button
               MyButtonPrimary(
                 onTap: () => signUserUp(context),
                 text: "Cadastrar-se",
               ),
-
+          ),
               const SizedBox(height: 20),
 
               // or continue with
@@ -175,7 +207,7 @@ class _MyFormState extends State<RegisterPage> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                      padding: const EdgeInsets.symmetric(vertical: 10.0),
                       child: Text(
                         'Ou entre com',
                         style: TextStyle(color: Colors.grey[700]),

@@ -32,6 +32,9 @@ class Message {
       case 04:
         snackBarMessage = 'Enviamos um link de redefinição de senha para o seu e-mail. Por favor, verifique.';
         break;
+      case 05:
+        snackBarMessage ='Codigo de Verificação Invalido';
+        break;
       case 401:
         snackBarMessage = 'Não Autorizado: A solicitação requer autenticação do cliente ou as credenciais fornecidas não são válidas';
         break;

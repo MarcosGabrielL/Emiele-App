@@ -32,6 +32,8 @@ class MyTextField extends StatelessWidget {
             filled: true,
             hintText: hintText,
             hintStyle: TextStyle(color: Colors.grey[500]),
+            contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10), // Reduz a altura do TextField
+
           ),
         ),
       ),

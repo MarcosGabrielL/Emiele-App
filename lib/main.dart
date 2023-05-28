@@ -11,6 +11,7 @@ import 'package:jurisconexao_cliente/widgets/recent_chats.dart';
 import 'package:jurisconexao_cliente/components/fab_bottom_app_bar.dart';
 
 import 'components/bottomnavigate_bar.dart';
+import 'components/custom_floatingActionButton.dart';
 
 void main() {
   runApp(const MyApp());
@@ -137,21 +138,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        tooltip: 'Increment',
-        child: Icon(Icons.question_mark, size: 35.0),
-        elevation: 1.0,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16.0),
-          side: BorderSide(
-            color: Theme.of(context)
-                .primaryColor, // Add your desired border color here
-            width: 2.0, // Add your desired border width here
-          ), // Add border radius here
-          // Add other properties for border customization, such as side and color
-        ),
-      ),
+      floatingActionButton: CustomFloatingActionButton(),
       bottomNavigationBar: Container(
         height: 50.0, // Defina a altura desejada aqui
         child: CustomBottomAppBar(),

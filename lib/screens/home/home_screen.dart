@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../components/bottomnavigate_bar.dart';
 import '../../components/config/enums.dart';
+import '../../components/custom_floatingActionButton.dart';
 import 'components/body.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -10,7 +11,12 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Body(),
-      bottomNavigationBar: CustomBottomAppBar(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: CustomFloatingActionButton(),
+      bottomNavigationBar: Container(
+        height: 50.0, // Defina a altura desejada aqui
+        child: CustomBottomAppBar(),
+      ),
     );
   }
 }

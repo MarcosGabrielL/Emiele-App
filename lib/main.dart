@@ -10,6 +10,8 @@ import 'package:jurisconexao_cliente/widgets/favorite_contacts.dart';
 import 'package:jurisconexao_cliente/widgets/recent_chats.dart';
 import 'package:jurisconexao_cliente/components/fab_bottom_app_bar.dart';
 
+import 'components/bottomnavigate_bar.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -152,73 +154,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       bottomNavigationBar: Container(
         height: 50.0, // Defina a altura desejada aqui
-        child: BottomAppBar(
-          shape: CircularNotchedRectangle(),
-          color: Theme.of(context).primaryColor,
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            verticalDirection: VerticalDirection.down,
-            textDirection: TextDirection.ltr,
-            textBaseline: TextBaseline.alphabetic,
-            children: <Widget>[
-              IconButton(
-                padding: EdgeInsets.zero,
-                constraints: BoxConstraints(),
-                icon: Icon(Icons.home, size: 25.0),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => Home()),// NewSoliticitacion()),
-                  );
-                },
-                color: Colors.white,
-              ),
-              IconButton(
-                padding: EdgeInsets.zero,
-                constraints: BoxConstraints(),
-                icon: Icon(Icons.search, size: 25.0),
-                onPressed: () {
-                  // Add your logic here for the search button
-                },
-                color: Colors.white,
-              ),
-              IconButton(
-                padding: EdgeInsets.zero,
-                constraints: BoxConstraints(),
-                icon: Icon(Icons.favorite, size: 0),
-                onPressed: () {
-                  // Add your logic here for the favorite button
-                },
-                color: Colors.transparent,
-              ),
-              IconButton(
-                padding: EdgeInsets.zero,
-                constraints: BoxConstraints(),
-                icon: Icon(Icons.chat, size: 25.0),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => MyApp()),
-                  );
-                },
-                color: Colors.white,
-              ),
-              IconButton(
-                padding: EdgeInsets.zero,
-                constraints: BoxConstraints(),
-                icon: Icon(Icons.settings, size: 25.0),
-                onPressed: () {
-                  // Add your logic here for the settings button
-                },
-                color: Colors.white,
-              ),
-            ],
-          ),
-        ),
+        child: CustomBottomAppBar(),
       ),
     );
   }

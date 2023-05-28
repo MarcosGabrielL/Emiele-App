@@ -17,10 +17,10 @@ class Body extends StatelessWidget {
             children: [
               SizedBox(height: SizeConfig.screenHeight * 0.05),
               Text(
-                "OTP Verification",
+                "Código de verificação",
                 style: headingStyle,
               ),
-              Text("We sent your code to +1 898 860 ***"),
+              Text("Enviamos o codigo para o seu email"),
               buildTimer(),
               OtpForm(),
               SizedBox(height: SizeConfig.screenHeight * 0.1),
@@ -29,7 +29,7 @@ class Body extends StatelessWidget {
                   // OTP code resend
                 },
                 child: Text(
-                  "Resend OTP Code",
+                  "Reenviar Codigo verificação",
                   style: TextStyle(decoration: TextDecoration.underline),
                 ),
               )
@@ -44,9 +44,9 @@ class Body extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text("This code will expired in "),
+        Text("O codigo experira em "),
         TweenAnimationBuilder(
-          tween: Tween(begin: 30.0, end: 0.0),
+          tween: Tween(begin: 60.0, end: 0.0),
           duration: Duration(seconds: 30),
           builder: (_, dynamic value, child) => Text(
             "00:${value.toInt()}",

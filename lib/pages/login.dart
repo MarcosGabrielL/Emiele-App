@@ -8,6 +8,8 @@ import 'package:jurisconexao_cliente/service/security.dart';
 import 'package:jurisconexao_cliente/service/validating.dart';
 
 class LoginPage extends StatelessWidget {
+  static var routeName;
+
   LoginPage({super.key});
 
   // text editing controllers

@@ -8,9 +8,11 @@ import 'package:jurisconexao_cliente/service/SnackBar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthService {
-  final String baseUrl = 'https://jurisconexao-service-auth-production.up.railway.app';
+  final String baseUrl =
+      'https://jurisconexao-service-auth-production.up.railway.app';
   final String isLoggedInKey = 'isLoggedIn';
   final String loggedUser = 'LoggedUser';
+  final String isFirstTimeKey = 'isFirstTime';
   late SharedPreferences _preferences;
 
   bool isLoggedIn = false;
@@ -21,9 +23,9 @@ class AuthService {
     isLoggedIn = _preferences.getBool(isLoggedInKey) ?? false;
     user = _preferences.getString(loggedUser) ?? "";
   }
+
   Future<bool> checkLoginStatus() async {
     _preferences = await SharedPreferences.getInstance();
-
 
     //Teste para login
     /* _preferences.setBool(isLoggedInKey, false);
@@ -32,7 +34,8 @@ class AuthService {
     return _preferences.getBool(isLoggedInKey) ?? false;
   }
 
-  Future<String> authenticate(BuildContext context ,String email, String password) async {
+  Future<String> authenticate(
+      BuildContext context, String email, String password) async {
     final url = Uri.parse('$baseUrl/authenticate');
     final body = json.encode({'email': email, 'password': password});
 
@@ -43,7 +46,7 @@ class AuthService {
 
       final responseData = json.encode(response.body);
       if (response.statusCode == 200) {
-       // print('Authenticate response: $responseData');
+        // print('Authenticate response: $responseData');
         SharedPreferences _preferences = await SharedPreferences.getInstance();
         isLoggedIn = true;
         await _preferences.setBool(isLoggedInKey, true);
@@ -63,7 +66,8 @@ class AuthService {
     }
   }
 
-  Future<String> signUp(BuildContext context, String name, String email, String password) async {
+  Future<String> signUp(
+      BuildContext context, String name, String email, String password) async {
     final url = Uri.parse('$baseUrl/process_register');
     final body = json.encode({
       "email": email,
@@ -73,39 +77,34 @@ class AuthService {
       "tipo": "3"
     });
 
-      try {
-        final response = await http.post(
-            url,
-            body: body,
-            headers: {
-          'Content-Type': 'application/json',
-        });
+    try {
+      final response = await http.post(url, body: body, headers: {
+        'Content-Type': 'application/json',
+      });
 
+      if (response.statusCode == 201 || response.statusCode == 200) {
+        final responseData = json.encode(response.body);
+        //print('Registration response: $responseData');
+        isLoggedIn = true;
 
+        SharedPreferences _preferences = await SharedPreferences.getInstance();
 
-        if (response.statusCode == 201 || response.statusCode == 200) {
-          final responseData = json.encode(response.body);
-          //print('Registration response: $responseData');
-          isLoggedIn = true;
+        await _preferences.setBool(isLoggedInKey, true);
+        await _preferences.setString(loggedUser, email);
 
-          SharedPreferences _preferences = await SharedPreferences.getInstance();
-
-          await _preferences.setBool(isLoggedInKey, true);
-          await _preferences.setString(loggedUser, email);
-
-          Message.showSnackBar(context, response.statusCode);
-          return  responseData;
-        } else {
-          final responseData = json.decode(response.body);
-          Message.showSnackBar(context, response.statusCode);
-          print('2: Registration failed: $responseData');
-          throw Exception('Registration failed');
-        }
-      } catch (e) {
-        Message.showSnackBar(context, 500);
-        print('2: Registration failed: $e');
-        throw Exception('Failed to connect to the server: $e');
+        Message.showSnackBar(context, response.statusCode);
+        return responseData;
+      } else {
+        final responseData = json.decode(response.body);
+        Message.showSnackBar(context, response.statusCode);
+        print('2: Registration failed: $responseData');
+        throw Exception('Registration failed');
       }
+    } catch (e) {
+      Message.showSnackBar(context, 500);
+      print('2: Registration failed: $e');
+      throw Exception('Failed to connect to the server: $e');
+    }
   }
 
   void logout() {
@@ -114,6 +113,19 @@ class AuthService {
     isLoggedIn = false;
     _preferences.setBool(isLoggedInKey, false);
   }
+
+  Future<bool> checkisFirstTimeStatus() async {
+    _preferences = await SharedPreferences.getInstance();
+
+    //Teste para login
+    /* _preferences.setBool(isFirstTimeKey, true);
+      * */
+
+    return _preferences.getBool(isFirstTimeKey) ?? true;
+  }
+
+   void set_isFirstTimeStatus() async {
+    _preferences = await SharedPreferences.getInstance();
+    _preferences.setBool(isFirstTimeKey, false);
+  }
 }
-
-

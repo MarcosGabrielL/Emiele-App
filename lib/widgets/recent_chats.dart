@@ -97,12 +97,12 @@ class RecentChats extends StatelessWidget {
                             width: 40.0,
                             height: 20.0,
                             decoration: BoxDecoration(
-                              color: Theme.of(context).primaryColor,
+                              color: Colors.deepOrangeAccent.shade100, //Theme.of(context).primaryColor,
                               borderRadius: BorderRadius.circular(30.0),
                             ),
                             alignment: Alignment.center,
                             child: Text(
-                              'NEW',
+                              'Novo',
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 12.0,

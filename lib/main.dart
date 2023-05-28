@@ -2,15 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:jurisconexao_cliente/pages/login.dart';
 import 'package:jurisconexao_cliente/pages/new_solicitation.dart';
 import 'package:jurisconexao_cliente/screens/forgot_password/forgot_password_screen.dart';
+import 'package:jurisconexao_cliente/screens/home/components/home_header.dart';
 import 'package:jurisconexao_cliente/screens/otp/otp_screen.dart';
 import 'package:jurisconexao_cliente/screens/splash/splash_screen.dart';
 import 'package:jurisconexao_cliente/service/security.dart';
 import 'package:jurisconexao_cliente/widgets/category_selector.dart';
 import 'package:jurisconexao_cliente/widgets/favorite_contacts.dart';
+import 'package:jurisconexao_cliente/widgets/favorits_categories.dart';
+import 'package:jurisconexao_cliente/widgets/info_categories.dart';
 import 'package:jurisconexao_cliente/widgets/recent_chats.dart';
 import 'package:jurisconexao_cliente/components/fab_bottom_app_bar.dart';
 
 import 'components/bottomnavigate_bar.dart';
+import 'components/config/size_config.dart';
 import 'components/custom_floatingActionButton.dart';
 
 void main() {
@@ -81,36 +85,14 @@ class _MyHomePageState extends State<MyHomePage> {
     }
 
     return Scaffold(
-      backgroundColor: Theme.of(context).primaryColor,
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).primaryColor,
-        leading: IconButton(
-          icon: const Icon(Icons.menu),
-          iconSize: 30.0,
-          color: Colors.white,
-          onPressed: () {},
-        ),
-        title: Text(
-          'Jurisconexão',
-          style: TextStyle(
-            fontSize: 28.0,
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        elevation: 0.0,
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.search),
-            iconSize: 30.0,
-            color: Colors.white,
-            onPressed: () {},
-          ),
-        ],
-      ),
+      backgroundColor: Colors.white, //Theme.of(context).primaryColor,
+
       body: Column(
         children: <Widget>[
+          SizedBox(height: getProportionateScreenHeight(30)),
+          HomeHeader(),
           CategorySelector(),
+          CategoriesGuield(),
           Expanded(
             child: Container(
               decoration: BoxDecoration(
@@ -118,8 +100,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   begin: Alignment.topLeft,
                   end: Alignment.bottomLeft,
                   colors: [
-                    const Color(0xFF011C38),
-                    Colors.black,
+                    Colors.white,
+                    Colors.grey,
                   ],
                 ),
                 borderRadius: BorderRadius.only(
@@ -129,7 +111,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               child: Column(
                 children: <Widget>[
-                  FavoriteContacts(),
+                  FavoriteCotegories(),
                   RecentChats(),
                 ],
               ),

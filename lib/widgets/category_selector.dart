@@ -7,13 +7,13 @@ class CategorySelector extends StatefulWidget {
 
 class _CategorySelectorState extends State<CategorySelector> {
   int selectedIndex = 0;
-  final List<String> categories = ['Solicitações', 'Abertas', 'Fechadas', 'Em Andamento'];
+  final List<String> categories = ['Todas', 'Abertas', 'Fechadas', 'Em Andamento'];
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 40.0,
-      color: Theme.of(context).primaryColor,
+      color:  Colors.white, //Theme.of(context).primaryColor,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: categories.length,
@@ -32,7 +32,7 @@ class _CategorySelectorState extends State<CategorySelector> {
               child: Text(
                 categories[index],
                 style: TextStyle(
-                  color: index == selectedIndex ? Colors.white : Colors.white60,
+                  color: index == selectedIndex ? Theme.of(context).primaryColor : Colors.grey,
                   fontSize: 16.0,
                   fontWeight: FontWeight.bold,
                   letterSpacing: 1.2,

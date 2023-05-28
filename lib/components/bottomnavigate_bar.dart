@@ -24,7 +24,7 @@ class CustomBottomAppBar extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => HomeScreen()),
+                MaterialPageRoute(builder: (context) => MyApp()),
               );
             },
             color: Colors.white,
@@ -54,7 +54,7 @@ class CustomBottomAppBar extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => MyApp()),
+                MaterialPageRoute(builder: (context) => HomeScreen()),
               );
             },
             color: Colors.white,

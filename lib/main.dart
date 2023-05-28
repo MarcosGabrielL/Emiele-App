@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jurisconexao_cliente/pages/login.dart';
 import 'package:jurisconexao_cliente/pages/new_solicitation.dart';
+import 'package:jurisconexao_cliente/screens/forgot_password/forgot_password_screen.dart';
 import 'package:jurisconexao_cliente/screens/splash/splash_screen.dart';
 import 'package:jurisconexao_cliente/service/security.dart';
 import 'package:jurisconexao_cliente/widgets/category_selector.dart';
@@ -169,7 +170,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => NewSoliticitacion()),
+                        builder: (context) => ForgotPasswordScreen()),// NewSoliticitacion()),
                   );
                 },
                 color: Colors.white,

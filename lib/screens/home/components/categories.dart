@@ -7,24 +7,26 @@ class Categories extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Map<String, dynamic>> categories = [
-      {"icon": "assets/icons/Flash Icon.svg", "text": "Flash Deal"},
-      {"icon": "assets/icons/Bill Icon.svg", "text": "Bill"},
-      {"icon": "assets/icons/Game Icon.svg", "text": "Game"},
-      {"icon": "assets/icons/Gift Icon.svg", "text": "Daily Gift"},
-      {"icon": "assets/icons/Discover.svg", "text": "More"},
+      {"icon": "assets/icons/Flash Icon.svg", "text": "Civil"},
+      {"icon": "assets/icons/Bill Icon.svg", "text": "Penal"},
+      {"icon": "assets/icons/Game Icon.svg", "text": "Trabalhista"},
+      {"icon": "assets/icons/Gift Icon.svg", "text": "Empresa"},
+      {"icon": "assets/icons/Discover.svg", "text": "Tributário"},
+      {"icon": "assets/icons/Flash Icon.svg", "text": "Ambiental"},
+      {"icon": "assets/icons/Bill Icon.svg", "text": "Exterior"},
+      {"icon": "assets/icons/Game Icon.svg", "text": "Adm"},
+      {"icon": "assets/icons/Gift Icon.svg", "text": "Cliente"},
+      {"icon": "assets/icons/Discover.svg", "text": "Previdência"},
     ];
-    return Padding(
-      padding: EdgeInsets.all(getProportionateScreenWidth(20)),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: List.generate(
-          categories.length,
-              (index) => CategoryCard(
-            icon: categories[index]["icon"],
-            text: categories[index]["text"],
-            press: () {},
-          ),
+    return SizedBox(
+      height: getProportionateScreenWidth(100),
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: categories.length,
+        itemBuilder: (context, index) => CategoryCard(
+          icon: categories[index]["icon"],
+          text: categories[index]["text"],
+          press: () {},
         ),
       ),
     );
@@ -47,22 +49,27 @@ class CategoryCard extends StatelessWidget {
     return GestureDetector(
       onTap: press,
       child: SizedBox(
-        width: getProportionateScreenWidth(55),
-        child: Column(
-          children: [
-            Container(
-              padding: EdgeInsets.all(getProportionateScreenWidth(15)),
-              height: getProportionateScreenWidth(55),
-              width: getProportionateScreenWidth(55),
-              decoration: BoxDecoration(
-                color: Color(0xFFFFECDF),
-                borderRadius: BorderRadius.circular(10),
+        width: getProportionateScreenWidth(75),
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 5.0),
+          child: Column(
+            children: [
+              Container(
+                padding: EdgeInsets.all(getProportionateScreenWidth(15)),
+                height: getProportionateScreenWidth(55),
+                width: getProportionateScreenWidth(55),
+                decoration: BoxDecoration(
+                  color: const Color(0xFFEADDFF),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Icon(Icons.question_mark), //SvgPicture.asset(icon!),
               ),
-              child: SvgPicture.asset(icon!),
-            ),
-            SizedBox(height: 5),
-            Text(text!, textAlign: TextAlign.center)
-          ],
+              SizedBox(height: 5),
+              Text(text!,
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 13))
+            ],
+          ),
         ),
       ),
     );

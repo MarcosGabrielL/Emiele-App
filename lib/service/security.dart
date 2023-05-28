@@ -128,4 +128,30 @@ class AuthService {
     _preferences = await SharedPreferences.getInstance();
     _preferences.setBool(isFirstTimeKey, false);
   }
+
+  Future<String> forgotPass(BuildContext context, String email) async {
+    final url = Uri.parse('$baseUrl/forgot_password/');
+    final body = {'email': email}; // Não precisa codificar para JSON usando json.encode()
+
+    try {
+      final response = await http.post(url, body: body, headers: {
+        'Content-Type': 'application/json',
+      });
+
+      final responseData = response.body;
+      print('Recuperar Senha: $responseData');
+
+      SharedPreferences _preferences = await SharedPreferences.getInstance();
+      bool isLoggedIn = true;
+      await _preferences.setBool('isLoggedInKey', isLoggedIn);
+
+      Message.showSnackBar(context, response.statusCode);
+
+      return responseData;
+    } catch (e) {
+      Message.showSnackBar(context, 500);
+      print('1: authenticate failed: $e');
+      throw Exception('Failed to connect to the server: $e');
+    }
+  }
 }

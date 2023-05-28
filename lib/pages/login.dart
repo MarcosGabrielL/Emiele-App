@@ -7,6 +7,8 @@ import 'package:jurisconexao_cliente/pages/register.dart';
 import 'package:jurisconexao_cliente/service/security.dart';
 import 'package:jurisconexao_cliente/service/validating.dart';
 
+import '../screens/forgot_password/forgot_password_screen.dart';
+
 class LoginPage extends StatelessWidget {
   static var routeName;
 
@@ -106,9 +108,18 @@ class LoginPage extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Text(
-                      'Esqueceu a Senha?',
-                      style: TextStyle(color: Colors.grey[600]),
+                    InkWell(
+                      child: Text(
+                        'Esqueceu a conta?',
+                        style: TextStyle(color: Colors.grey[700]),
+
+                      ),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => ForgotPasswordScreen()),
+                        );
+                      },
                     ),
                   ],
                 ),
@@ -182,8 +193,6 @@ class LoginPage extends StatelessWidget {
                   const SizedBox(width: 4),
                   GestureDetector(
                     onTap: () {
-
-
                       // Add the navigation logic to open the register.dart file here
                       Navigator.push(
                         context,

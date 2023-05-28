@@ -29,6 +29,9 @@ class Message {
       case 03:
         snackBarMessage = 'Para prosseguir, é necessário que você concorde com os termos e condições.e';
         break;
+      case 04:
+        snackBarMessage = 'Enviamos um link de redefinição de senha para o seu e-mail. Por favor, verifique.';
+        break;
       case 401:
         snackBarMessage = 'Não Autorizado: A solicitação requer autenticação do cliente ou as credenciais fornecidas não são válidas';
         break;

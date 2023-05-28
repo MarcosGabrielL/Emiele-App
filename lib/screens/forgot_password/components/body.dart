@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:jurisconexao_cliente/components/default_button.dart';
 import 'package:jurisconexao_cliente/components/form_error.dart';
 import 'package:jurisconexao_cliente/components/no_account_text.dart';
+import 'package:jurisconexao_cliente/service/SnackBar.dart';
+import 'package:jurisconexao_cliente/service/security.dart';
 
 
 import '../../../components/config/size_config.dart';
 import '../../../components/constant.dart';
 import '../../../components/custom_surfix_icon.dart';
+import '../../../service/validating.dart';
 
 
 class Body extends StatelessWidget {
@@ -21,14 +24,18 @@ class Body extends StatelessWidget {
           child: Column(
             children: [
               SizedBox(height: SizeConfig.screenHeight * 0.04),
-              Text(
-                "Recuperar Senha",
-                style: TextStyle(
-                  fontSize: getProportionateScreenWidth(28),
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 50.0),
+                child: Text(
+                  "Recuperar Senha",
+                  style: TextStyle(
+                    fontSize: getProportionateScreenWidth(28),
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
+
               Text(
                 "Por favor, digite seu e-mail e nós lhe enviaremos \num link para retornar à sua conta",
                 textAlign: TextAlign.center,
@@ -51,7 +58,7 @@ class ForgotPassForm extends StatefulWidget {
 class _ForgotPassFormState extends State<ForgotPassForm> {
   final _formKey = GlobalKey<FormState>();
   List<String> errors = [];
-  String? email;
+  late String email = '';
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -60,7 +67,7 @@ class _ForgotPassFormState extends State<ForgotPassForm> {
         children: [
           TextFormField(
             keyboardType: TextInputType.emailAddress,
-            onSaved: (newValue) => email = newValue,
+            onSaved: (newValue) => email = newValue ?? '',
             onChanged: (value) {
               if (value.isNotEmpty && errors.contains(kEmailNullError)) {
                 setState(() {
@@ -103,7 +110,11 @@ class _ForgotPassFormState extends State<ForgotPassForm> {
             text: "Continue",
             press: () {
               if (_formKey.currentState!.validate()) {
-                // Do what you want to do
+                if(Validation.isEmailValid(email)) {
+                  new AuthService().forgotPass(context, email);
+                }else{
+                  Message.showSnackBar(context, 04);
+                }
               }
             },
           ),

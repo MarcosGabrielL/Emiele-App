@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 
 import '../main.dart';
+import '../models/message_model.dart';
+import '../pages/recent_chats_2.dart';
+import '../screens/chat_screen.dart';
 import '../screens/home/home_screen.dart';
 import '../screens/settings/settings_screen.dart';
+import '../widgets/new_chat.dart';
+import '../widgets/recent_chats.dart';
+import 'constant.dart';
 
 class CustomBottomAppBar extends StatelessWidget {
   @override
@@ -55,7 +61,7 @@ class CustomBottomAppBar extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => HomeScreen()),
+                MaterialPageRoute(builder: (context) => RecentChats2()), // NewChatScreen(user: james)),
               );
             },
             color: Colors.white,

@@ -35,7 +35,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
       colors: [
 
         Colors.white,
-        Colors.grey,
+        Colors.white,
       ],
     ),
     borderRadius: BorderRadius.only(
@@ -63,12 +63,12 @@ class _PaymentDetailsState extends State<PaymentDetails> {
               cardType: CardType.masterCard,
               showShadow: true,
             ),
-            StickyLabel(text: "Informação", textColor: Colors.black,),
+            StickyLabel(text: "", textColor: Colors.black,),
             SizedBox(height: 8.0),
             Container( //Esse container
               margin: EdgeInsets.symmetric(horizontal: 24.0),
               decoration: BoxDecoration(
-                color: Colors.transparent,
+                color: Colors.grey[200],
                 border: Border.all(
                   width: 0.5,
                   color: Colors.transparent,
@@ -208,12 +208,12 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                 ],
               ),
             ),
-            StickyLabel(text: "Detalhes ultimas transções", textColor: Colors.black),
+            StickyLabel(text: "", textColor: Colors.black),
             Container(
               margin: EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
               padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
               decoration: BoxDecoration(
-                color: Colors.transparent,
+                color: Colors.grey[200],
                 border: Border.all(
                   width: 0.5,
                   color: Colors.transparent,

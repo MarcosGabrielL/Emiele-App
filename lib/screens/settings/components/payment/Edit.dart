@@ -3,7 +3,9 @@ import 'package:flip_card/flip_card_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../../../components/config/size_config.dart';
 import '../../../../components/constant.dart';
+import '../../../../components/home_header_clean.dart';
 import 'components/card_alert_dialog.dart';
 import 'components/card_error_alert_dialog.dart';
 import 'components/card_input_formatter.dart';
@@ -36,7 +38,9 @@ class _HomePageState extends State<Edit> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const SizedBox(height: 30),
+              SizedBox(height: getProportionateScreenHeight(10)),
+              HomeHeaderClean(),
+              const SizedBox(height: 20),
               FlipCard(
                   fill: Fill.fillFront,
                   direction: FlipDirection.HORIZONTAL,
@@ -146,7 +150,7 @@ class _HomePageState extends State<Edit> {
                     border: InputBorder.none,
                     contentPadding:
                     EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                    hintText: 'Card Number',
+                    hintText: 'Numero do Cartao',
                     hintStyle: TextStyle(
                       color: Colors.grey,
                       fontSize: 16,
@@ -189,7 +193,7 @@ class _HomePageState extends State<Edit> {
                     border: InputBorder.none,
                     contentPadding:
                     EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                    hintText: 'Full Name',
+                    hintText: 'Nome no Cartao',
                     hintStyle: TextStyle(
                       color: Colors.grey,
                       fontSize: 16,
@@ -312,7 +316,7 @@ class _HomePageState extends State<Edit> {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   foregroundColor: Colors.white,
-                  backgroundColor: Colors.deepPurpleAccent,
+                  backgroundColor: kPrimaryColor,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15),
                   ),
@@ -332,8 +336,9 @@ class _HomePageState extends State<Edit> {
                   });
                 },
                 child: Text(
-                  'Add Card'.toUpperCase(),
+                  'Atualizar Cartão'.toUpperCase(),
                   style: const TextStyle(
+
                     fontSize: 15,
                     fontWeight: FontWeight.w500,
                   ),

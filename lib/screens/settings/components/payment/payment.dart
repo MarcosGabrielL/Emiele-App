@@ -2,7 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:jurisconexao_cliente/screens/settings/components/payment/success.dart';
 
+import '../../../../components/config/size_config.dart';
 import '../../../../components/constant.dart';
+import '../../../../components/home_header_clean.dart';
 import '../../../../widgets/headerLabel.dart';
 import '../../../notification/components/defaultAppBar.dart';
 import '../../../notification/components/defaultBackButton.dart';
@@ -21,14 +23,13 @@ class _PaymentState extends State<Payment> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kWhiteColor,
-      appBar: DefaultAppBar(
-        title: 'Payment',
-        child: DefaultBackButton(),
-      ),
+
       body: Column(
         children: [
+          SizedBox(height: getProportionateScreenHeight(40)),
+          HomeHeaderClean(),
           HeaderLabel(
-            headerText: 'Choose your payment method',
+            headerText: 'Escolha seu metodo de pagamento',
           ),
           Expanded(
             child: ListView.separated(
@@ -54,7 +55,7 @@ class _PaymentState extends State<Payment> {
             ),
           ),
           DefaultButton2(
-            btnText: 'Pay',
+            btnText: 'Continuar',
             onPressed: () => Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (context) => Success(),

@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:jurisconexao_cliente/main.dart';
 
 import '../../../../components/bottomnavigate_bar.dart';
 import '../../../../components/constant.dart';
@@ -23,16 +24,16 @@ class _SuccessState extends State<Success> {
         children: [
           EmptySection(
             emptyImg: success,
-            emptyMsg: 'Successful !!',
+            emptyMsg: 'Sucesso !!',
           ),
           SubTitle(
-            subTitleText: 'Your payment was done successfully',
+            subTitleText: 'Seu pagamento foi feito com sucesso',
           ),
           DefaultButton2(
             btnText: 'Ok',
             onPressed: () => Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) =>  CustomBottomAppBar(),
+                builder: (context) =>  MyApp(),
               ),
             ),
           ),

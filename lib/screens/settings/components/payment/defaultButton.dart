@@ -18,7 +18,7 @@ class DefaultButton2 extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: kDefaultPadding),
       child: TextButton(
         onPressed: () {
-          // Ação do botão
+          onPressed();
         },
         style: TextButton.styleFrom(
           padding: EdgeInsets.symmetric(vertical: kLessPadding),
@@ -26,7 +26,7 @@ class DefaultButton2 extends StatelessWidget {
             borderRadius: BorderRadius.circular(10.0),
           ),
         ),
-        child: Text('Button'),
+        child: Text(this.btnText),
       ),
     );
   }

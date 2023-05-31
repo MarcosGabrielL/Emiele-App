@@ -296,10 +296,10 @@ final icons = [
 ];
 
 final paymentLabels = [
-  'Credit card / Debit card',
-  'Cash on delivery',
-  'Paypal',
-  'Google wallet',
+  'Cartão Crédito / Debito ',
+  'Dinheiro',
+  'Pix',
+  //'Google wallet',
 ];
 
 final paymentIcons = [

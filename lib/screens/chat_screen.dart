@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:jurisconexao_cliente/components/bottombar.dart';
 import 'package:jurisconexao_cliente/models/message_model.dart';
 import 'package:jurisconexao_cliente/models/user_model.dart';
+import 'package:jurisconexao_cliente/screens/settings/components/payment/payment.dart';
 import 'package:jurisconexao_cliente/widgets/filters.dart';
 
 import '../components/util/date.dart';
@@ -22,19 +23,13 @@ class _ChatScreenState extends State<ChatScreen> {
   List<Message> solicitacoes1 = [
 
     Message(
-      sender: currentUser,
+      sender: Sistema,
       time: DataUtil.getFormattedTime(),
-      text: 'Just walked my doge. She was super duper cute. The best pupper!!',
+      text: 'Olá! Como posso ajudar com sua dúvida jurídica?',
       isLiked: false,
       unread: true,
     ),
-    Message(
-      sender: greg,
-      time: '11:30 AM',
-      text: 'Hey, how\'s it going? What did you do today?',
-      isLiked: false,
-      unread: false,
-    ),
+
 
   ];
 
@@ -124,7 +119,12 @@ class _ChatScreenState extends State<ChatScreen> {
             icon: Icon(Icons.send),
             iconSize: 25.0,
             color: Theme.of(context).primaryColor,
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Payment()),
+              );
+            },
           ),
         ],
       ),

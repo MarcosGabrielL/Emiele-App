@@ -175,21 +175,3 @@ List<Message> messages = [
   ),
 ];
 
-List<Message> solicitacoes = [
-
-  Message(
-    sender: currentUser,
-    time: DataUtil.getFormattedTime(),
-    text: 'Just walked my doge. She was super duper cute. The best pupper!!',
-    isLiked: false,
-    unread: true,
-  ),
-  Message(
-    sender: greg,
-    time: '11:30 AM',
-    text: 'Hey, how\'s it going? What did you do today?',
-    isLiked: false,
-    unread: false,
-  ),
-
-];

@@ -16,8 +16,9 @@ class CustomFloatingActionButton extends StatelessWidget {
         );
       },
       tooltip: 'Increment',
-      child: Icon(Icons.question_mark, size: 35.0),
+      child: Icon(Icons.question_mark, size: 35.0, color: Colors.deepOrangeAccent.shade100,),
       elevation: 1.0,
+      backgroundColor: Colors.grey.shade200, // Defina a cor de fundo aqui
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16.0),
         side: BorderSide(

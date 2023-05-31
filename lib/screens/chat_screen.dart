@@ -153,7 +153,7 @@ class _ChatScreenState extends State<ChatScreen> {
         backgroundColor: Theme.of(context).primaryColor,
 
         title: Text(
-          widget.user.name,
+         '',
           style: TextStyle(
             fontSize: 28.0,
             fontWeight: FontWeight.bold,

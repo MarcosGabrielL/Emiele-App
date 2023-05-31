@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:jurisconexao_cliente/main.dart';
 import 'package:jurisconexao_cliente/pages/new_solicitation.dart';
+import 'package:jurisconexao_cliente/screens/home/home_screen.dart';
 
 class CustomBottomNavigationBar extends StatelessWidget {
   @override
@@ -24,7 +26,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => NewSoliticitacion()),
+                  MaterialPageRoute(builder: (context) => MyApp()),
                 );
               },
               color: Colors.white,
@@ -53,7 +55,10 @@ class CustomBottomNavigationBar extends StatelessWidget {
               constraints: BoxConstraints(),
               icon: Icon(Icons.settings, size: 25.0),
               onPressed: () {
-                // Adicione a lógica aqui para o botão de configurações
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => HomeScreen()),
+                );
               },
               color: Colors.white,
             ),

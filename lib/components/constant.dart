@@ -24,6 +24,8 @@ const kDarkColor = Color(0xFF303030);
 const kOrangeColor =  Colors.orange;
 const kTransparent = Colors.transparent;
 
+const Color kDarkBlue = Color(0xFF090943);
+
 const kDefaultPadding = 24.0;
 const kLessPadding = 10.0;
 const kFixPadding = 16.0;
@@ -408,32 +410,32 @@ final trackOrderList = [
 final paymentDetailList = [
   PaymentModal(
       date: "Jan 01",
-      details: "Buy IPhoneX",
+      details: "Compra IPhoneX",
       amount: 1000.0,
       textColor: Colors.red),
   PaymentModal(
       date: "Aug 15",
-      details: "Flat ₹650 off",
+      details: "Compra ₹650 off",
       amount: 650.0,
       textColor: Colors.green),
   PaymentModal(
       date: "Dec 03",
-      details: "Congrats! Flat ₹180",
+      details: "PArabés! Flat ₹180",
       amount: 180.0,
       textColor: Colors.green),
   PaymentModal(
       date: "Feb 14",
-      details: "Buy Shoes Upto 50% Off",
+      details: "Compra em Shoes Upto 50% Off",
       amount: 540.0,
       textColor: Colors.red),
   PaymentModal(
       date: "Sep 08",
-      details: "Buy Footwear on Discount",
+      details: "Compra em Footwear on Discount",
       amount: 210.0,
       textColor: Colors.red),
   PaymentModal(
       date: "Apr 18",
-      details: "Congrats! ₹375 Rewarded",
+      details: "Parabéns! ₹375 Rewarded",
       amount: 375.0,
       textColor: Colors.green),
 ];

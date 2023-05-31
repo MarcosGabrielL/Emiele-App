@@ -7,6 +7,7 @@ import '../../../../components/config/size_config.dart';
 import '../../../../components/constant.dart';
 import '../../../../components/home_header_clean.dart';
 import '../../../../widgets/stickyLabel.dart';
+import 'Edit.dart';
 
 class PaymentDetails extends StatefulWidget {
 
@@ -18,7 +19,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
   String cardNumber = "5450 7879 4864 7854",
       cardExpiry = "10/25",
       cardHolderName = "John Travolta",
-      bankName = "ICICI Bank",
+      bankName = "Banco do Brasil",
       cvv = "456";
   @override
   Widget build(BuildContext context) {
@@ -49,7 +50,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
           children: [
             SizedBox(height: getProportionateScreenHeight(40)),
             HomeHeaderClean(),
-            SizedBox(height: getProportionateScreenHeight(8)),
+            SizedBox(height: getProportionateScreenHeight(18)),
             CreditCard(
               cardNumber: cardNumber,
               cardExpiry: cardExpiry,
@@ -62,18 +63,19 @@ class _PaymentDetailsState extends State<PaymentDetails> {
               cardType: CardType.masterCard,
               showShadow: true,
             ),
-            StickyLabel(text: "Card Information", textColor: Colors.black,),
+            StickyLabel(text: "Informação", textColor: Colors.black,),
             SizedBox(height: 8.0),
-            Container(
+            Container( //Esse container
               margin: EdgeInsets.symmetric(horizontal: 24.0),
               decoration: BoxDecoration(
-                color: kWhiteColor,
+                color: Colors.transparent,
                 border: Border.all(
                   width: 0.5,
-                  color: kLightColor,
+                  color: Colors.transparent,
                 ),
                 borderRadius: BorderRadius.circular(10.0),
               ),
+
               child: Column(
                 children: [
                   Padding(
@@ -84,8 +86,9 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("My Perosnal Card",
+                        Text("Cartão Principal",
                             style: TextStyle(fontSize: 18.0)),
+
                         Container(
                             width: 60.0,
                             child: Icon(Icons.payment,
@@ -102,7 +105,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Card Number",
+                              "Numero",
                               style: TextStyle(
                                 fontSize: 16.0,
                                 color: kLightColor,
@@ -148,7 +151,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Card Name",
+                              "Nome",
                               style: TextStyle(
                                 fontSize: 16.0,
                                 color: kLightColor,
@@ -187,7 +190,11 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                     width: MediaQuery.of(context).size.width,
                     child: TextButton(
                       onPressed: () {
-                        // Ação do botão
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Edit()),
+                        );
+
                       },
                       style: TextButton.styleFrom(
                         padding: EdgeInsets.symmetric(vertical: kLessPadding),
@@ -195,24 +202,25 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                       ),
-                      child: Text('Edit Detail'),
+                      child: Text('Editar'),
                     ),
                   ),
                 ],
               ),
             ),
-            StickyLabel(text: "Transaction Details", textColor: Colors.black),
+            StickyLabel(text: "Detalhes ultimas transções", textColor: Colors.black),
             Container(
               margin: EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
               padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
               decoration: BoxDecoration(
-                color: kWhiteColor,
+                color: Colors.transparent,
                 border: Border.all(
                   width: 0.5,
-                  color: kLightColor,
+                  color: Colors.transparent,
                 ),
                 borderRadius: BorderRadius.circular(10.0),
               ),
+
               child: ListView.separated(
                 shrinkWrap: true,
                 itemCount: paymentDetailList.length,

@@ -12,7 +12,7 @@ class SpecialParaVoce extends StatelessWidget {
     return Column(
       children: [
 
-        SizedBox(height: getProportionateScreenWidth(20)),
+        SizedBox(height: getProportionateScreenWidth(0)),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(

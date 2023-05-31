@@ -12,7 +12,7 @@ class FavoriteCotegories extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 10.0),
+      padding: EdgeInsets.symmetric(vertical: 0.0),
       child: Column(
         children: <Widget>[
           /* Padding(

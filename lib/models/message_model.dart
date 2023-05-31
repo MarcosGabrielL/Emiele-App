@@ -33,6 +33,11 @@ final User greg = User(
   name: 'Greg',
   imageUrl: 'assets/images/greg.jpg',
 );
+final User Sistema = User(
+  id: 1,
+  name: 'Sistema',
+  imageUrl: 'assets/images/profile.jpg',
+);
 final User james = User(
   id: 2,
   name: 'James',
@@ -121,6 +126,7 @@ List<Message> chats = [
     unread: false,
   ),
 ];
+
 
 // EXAMPLE MESSAGES IN CHAT SCREEN
 List<Message> messages = [

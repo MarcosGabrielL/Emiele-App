@@ -96,6 +96,7 @@ class _MyHomePageState extends State<MyHomePage> {
         children: <Widget>[
           SizedBox(height: getProportionateScreenHeight(40)),
           HomeHeader(),
+          SizedBox(height: getProportionateScreenHeight(10)),
           CategorySelector(),
           CategoriesGuield(),
           Expanded(

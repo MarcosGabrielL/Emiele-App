@@ -33,7 +33,7 @@ class _AccountState extends State<Account> {
             clipBehavior: Clip.none, alignment: Alignment.center,
             children: [
               Container(
-                height: MediaQuery.of(context).size.height * 0.2,
+                height: MediaQuery.of(context).size.height * 0.12,
                 decoration: BoxDecoration(
                   color: Theme.of(context).primaryColor,
                   borderRadius: BorderRadius.only(

@@ -30,6 +30,18 @@ class PopularSearchs extends StatelessWidget {
                 numOfBrands: 24,
                 press: () {},
               ),
+              SpecialOfferCard(
+                image: "assets/images/img1.png",
+                category: "Fashion",
+                numOfBrands: 24,
+                press: () {},
+              ),
+              SpecialOfferCard(
+                image: "assets/images/img1.png",
+                category: "Fashion",
+                numOfBrands: 24,
+                press: () {},
+              ),
               SizedBox(width: getProportionateScreenWidth(20)),
             ],
           ),

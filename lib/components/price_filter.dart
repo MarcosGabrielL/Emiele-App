@@ -7,7 +7,7 @@ class PriceFilter extends StatefulWidget {
 }
 
 class _PriceFilterState extends State<PriceFilter> {
-  RangeValues _currentRangeValues = RangeValues(0, 1000);
+  RangeValues _currentRangeValues = RangeValues(0, 100);
   late String selectedOption; // Valores iniciais do filtro
 
   @override
@@ -49,11 +49,11 @@ class _PriceFilterState extends State<PriceFilter> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Text(
-                '\$${_currentRangeValues.start.toStringAsFixed(2)}',
+                'R\$ ${_currentRangeValues.start.toStringAsFixed(2)}',
                 style: TextStyle(color: Colors.white), // Define a cor do texto como branco
               ),
               Text(
-                '\$${_currentRangeValues.end.toStringAsFixed(2)}',
+                'R\$ ${_currentRangeValues.end.toStringAsFixed(2)}',
                 style: TextStyle(color: Colors.white), // Define a cor do texto como branco
               ),
             ],

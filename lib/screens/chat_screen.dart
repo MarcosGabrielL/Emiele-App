@@ -4,8 +4,11 @@ import 'package:jurisconexao_cliente/models/message_model.dart';
 import 'package:jurisconexao_cliente/models/user_model.dart';
 import 'package:jurisconexao_cliente/widgets/filters.dart';
 
+import '../components/util/date.dart';
+
 class ChatScreen extends StatefulWidget {
   final User user;
+
 
   ChatScreen({required this.user});
 
@@ -15,6 +18,25 @@ class ChatScreen extends StatefulWidget {
 
 class _ChatScreenState extends State<ChatScreen> {
   bool isOptionsVisible = true;
+
+  List<Message> solicitacoes1 = [
+
+    Message(
+      sender: currentUser,
+      time: DataUtil.getFormattedTime(),
+      text: 'Just walked my doge. She was super duper cute. The best pupper!!',
+      isLiked: false,
+      unread: true,
+    ),
+    Message(
+      sender: greg,
+      time: '11:30 AM',
+      text: 'Hey, how\'s it going? What did you do today?',
+      isLiked: false,
+      unread: false,
+    ),
+
+  ];
 
   _buildMessage(Message message, bool isMe) {
     final Container msg = Container(
@@ -194,9 +216,9 @@ class _ChatScreenState extends State<ChatScreen> {
                   child: ListView.builder(
                     reverse: true,
                     padding: EdgeInsets.only(top: 15.0),
-                    itemCount: 2, //messages.length,
+                    itemCount: solicitacoes1.length, //messages.length,
                     itemBuilder: (BuildContext context, int index) {
-                      final Message message = messages[index];
+                      final Message message = solicitacoes1[index];
                       final bool isMe = message.sender.id == currentUser.id;
                       return _buildMessage(message, isMe);
                     },
@@ -208,7 +230,10 @@ class _ChatScreenState extends State<ChatScreen> {
           ],
         ),
       ),
-        bottomNavigationBar: CustomBottomNavigationBar(),
+      //  bottomNavigationBar: CustomBottomNavigationBar(),
     );
   }
 }
+
+
+

@@ -39,7 +39,7 @@ class ListFront extends StatelessWidget {
                 child: Container(
                   margin: EdgeInsets.only(top: 5.0, bottom: 5.0, right: 0.0),
                   padding:
-                  EdgeInsets.symmetric(horizontal: 0.0, vertical: 10.0),
+                  EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
                   decoration: BoxDecoration(
                     color: Colors.transparent,
                     borderRadius: BorderRadius.only(
@@ -50,7 +50,7 @@ class ListFront extends StatelessWidget {
                   child: Column(
                     children: [
                       SpecialParaVoce(),
-                      SizedBox(height: getProportionateScreenWidth(0)),
+                      SizedBox(height: getProportionateScreenWidth(10)),
                       PopularSearchs(),
                     ],
                   ),

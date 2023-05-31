@@ -41,7 +41,10 @@ class CustomBottomAppBar extends StatelessWidget {
             constraints: BoxConstraints(),
             icon: Icon(Icons.search, size: 25.0),
             onPressed: () {
-              // Adicione sua lógica aqui para o botão de pesquisa
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => HomeScreen()),
+              );
             },
             color: Colors.white,
           ),

@@ -3,13 +3,18 @@ import 'package:jurisconexao_cliente/pages/login.dart';
 import 'package:jurisconexao_cliente/pages/new_solicitation.dart';
 import 'package:jurisconexao_cliente/screens/forgot_password/forgot_password_screen.dart';
 import 'package:jurisconexao_cliente/screens/home/components/home_header.dart';
+import 'package:jurisconexao_cliente/screens/home/components/popular_product.dart';
+import 'package:jurisconexao_cliente/screens/home/components/special_offers.dart';
 import 'package:jurisconexao_cliente/screens/otp/otp_screen.dart';
 import 'package:jurisconexao_cliente/screens/splash/splash_screen.dart';
 import 'package:jurisconexao_cliente/service/security.dart';
+import 'package:jurisconexao_cliente/widgets/cards_horizontal.dart';
 import 'package:jurisconexao_cliente/widgets/category_selector.dart';
 import 'package:jurisconexao_cliente/widgets/favorite_contacts.dart';
 import 'package:jurisconexao_cliente/widgets/favorits_categories.dart';
 import 'package:jurisconexao_cliente/widgets/info_categories.dart';
+import 'package:jurisconexao_cliente/widgets/others_list_front.dart';
+import 'package:jurisconexao_cliente/widgets/popular_cards.dart';
 import 'package:jurisconexao_cliente/widgets/recent_chats.dart';
 import 'package:jurisconexao_cliente/components/fab_bottom_app_bar.dart';
 
@@ -99,6 +104,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 gradient: LinearGradient(
                   begin: Alignment.topLeft,
                   end: Alignment.bottomLeft,
+                  stops: [0.8, 1.0],
                   colors: [
                     Colors.white,
                     Colors.grey,
@@ -112,7 +118,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Column(
                 children: <Widget>[
                   FavoriteCotegories(),
-                  RecentChats(),
+                  ListFront(),
                 ],
               ),
             ),

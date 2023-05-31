@@ -16,7 +16,7 @@ const kPrimaryGradientColor = LinearGradient(
 );
 const kSecondaryColor = Color(0xFF979797);
 const kTextColor = Color(0xFF757575);
-
+const kBluePrimary = const Color(0xFF011C38);
 const kAccentColor = Color(0xFFF1F1F1);
 const kWhiteColor = Color(0xFFFFFFFF);
 const kLightColor = Color(0xFF808080);

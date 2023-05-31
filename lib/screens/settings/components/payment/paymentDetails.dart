@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:jurisconexao_cliente/screens/notification/components/defaultAppBar.dart';
 import 'package:jurisconexao_cliente/screens/notification/components/defaultBackButton.dart';
 
+import '../../../../components/config/size_config.dart';
 import '../../../../components/constant.dart';
+import '../../../../components/home_header_clean.dart';
 import '../../../../widgets/stickyLabel.dart';
 
 class PaymentDetails extends StatefulWidget {
@@ -22,13 +24,32 @@ class _PaymentDetailsState extends State<PaymentDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kWhiteColor,
-      appBar: DefaultAppBar(
-        title: "Payment Details",
-        child: DefaultBackButton(),
-      ),
+
       body: SingleChildScrollView(
+      child: Container(
+      decoration: BoxDecoration(
+      gradient: LinearGradient(
+      begin: Alignment.topLeft,
+      end: Alignment.bottomLeft,
+      colors: [
+
+        Colors.white,
+        Colors.grey,
+      ],
+    ),
+    borderRadius: BorderRadius.only(
+    topLeft: Radius.circular(0.0),
+    topRight: Radius.circular(0.0),
+    bottomLeft: Radius.circular(30.0),
+    bottomRight: Radius.circular(30.0),
+    ),
+    ),
         child: Column(
+
           children: [
+            SizedBox(height: getProportionateScreenHeight(40)),
+            HomeHeaderClean(),
+            SizedBox(height: getProportionateScreenHeight(8)),
             CreditCard(
               cardNumber: cardNumber,
               cardExpiry: cardExpiry,
@@ -207,7 +228,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                         ),
                       ),
                       Container(
-                        width: 190.0,
+                        width: MediaQuery.of(context).size.width * 0.3,
                         child: Text(
                           paymentDetailList[index].details,
                           style: TextStyle(fontSize: 16.0),
@@ -238,6 +259,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
           ],
         ),
       ),
+    ),
     );
   }
 }

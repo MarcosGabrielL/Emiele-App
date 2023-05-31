@@ -21,6 +21,7 @@ const kAccentColor = Color(0xFFF1F1F1);
 const kWhiteColor = Color(0xFFFFFFFF);
 const kLightColor = Color(0xFF808080);
 const kDarkColor = Color(0xFF303030);
+const kOrangeColor =  Colors.orange;
 const kTransparent = Colors.transparent;
 
 const kDefaultPadding = 24.0;
@@ -223,6 +224,11 @@ const kDarkTextStyle = TextStyle(
   color: kDarkColor,
 );
 
+const kOrangeTextStyle = TextStyle(
+  fontSize: 20.0,
+  color: kOrangeColor,
+);
+
 const kDivider = Divider(
   color: kAccentColor,
   thickness: kLessPadding,
@@ -268,13 +274,13 @@ List<Map<String, String>> introData = [
 ];
 
 final labels = [
-  'Notifications',
-  'Payments',
-  'Message',
-  'My Orders',
-  'Setting Account',
-  'Call Center',
-  'About Application',
+  'Notificações',
+  'Formas de Pagamento',
+  //'Message',
+  'Pagamentos',
+  'Configuração Conta',
+  'Ajuda',
+  'Sobre',
 ];
 
 final icons = [

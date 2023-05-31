@@ -3,7 +3,10 @@
 import 'package:flutter/material.dart';
 import 'package:jurisconexao_cliente/main.dart';
 import 'package:jurisconexao_cliente/screens/settings/settings/settings.dart';
+import '../../components/bottomnavigate_bar.dart';
+import '../../components/config/size_config.dart';
 import '../../components/constant.dart';
+import '../../components/custom_floatingActionButton.dart';
 import '../notification/notificationList.dart';
 import 'components/about/about_screen.dart';
 import 'components/callCenter/callCenter.dart';
@@ -30,11 +33,15 @@ class _AccountState extends State<Account> {
             clipBehavior: Clip.none, alignment: Alignment.center,
             children: [
               Container(
-                height: 250.0,
-                child: Image(
-                  image: AssetImage(bg),
-                  fit: BoxFit.cover,
+                height: MediaQuery.of(context).size.height * 0.2,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).primaryColor,
+                  borderRadius: BorderRadius.only(
+                    bottomRight: Radius.circular(30.0),
+                    bottomLeft: Radius.circular(30.0),
+                  ),
                 ),
+
               ),
               Positioned(
                 bottom: -60.0,
@@ -56,12 +63,13 @@ class _AccountState extends State<Account> {
               Positioned(
                 bottom: -88.0,
                 child: Text(
-                  'Username',
-                  style: kDarkTextStyle,
+                  'Usuario',
+                  style: kOrangeTextStyle,
                 ),
               ),
             ],
           ),
+          SizedBox(height: getProportionateScreenHeight(20)),
           Expanded(
             child: ListView.builder(
               padding: EdgeInsets.only(top: 88.0),
@@ -77,24 +85,24 @@ class _AccountState extends State<Account> {
                     onTap: () => Navigator.of(context)
                         .push(MaterialPageRoute(builder: (context) {
                       switch (labels[index]) {
-                        case 'Notifications':
+                        case 'Notificações':
                           return NotificationList();
                           break;
-                        case 'Payments':
+                        case 'Formas de Pagamento':
                           return PaymentDetails();
                           break;
-                        case 'Message':
-                          return Message_config();
-                          break;
-                        case 'My Orders':
+                        //case 'Message':
+                          //return Message_config();
+                          //break;
+                        case 'Pagamentos':
                           return TrackOrder();
                           break;
-                        case 'Setting Account':
+                        case 'Configuração Conta':
                           return Setting();
                           break;
-                        case 'Call Center':
+                        case 'Ajuda':
                           return CallCenter();
-                        case 'About Application':
+                        case 'Sobre':
                           return About();
                           break;
                         default:
@@ -136,6 +144,12 @@ class _AccountState extends State<Account> {
             ),
           ),
         ],
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: CustomFloatingActionButton(),
+      bottomNavigationBar: Container(
+        height: 50.0, // Defina a altura desejada aqui
+        child: CustomBottomAppBar(),
       ),
     );
   }

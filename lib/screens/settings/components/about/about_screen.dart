@@ -1,15 +1,13 @@
-import 'package:e_commerce/constant.dart';
-import 'package:e_commerce/notification/components/defaultAppBar.dart';
-import 'package:e_commerce/notification/components/defaultBackButton.dart';
-import 'package:e_commerce/notification/components/notificationTiles.dart';
+
 import 'package:flutter/material.dart';
+import 'package:jurisconexao_cliente/screens/notification/components/defaultBackButton.dart';
 
 import '../../../../components/constant.dart';
 import '../../../home/components/home_header.dart';
+import '../../../notification/components/defaultAppBar.dart';
 import 'components/descSection.dart';
 
 class About extends StatefulWidget {
-  About({Key key}) : super(key: key);
 
   @override
   _AboutState createState() => _AboutState();

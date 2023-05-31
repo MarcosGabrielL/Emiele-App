@@ -5,8 +5,8 @@ import '../../../../../components/constant.dart';
 class DescSection extends StatelessWidget {
   final String text;
   const DescSection({
-    required Key key, required this.text,
-  }) : super(key: key);
+    required this.text,
+  }) : super();
 
   @override
   Widget build(BuildContext context) {

@@ -1,17 +1,17 @@
-import 'package:e_commerce/about/about.dart';
-import 'package:e_commerce/callCenter/callCenter.dart';
-import 'package:e_commerce/message/message.dart';
-import 'package:e_commerce/orders/orders.dart';
-import 'package:e_commerce/orders/trackOrder.dart';
-import 'package:e_commerce/payment/payment.dart';
-import 'package:e_commerce/payment/paymentDetails.dart';
-import 'package:e_commerce/settings/setting.dart';
+
+
 import 'package:flutter/material.dart';
-import '../constant.dart';
+import 'package:jurisconexao_cliente/main.dart';
+import 'package:jurisconexao_cliente/screens/settings/settings/settings.dart';
+import '../../components/constant.dart';
 import '../notification/notificationList.dart';
+import 'components/about/about_screen.dart';
+import 'components/callCenter/callCenter.dart';
+import 'components/message/message.dart';
+import 'components/orders/trackOrder.dart';
+import 'components/payment/paymentDetails.dart';
 
 class Account extends StatefulWidget {
-  Account({Key key}) : super(key: key);
 
   @override
   _AccountState createState() => _AccountState();
@@ -27,8 +27,7 @@ class _AccountState extends State<Account> {
       body: Column(
         children: [
           Stack(
-            overflow: Overflow.visible,
-            alignment: Alignment.center,
+            clipBehavior: Clip.none, alignment: Alignment.center,
             children: [
               Container(
                 height: 250.0,
@@ -85,7 +84,7 @@ class _AccountState extends State<Account> {
                           return PaymentDetails();
                           break;
                         case 'Message':
-                          return Message();
+                          return Message_config();
                           break;
                         case 'My Orders':
                           return TrackOrder();
@@ -99,7 +98,7 @@ class _AccountState extends State<Account> {
                           return About();
                           break;
                         default:
-                          return null;
+                          return MyApp();
                       }
                     }))
                   // onTap: () => this.setState(
@@ -152,6 +151,5 @@ class _AccountState extends State<Account> {
         onPressed: () {},
       ),
     );
-    scaffoldKey.currentState.showSnackBar(sb);
   }
 }

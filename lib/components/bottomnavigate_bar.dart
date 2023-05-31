@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../main.dart';
 import '../screens/home/home_screen.dart';
+import '../screens/settings/settings_screen.dart';
 
 class CustomBottomAppBar extends StatelessWidget {
   @override
@@ -64,7 +65,10 @@ class CustomBottomAppBar extends StatelessWidget {
             constraints: BoxConstraints(),
             icon: Icon(Icons.settings, size: 25.0),
             onPressed: () {
-              // Adicione sua lógica aqui para o botão de configurações
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Account()),
+              );
             },
             color: Colors.white,
           ),

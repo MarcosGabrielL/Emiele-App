@@ -18,8 +18,28 @@ class Message {
     required this.isLiked,
     required this.unread,
   });
-}
 
+
+  factory Message.fromJson(Map<String, dynamic> json) {
+    return Message(
+      sender: User.fromJson(json['sender']),
+      time: json['time'],
+      text: json['text'],
+      isLiked: json['isLiked'],
+      unread: json['unread'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'sender': sender.toJson(),
+      'time': time,
+      'text': text,
+      'isLiked': isLiked,
+      'unread': unread,
+    };
+  }
+}
 // YOU - current user
 final User currentUser = User(
   id: 0,
@@ -174,4 +194,6 @@ List<Message> messages = [
     unread: true,
   ),
 ];
+
+
 

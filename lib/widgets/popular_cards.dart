@@ -20,25 +20,25 @@ class PopularSearchs extends StatelessWidget {
             children: [
               SpecialOfferCard(
                 image: "assets/images/img1.png",
-                category: "Smartphone",
+                category: "Hamburguer",
                 numOfBrands: 18,
                 press: () {},
               ),
               SpecialOfferCard(
-                image: "assets/images/img1.png",
-                category: "Fashion",
+                image: "assets/images/img2.png",
+                category: "Pizza",
                 numOfBrands: 24,
                 press: () {},
               ),
               SpecialOfferCard(
                 image: "assets/images/img1.png",
-                category: "Fashion",
+                category: "Pastel",
                 numOfBrands: 24,
                 press: () {},
               ),
               SpecialOfferCard(
                 image: "assets/images/img1.png",
-                category: "Fashion",
+                category: "Hamburguer",
                 numOfBrands: 24,
                 press: () {},
               ),
@@ -79,8 +79,23 @@ class SpecialOfferCard extends StatelessWidget {
               children: [
                 Image.asset(
                   image,
-                  fit: BoxFit.contain,
+                  width: double.infinity,
+                  height: double.infinity,
+                  fit: BoxFit.cover,
                 ),
+                Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        Colors.black.withOpacity(0.8),
+                        Colors.transparent,
+                      ],
+                    ),
+                  ),
+                ),
+
                 Container(
                   decoration: BoxDecoration(
                   /*  gradient: LinearGradient(
@@ -105,11 +120,11 @@ class SpecialOfferCard extends StatelessWidget {
                         TextSpan(
                           text: "$category\n",
                           style: TextStyle(
-                            fontSize: getProportionateScreenWidth(18),
+                            fontSize: getProportionateScreenWidth(17),
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        TextSpan(text: "$numOfBrands Brands")
+                        TextSpan(text: "R\$$numOfBrands")
                       ],
                     ),
                   ),

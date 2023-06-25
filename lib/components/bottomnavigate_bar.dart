@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:jurisconexao_cliente/pages/RecentsOrders.dart';
+import 'package:jurisconexao_cliente/screens/categories/search/search_by_category.dart';
 
 import '../main.dart';
 import '../models/message_model.dart';
 import '../pages/recent_chats_2.dart';
+import '../screens/cart/cart_screen.dart';
 import '../screens/chat_screen.dart';
 import '../screens/home/home_screen.dart';
 import '../screens/settings/settings_screen.dart';
@@ -36,14 +39,15 @@ class CustomBottomAppBar extends StatelessWidget {
             },
             color: Colors.white,
           ),
+
           IconButton(
             padding: EdgeInsets.zero,
             constraints: BoxConstraints(),
-            icon: Icon(Icons.search, size: 25.0),
+            icon: Icon(Icons.list_alt, size: 25.0),
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => HomeScreen()),
+                MaterialPageRoute(builder: (context) => RecentOrders()), // NewChatScreen(user: james)),
               );
             },
             color: Colors.white,
@@ -51,16 +55,19 @@ class CustomBottomAppBar extends StatelessWidget {
           IconButton(
             padding: EdgeInsets.zero,
             constraints: BoxConstraints(),
-            icon: Icon(Icons.favorite, size: 0),
+            icon: Icon(Icons.favorite, size: 25.0),
             onPressed: () {
-              // Adicione sua lógica aqui para o botão de favoritos
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => CategoryPage()),
+              );
             },
-            color: Colors.transparent,
+            color: Colors.white,
           ),
           IconButton(
             padding: EdgeInsets.zero,
             constraints: BoxConstraints(),
-            icon: Icon(Icons.chat, size: 25.0),
+            icon: Icon(Icons.chat_outlined, size: 25.0),
             onPressed: () {
               Navigator.push(
                 context,

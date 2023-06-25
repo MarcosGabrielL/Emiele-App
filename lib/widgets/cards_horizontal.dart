@@ -20,13 +20,13 @@ class SpecialParaVoce extends StatelessWidget {
             children: [
               SpecialOfferCard(
                 image: "assets/images/Image Banner 2.png",
-                category: "Smartphone",
+                category: "Promoção 1",
                 numOfBrands: 18,
                 press: () {},
               ),
               SpecialOfferCard(
                 image: "assets/images/Image Banner 3.png",
-                category: "Fashion",
+                category: "Promoção 2",
                 numOfBrands: 24,
                 press: () {},
               ),
@@ -65,9 +65,13 @@ class SpecialOfferCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
             child: Stack(
               children: [
-                Image.asset(
-                  image,
-                  fit: BoxFit.cover,
+                ClipRect(
+                  child: Image.asset(
+                    image,
+                    width: double.infinity,
+                    height: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
                 ),
                 Container(
                   decoration: BoxDecoration(
@@ -97,7 +101,7 @@ class SpecialOfferCard extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        TextSpan(text: "$numOfBrands Brands")
+                        TextSpan(text: "$numOfBrands% OFF")
                       ],
                     ),
                   ),

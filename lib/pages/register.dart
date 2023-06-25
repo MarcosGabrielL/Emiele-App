@@ -77,7 +77,7 @@ class _MyFormState extends State<RegisterPage> {
             children: [
 
 
-              const SizedBox(height: 10),
+              const SizedBox(height: 50),
           Padding(
             padding: EdgeInsets.symmetric(vertical: 10.0),
             child:
@@ -93,7 +93,7 @@ class _MyFormState extends State<RegisterPage> {
               ),
           ),
 
-              const SizedBox(height: 70),
+              const SizedBox(height: 40),
 
               // welcome back, you've been missed!
               Text(

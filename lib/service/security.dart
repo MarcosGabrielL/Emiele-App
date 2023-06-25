@@ -28,7 +28,14 @@ class AuthService {
   Future<bool> checkLoginStatus() async {
     _preferences = await SharedPreferences.getInstance();
 
-    //Teste para login
+    /**
+     * Teste para entrada sem registro
+     */
+    //await _preferences.setBool(isLoggedInKey, true);
+
+    /**
+     * Teste para remover Registro
+     */
     /* _preferences.setBool(isLoggedInKey, false);
      _preferences.setString(loggedUser,"");*/
 
@@ -75,7 +82,8 @@ class AuthService {
       "password": password,
       "firstName": name,
       "lastName": "",
-      "tipo": "3"
+      "tipo": "3",
+      "instancia": "1"
     });
 
     try {

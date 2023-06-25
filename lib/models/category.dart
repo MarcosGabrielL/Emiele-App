@@ -20,56 +20,74 @@ class Category {
 }
 
 
-final Category Civil = Category(
-  description: 'Civil',
-  image: 'assets/categories/civil.png',
+final Category Porcoes = Category(
+  description: 'Porcoes',
+  image: 'assets/categories/soup.png',
 );
-final Category Penal = Category(
-  description: 'Penal',
-  image: 'assets/categories/penal.png',
+final Category Saladas = Category(
+  description: 'Saladas',
+  image: 'assets/categories/salad.png',
 );
-final Category Trabalhista = Category(
-  description: 'Trabalhista',
-  image: 'assets/categories/trabalhista.png',
+final Category Aves = Category(
+  description: 'Aves',
+  image: 'assets/categories/chickenleg.png',
 );
-final Category Empresarial = Category(
-  description: 'Empresarial',
-  image: 'assets/categories/empresarial.png',
+final Category Peixes = Category(
+  description: 'Peixes',
+  image: 'assets/categories/fish.png',
 );
-final Category Tributario = Category(
-  description: 'Tributário',
-  image: 'assets/categories/tax.png',
+final Category Carnes = Category(
+  description: 'Carnes',
+  image: 'assets/categories/meat.png',
 );
-final Category Ambiental = Category(
-  description: 'Ambiental',
-  image: 'assets/categories/ambiental.png',
+final Category Combos = Category(
+  description: 'Combos',
+  image: 'assets/categories/combos.png',
 );
-final Category Internacional = Category(
-  description: 'Internacional',
-  image: 'assets/images/steven.jpg',
+final Category Lanches = Category(
+  description: 'Lanches',
+  image: 'assets/categories/burrito.png',
 );
-final Category Administrativo = Category(
-  description: 'Administrativo',
-  image: 'assets/images/greg.jpg',
+final Category Sanduiches = Category(
+  description: 'Sanduiches',
+  image: 'assets/categories/taco.png',
 );
-final Category Consumidor = Category(
-  description: 'Consumidor',
-  image: 'assets/images/james.jpg',
+final Category Executivos = Category(
+  description: 'Executivos',
+  image: 'assets/categories/friedrice.png',
 );
-final Category Previdenciario = Category(
-  description: 'Previdenciário',
-  image: 'assets/images/john.jpg',
+final Category Marmitex = Category(
+  description: 'Marmitex',
+  image: 'assets/categories/takeaway.png',
+);
+
+final Category Guarnicoes = Category(
+  description: 'Guarnicoes',
+  image: 'assets/categories/mashedpotato.png',
+);
+
+final Category Sobremesas = Category(
+  description: 'Sobremesas',
+  image: 'assets/categories/shavedice.png',
+);
+
+final Category Bebidas = Category(
+  description: 'Bebidas',
+  image: 'assets/categories/drink.png',
 );
 
 final List<Category> categories = [
-  Civil,
-  Penal,
-  Trabalhista,
-  Empresarial,
-  Tributario,
-  Ambiental,
-  Internacional,
-  Administrativo,
-  Consumidor,
-  Previdenciario,
+  Marmitex,
+  Executivos,
+  Sanduiches,
+  Lanches,
+  Combos,
+  Carnes,
+  Peixes,
+  Aves,
+  Saladas,
+  Porcoes,
+  Guarnicoes,
+  Sobremesas,
+  Bebidas,
 ];

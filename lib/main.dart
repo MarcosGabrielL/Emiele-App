@@ -1,26 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:jurisconexao_cliente/pages/login.dart';
-import 'package:jurisconexao_cliente/pages/new_solicitation.dart';
-import 'package:jurisconexao_cliente/screens/forgot_password/forgot_password_screen.dart';
 import 'package:jurisconexao_cliente/screens/home/components/home_header.dart';
-import 'package:jurisconexao_cliente/screens/home/components/popular_product.dart';
-import 'package:jurisconexao_cliente/screens/home/components/special_offers.dart';
-import 'package:jurisconexao_cliente/screens/otp/otp_screen.dart';
 import 'package:jurisconexao_cliente/screens/splash/splash_screen.dart';
 import 'package:jurisconexao_cliente/service/security.dart';
-import 'package:jurisconexao_cliente/widgets/cards_horizontal.dart';
 import 'package:jurisconexao_cliente/widgets/category_selector.dart';
-import 'package:jurisconexao_cliente/widgets/favorite_contacts.dart';
 import 'package:jurisconexao_cliente/widgets/favorits_categories.dart';
 import 'package:jurisconexao_cliente/widgets/info_categories.dart';
 import 'package:jurisconexao_cliente/widgets/others_list_front.dart';
-import 'package:jurisconexao_cliente/widgets/popular_cards.dart';
-import 'package:jurisconexao_cliente/widgets/recent_chats.dart';
-import 'package:jurisconexao_cliente/components/fab_bottom_app_bar.dart';
-
 import 'components/bottomnavigate_bar.dart';
 import 'components/config/size_config.dart';
-import 'components/custom_floatingActionButton.dart';
 
 void main() {
   runApp(const MyApp());
@@ -29,7 +17,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -76,6 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Future<void> checkLoginStatus() async {
     isLoggedIn = await authManager.checkLoginStatus();
     isFirstTime = await authManager.checkisFirstTimeStatus();
+
     setState(() {}); // Update the state to reflect the login status change
   }
 
@@ -99,6 +87,7 @@ class _MyHomePageState extends State<MyHomePage> {
           SizedBox(height: getProportionateScreenHeight(10)),
           CategorySelector(),
           CategoriesGuield(),
+          SizedBox(height: getProportionateScreenHeight(10)),
           Expanded(
             child: Container(
               decoration: BoxDecoration(
@@ -108,7 +97,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   stops: [0.8, 1.0],
                   colors: [
                     Colors.white,
-                    Colors.grey,
+                    Colors.white, //gradiente
                   ],
                 ),
                 borderRadius: BorderRadius.only(
@@ -126,8 +115,8 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: CustomFloatingActionButton(),
+      //floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      //floatingActionButton: CustomFloatingActionButton(),
       bottomNavigationBar: Container(
         height: 50.0, // Defina a altura desejada aqui
         child: CustomBottomAppBar(),

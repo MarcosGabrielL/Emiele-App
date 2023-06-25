@@ -18,16 +18,16 @@ class CategoriesGuield extends StatelessWidget {
         vertical: getProportionateScreenWidth(15),
       ),
       decoration: BoxDecoration(
-        color: Color(0xFF4A3298),
+        color: Colors.grey.shade200,
         borderRadius: BorderRadius.circular(20),
       ),
       child: Text.rich(
         TextSpan(
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Colors.black),
           children: [
-            TextSpan(text: "Não tem certeza?\n"),
+            TextSpan(text: "Cupom 🤩\n"),
             TextSpan(
-              text: "Guia de Categorias",
+              text: "Cupom a partir de R\$5",
               style: TextStyle(
                 fontSize: getProportionateScreenWidth(20),
                 fontWeight: FontWeight.bold,

@@ -1,16 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:jurisconexao_cliente/models/message_model.dart';
-import 'package:jurisconexao_cliente/screens/chat_screen.dart';
-
 import '../components/bottomnavigate_bar.dart';
 import '../components/config/size_config.dart';
-import '../components/custom_floatingActionButton.dart';
 import '../screens/home/components/home_header.dart';
 import '../widgets/category_selector.dart';
-import '../widgets/favorite_contacts.dart';
-import '../widgets/favorits_categories.dart';
-import '../widgets/info_categories.dart';
-import '../widgets/recent_chats.dart';
+import '../widgets/orders_widget.dart';
 
 class RecentOrders extends StatelessWidget {
   @override
@@ -22,7 +15,9 @@ class RecentOrders extends StatelessWidget {
         children: <Widget>[
           SizedBox(height: getProportionateScreenHeight(40)),
           HomeHeader(),
+          SizedBox(height: getProportionateScreenHeight(20)),
           CategorySelector(),
+          SizedBox(height: getProportionateScreenHeight(40)),
           Expanded(
             child: Container(
               decoration: BoxDecoration(
@@ -31,7 +26,7 @@ class RecentOrders extends StatelessWidget {
                   end: Alignment.bottomLeft,
                   colors: [
                     Colors.white,
-                    Colors.grey,
+                    Colors.white,
                   ],
                 ),
                 borderRadius: BorderRadius.only(
@@ -39,17 +34,19 @@ class RecentOrders extends StatelessWidget {
                   topRight: Radius.circular(30.0),
                 ),
               ),
-              child: Column(
+              child: SingleChildScrollView(
+                child: Column(
                 children: <Widget>[
-                  FavoriteContacts(),
-                  RecentChats(), //Orders
+                  //FavoriteContacts(),
+                  Orders(), //Orders
                 ],
+              ),
               ),
             ),
           ),
         ],
       ),
-      
+
       bottomNavigationBar: Container(
         height: 50.0, // Defina a altura desejada aqui
         child: CustomBottomAppBar(),

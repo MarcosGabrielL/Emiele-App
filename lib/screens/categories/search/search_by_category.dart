@@ -139,7 +139,7 @@ class LongCourseCard extends StatelessWidget {
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                     colors: [
-                      AppColors.red,
+                      kSecondaryColor,
                       Colors.transparent,
                     ],
                   ),
@@ -208,7 +208,7 @@ class ShortTopCourseCard extends StatelessWidget {
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                     colors: [
-                      AppColors.red,
+                      kSecondaryColor,
                       Colors.transparent,
                     ],
                   ),
@@ -228,14 +228,14 @@ class CourseCardRow extends StatelessWidget {
     return Row(
       children: [
         LongCourseCard(
-        background: AppColors.red,
+        background: kSecondaryColor,
         title: 'Music Class',
         subtitle: '10 Course',
         image: 'assets/images/img1.png'
         ),
         SizedBox(width: 16), // Adicione um espaçamento entre os cards
         ShortTopCourseCard(
-        background: AppColors.red,
+        background: kSecondaryColor,
     title: 'Music Class',
     subtitle: '10 Course',
     image: 'assets/images/img2.png'
@@ -252,14 +252,14 @@ class CourseCardRowInverted extends StatelessWidget {
     return Row(
       children: [
         ShortTopCourseCard(
-            background: AppColors.red,
+            background: kSecondaryColor,
             title: 'Music Class',
             subtitle: '10 Course',
             image: 'assets/images/img2.png'
         ),
         SizedBox(width: 16), // Adicione um espaçamento entre os cards
         LongCourseCard(
-            background: AppColors.red,
+            background: kSecondaryColor,
             title: 'Music Class',
             subtitle: '10 Course',
             image: 'assets/images/img1.png'

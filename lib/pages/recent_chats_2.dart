@@ -49,8 +49,8 @@ class RecentChats2 extends StatelessWidget {
           ),
         ],
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: CustomFloatingActionButton(),
+      //floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      //floatingActionButton: CustomFloatingActionButton(),
       bottomNavigationBar: Container(
         height: 50.0, // Defina a altura desejada aqui
         child: CustomBottomAppBar(),

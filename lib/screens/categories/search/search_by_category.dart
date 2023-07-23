@@ -20,7 +20,7 @@ class CategoryPage extends StatelessWidget {
               padding: const EdgeInsets.only(left: 24),
               height: size.height / 4,
               width: size.width,
-              decoration: const BoxDecoration(
+              decoration:  BoxDecoration(
                   color: kPrimaryColor,
               ),
               child: SafeArea(

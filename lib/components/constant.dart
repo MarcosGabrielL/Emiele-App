@@ -7,14 +7,18 @@ import '../models/paymentModal.dart';
 import '../models/recommendedModal.dart';
 import '../models/reviewModal.dart';
 
-const kPrimaryColor =  const Color(0xFFDB0035);
+const vendedor_Id =  2;
+const token = '';
+const ambiente = 0;
+ Color kPrimaryColor =  const Color(0xFFDB0035);
+ Color kSecondaryColor = Color(0xFF979797);
+
 const kPrimaryLightColor = Color(0xFFFFECDF);
 const kPrimaryGradientColor = LinearGradient(
   begin: Alignment.topLeft,
   end: Alignment.bottomRight,
   colors: [Color(0xFFFFA53E), Color(0xFFFF7643)],
 );
-const kSecondaryColor = Color(0xFF979797);
 const kTextColor = Color(0xFF757575);
 const kBluePrimary = const Color(0xFF011C38);
 const kAccentColor = Color(0xFFF1F1F1);
@@ -216,7 +220,7 @@ const kSubTextStyle = TextStyle(
   color: kLightColor,
 );
 
-const kTitleTextStyle = TextStyle(
+ TextStyle kTitleTextStyle = TextStyle(
   fontSize: 20.0,
   color: kPrimaryColor,
 );

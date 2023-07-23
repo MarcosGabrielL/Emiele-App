@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 
+import '../../components/config/service/Config.dart';
+import '../../components/config/environment.dart';
 import '../../components/config/size_config.dart';
+import '../../components/constant.dart';
 import 'components/body.dart';
 
 class SplashScreen extends StatelessWidget {
   static String routeName = "/splash";
+
+
   @override
   Widget build(BuildContext context) {
     // You have to call it on your starting screen
@@ -13,4 +18,7 @@ class SplashScreen extends StatelessWidget {
       body: Body(),
     );
   }
-}
+
+
+
+  }

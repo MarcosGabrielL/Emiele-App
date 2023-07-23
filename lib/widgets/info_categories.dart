@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jurisconexao_cliente/components/constant.dart';
 
 import '../../../components/config/size_config.dart';
 
@@ -23,7 +24,7 @@ class CategoriesGuield extends StatelessWidget {
       ),
       child: Text.rich(
         TextSpan(
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: kPrimaryColor),
           children: [
             TextSpan(text: "Cupom 🤩\n"),
             TextSpan(

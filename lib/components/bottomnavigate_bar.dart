@@ -18,7 +18,7 @@ class CustomBottomAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return BottomAppBar(
       shape: CircularNotchedRectangle(),
-      color: Theme.of(context).primaryColor,
+      color: kPrimaryColor,
       child: Row(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceAround,

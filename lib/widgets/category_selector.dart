@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jurisconexao_cliente/components/constant.dart';
 
 class CategorySelector extends StatefulWidget {
   @override
@@ -32,7 +33,7 @@ class _CategorySelectorState extends State<CategorySelector> {
               child: Text(
                 categories[index],
                 style: TextStyle(
-                  color: index == selectedIndex ? Theme.of(context).primaryColor : Colors.grey,
+                  color: index == selectedIndex ? kPrimaryColor : Colors.grey,
                   fontSize: 16.0,
                   fontWeight: FontWeight.bold,
                   letterSpacing: 1.2,

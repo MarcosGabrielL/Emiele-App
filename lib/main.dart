@@ -8,8 +8,10 @@ import 'package:jurisconexao_cliente/widgets/favorits_categories.dart';
 import 'package:jurisconexao_cliente/widgets/info_categories.dart';
 import 'package:jurisconexao_cliente/widgets/others_list_front.dart';
 import 'components/bottomnavigate_bar.dart';
+import 'components/config/service/Config.dart';
 import 'components/config/size_config.dart';
-
+import 'components/constant.dart';
+import '../../../models/Cor.dart';
 void main() {
   runApp(const MyApp());
 }
@@ -22,7 +24,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Jurisconexao',
       theme: ThemeData(
-        primaryColor: const Color(0xFFDB0035),
+        primaryColor: kPrimaryColor,
         //colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Color(0x20FEF9EB)),
         useMaterial3: true,
       ),
@@ -69,6 +71,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    fetchColors();
+
     if (isFirstTime) {
       return SplashScreen();
     } else {
@@ -122,5 +126,22 @@ class _MyHomePageState extends State<MyHomePage> {
         child: CustomBottomAppBar(),
       ),
     );
+  }
+
+  void fetchColors() async {
+    ConfigService configService = ConfigService(); // Create an instance of ConfigService
+
+      try {
+        List<CorModel> colors = await configService.findColorsByIdVendedor(vendedor_Id, token);
+        for (var color in colors) {
+          print(color.toString());
+          kPrimaryColor = Color(int.parse(color.primaryColor.replaceAll('#', '0xFF')));
+          kSecondaryColor = Color(int.parse(color.secondary.replaceAll('#', '0xFF')));
+        }
+      } catch (error) {
+        print("Error fetching colors: $error");
+        // Handle error if needed
+      }
+
   }
 }

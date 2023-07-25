@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:jurisconexao_cliente/pages/login.dart';
 import 'package:jurisconexao_cliente/screens/home/components/home_header.dart';
 import 'package:jurisconexao_cliente/screens/splash/splash_screen.dart';
+import 'package:jurisconexao_cliente/service/Anuncio.dart';
 import 'package:jurisconexao_cliente/service/security.dart';
 import 'package:jurisconexao_cliente/widgets/category_selector.dart';
 import 'package:jurisconexao_cliente/widgets/favorits_categories.dart';
@@ -12,6 +13,7 @@ import 'components/config/service/Config.dart';
 import 'components/config/size_config.dart';
 import 'components/constant.dart';
 import '../../../models/Cor.dart';
+import 'models/Anuncio.dart';
 void main() {
   runApp(const MyApp());
 }
@@ -71,7 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    fetchColors();
+    fetchConfig();
 
     if (isFirstTime) {
       return SplashScreen();
@@ -128,9 +130,9 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  void fetchColors() async {
+  void fetchConfig() async {
     ConfigService configService = ConfigService(); // Create an instance of ConfigService
-
+    AnuncioService anuncioService = AnuncioService();
       try {
         List<CorModel> colors = await configService.findColorsByIdVendedor(vendedor_Id, token);
         for (var color in colors) {
@@ -142,6 +144,19 @@ class _MyHomePageState extends State<MyHomePage> {
         print("Error fetching colors: $error");
         // Handle error if needed
       }
+
+    try {
+      List<Anuncio> anuncios = await anuncioService.findAnuncioByIdVendedor(vendedor_Id, token);
+      for (var anuncio in anuncios) {
+        print(anuncio.toString());
+        //kPrimaryColor = Color(int.parse(color.primaryColor.replaceAll('#', '0xFF')));
+        //kSecondaryColor = Color(int.parse(color.secondary.replaceAll('#', '0xFF')));
+      }
+    } catch (error) {
+      print("Error fetching colors: $error");
+      // Handle error if needed
+    }
+
 
   }
 }

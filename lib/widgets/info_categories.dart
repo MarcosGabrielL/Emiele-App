@@ -26,9 +26,9 @@ class CategoriesGuield extends StatelessWidget {
         TextSpan(
           style: TextStyle(color: kPrimaryColor),
           children: [
-            TextSpan(text: "Cupom 🤩\n"),
+            TextSpan(text: kTitulo + " 🤩\n"), //"Cupom "),
             TextSpan(
-              text: "Cupom a partir de R\$5",
+              text: kSubTitulo, //"Cupom a partir de R\$5",
               style: TextStyle(
                 fontSize: getProportionateScreenWidth(20),
                 fontWeight: FontWeight.bold,

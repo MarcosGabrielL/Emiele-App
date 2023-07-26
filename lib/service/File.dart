@@ -1,15 +1,17 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import '../components/config/environment.dart';
 import '../models/files/FileDB.dart';
 
 class FileService {
-  final String baseUrl;
-
-  FileService(this.baseUrl);
+  final String baseUrl = Environment.baseUrl;
+  final String baseUrlVendas = Environment.baseUrlVendas;
+  FileService();
 
   Future<String> uploadSingleFile(File file, String id) async {
     final formData = http.MultipartFile.fromBytes('file', await file.readAsBytes(), filename: file.path);
@@ -56,15 +58,15 @@ class FileService {
     }
   }
 
-  Future<FileDB> findById(String id, String token) async {
-    final response = await http.get(Uri.parse('$baseUrl/file/$id'));
+  Future<Uint8List> findById(int id, String token) async {
+    final response = await http.get(Uri.parse('$baseUrlVendas/file/$id'));
     if (response.statusCode == 200) {
-      final jsonData = jsonDecode(response.body);
-      return FileDB.fromJson(jsonData);
+      return response.bodyBytes;
     } else {
       throw Exception('Failed to fetch file by ID');
     }
   }
+
 
   Future<void> deleteById(String id, String token) async {
     final response = await http.get(Uri.parse('$baseUrl/file/delete/$id'));
@@ -105,4 +107,18 @@ class FileService {
       throw Exception('Failed to update store photo');
     }
   }
+
+  Future<List<FileDB>> findBannersByIdVendedor(dynamic id, String token) async {
+    final String url = '$baseUrlVendas/filelist/banners/loja/$id';
+    final response = await http.get(Uri.parse(url));
+
+    if (response.statusCode == 200) {
+      final List<dynamic> data = json.decode(response.body);
+      return List<FileDB>.from(data.map((jsonObject) => FileDB.fromJson(jsonObject)));
+    } else {
+      throw Exception('Failed to load banners');
+    }
+  }
+
+
 }

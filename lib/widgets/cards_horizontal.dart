@@ -1,6 +1,9 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 
 import '../../../components/config/size_config.dart';
+import '../components/constant.dart';
 
 class SpecialParaVoce extends StatelessWidget {
   const SpecialParaVoce({
@@ -19,14 +22,14 @@ class SpecialParaVoce extends StatelessWidget {
 
             children: [
               SpecialOfferCard(
-                image: "assets/images/Image Banner 2.png",
-                category: "Promoção 1",
+                file: fileData1,
+                category: "",//""Promoção 1",
                 numOfBrands: 18,
                 press: () {},
               ),
               SpecialOfferCard(
-                image: "assets/images/Image Banner 3.png",
-                category: "Promoção 2",
+                file:fileData2,
+                category: "",//"Promoção 2",
                 numOfBrands: 24,
                 press: () {},
               ),
@@ -42,15 +45,16 @@ class SpecialParaVoce extends StatelessWidget {
 class SpecialOfferCard extends StatelessWidget {
   const SpecialOfferCard({
     Key? key,
+    required this.file,
     required this.category,
-    required this.image,
     required this.numOfBrands,
     required this.press,
   }) : super(key: key);
 
-  final String category, image;
+  final String category;
   final int numOfBrands;
   final GestureTapCallback press;
+  final Uint8List file;
 
   @override
   Widget build(BuildContext context) {
@@ -66,8 +70,8 @@ class SpecialOfferCard extends StatelessWidget {
             child: Stack(
               children: [
                 ClipRect(
-                  child: Image.asset(
-                    image,
+                  child: Image.memory(
+                    file,
                     width: double.infinity,
                     height: double.infinity,
                     fit: BoxFit.cover,
@@ -95,13 +99,13 @@ class SpecialOfferCard extends StatelessWidget {
                       style: TextStyle(color: Colors.white),
                       children: [
                         TextSpan(
-                          text: "$category\n",
+                          text: "",
                           style: TextStyle(
                             fontSize: getProportionateScreenWidth(18),
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        TextSpan(text: "$numOfBrands% OFF")
+                        //TextSpan(text: "$numOfBrands% OFF")
                       ],
                     ),
                   ),

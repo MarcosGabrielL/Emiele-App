@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:jurisconexao_cliente/components/config/size_config.dart';
 
@@ -10,6 +12,10 @@ import '../models/reviewModal.dart';
 const vendedor_Id =  2;
 const token = '';
 const ambiente = 0;
+String kTitulo = '';
+String kSubTitulo = '';
+Uint8List fileData1 = Uint8List(0);
+Uint8List fileData2 = Uint8List(0);
  Color kPrimaryColor =  const Color(0xFFDB0035);
  Color kSecondaryColor = Color(0xFF979797);
 

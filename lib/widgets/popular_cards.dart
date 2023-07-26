@@ -1,6 +1,12 @@
+
+
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 
 import '../../../components/config/size_config.dart';
+import '../components/constant.dart';
 
 class PopularSearchs extends StatelessWidget {
   const PopularSearchs({
@@ -12,38 +18,22 @@ class PopularSearchs extends StatelessWidget {
     return Column(
       children: [
 
-        SizedBox(height: getProportionateScreenWidth(20)),
+        SizedBox(width: getProportionateScreenWidth(40)),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
 
-            children: [
-              SpecialOfferCard(
-                image: "assets/images/img1.png",
-                category: "Hamburguer",
-                numOfBrands: 18,
+          children: List.generate(
+            ProdutosDestacados.length,
+                (i) => SpecialOfferCard(
+                file: Uint8List.fromList(Base64Decoder().convert(ProdutosDestacados[i].urls[0])),
+                category: ProdutosDestacados[i].descricao,
+                numOfBrands: ProdutosDestacados[i].precoun,
                 press: () {},
               ),
-              SpecialOfferCard(
-                image: "assets/images/img2.png",
-                category: "Pizza",
-                numOfBrands: 24,
-                press: () {},
-              ),
-              SpecialOfferCard(
-                image: "assets/images/img1.png",
-                category: "Pastel",
-                numOfBrands: 24,
-                press: () {},
-              ),
-              SpecialOfferCard(
-                image: "assets/images/img1.png",
-                category: "Hamburguer",
-                numOfBrands: 24,
-                press: () {},
-              ),
-              SizedBox(width: getProportionateScreenWidth(20)),
-            ],
+          ),
+
+
           ),
         ),
       ],
@@ -54,15 +44,16 @@ class PopularSearchs extends StatelessWidget {
 class SpecialOfferCard extends StatelessWidget {
   const SpecialOfferCard({
     Key? key,
+    required this.file,
     required this.category,
-    required this.image,
     required this.numOfBrands,
     required this.press,
   }) : super(key: key);
 
-  final String category, image;
-  final int numOfBrands;
+  final String category;
+  final String numOfBrands;
   final GestureTapCallback press;
+  final Uint8List file;
 
   @override
   Widget build(BuildContext context) {
@@ -77,11 +68,13 @@ class SpecialOfferCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
             child: Stack(
               children: [
-                Image.asset(
-                  image,
-                  width: double.infinity,
-                  height: double.infinity,
-                  fit: BoxFit.cover,
+                ClipRect(
+                  child: Image.memory(
+                    file,
+                    width: double.infinity,
+                    height: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
                 ),
                 Container(
                   decoration: BoxDecoration(
@@ -89,23 +82,10 @@ class SpecialOfferCard extends StatelessWidget {
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
                       colors: [
-                        Colors.black.withOpacity(0.8),
-                        Colors.transparent,
+                        Color(0xFF343434).withOpacity(0.4),
+                        Color(0xFF343434).withOpacity(0.15),
                       ],
                     ),
-                  ),
-                ),
-
-                Container(
-                  decoration: BoxDecoration(
-                  /*  gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        Color(0xFF343434).withOpacity(1),
-                        Color(0xFF343434).withOpacity(1),
-                      ],
-                    ),*/
                   ),
                 ),
                 Padding(
@@ -118,13 +98,13 @@ class SpecialOfferCard extends StatelessWidget {
                       style: TextStyle(color: Colors.white),
                       children: [
                         TextSpan(
-                          text: "$category\n",
+                          text: category+"\n",
                           style: TextStyle(
-                            fontSize: getProportionateScreenWidth(17),
+                            fontSize: getProportionateScreenWidth(18),
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        TextSpan(text: "R\$$numOfBrands")
+                        TextSpan(text: "R\$"+numOfBrands)
                       ],
                     ),
                   ),

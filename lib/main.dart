@@ -7,6 +7,7 @@ import 'package:jurisconexao_cliente/screens/home/components/home_header.dart';
 import 'package:jurisconexao_cliente/screens/splash/splash_screen.dart';
 import 'package:jurisconexao_cliente/service/Anuncio.dart';
 import 'package:jurisconexao_cliente/service/File.dart';
+import 'package:jurisconexao_cliente/service/Produto.dart';
 import 'package:jurisconexao_cliente/service/security.dart';
 import 'package:jurisconexao_cliente/widgets/category_selector.dart';
 import 'package:jurisconexao_cliente/widgets/favorits_categories.dart';
@@ -17,7 +18,10 @@ import 'components/config/service/Config.dart';
 import 'components/config/size_config.dart';
 import 'components/constant.dart';
 import '../../../models/Cor.dart';
+import 'dart:convert';
 import 'models/Anuncio.dart';
+import 'models/Venda/Produto.dart';
+import 'models/Venda/ProdutoDTO.dart';
 import 'models/files/FileDB.dart';
 void main() {
   runApp(const MyApp());
@@ -148,6 +152,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         children: <Widget>[
                           FavoriteCotegories(),
                           ListFront(),
+
                         ],
                       ),
                     ),
@@ -171,6 +176,7 @@ class _MyHomePageState extends State<MyHomePage> {
     ConfigService configService = ConfigService(); // Create an instance of ConfigService
     AnuncioService anuncioService = AnuncioService();
     FileService fileService = FileService();
+    ProdutoService produtoService = ProdutoService();
     try {
       List<CorModel> colors = await configService.findColorsByIdVendedor(vendedor_Id, token);
       for (var color in colors) {
@@ -198,22 +204,35 @@ class _MyHomePageState extends State<MyHomePage> {
     try {
 
       List<FileDB> files = await fileService.findBannersByIdVendedor(vendedor_Id, token);
-        print(files.length);
       if(files.length > 1) {
         fileData1 = await fileService.findById(files[0].id, '');
-        print(fileData1.length);
-
+        //print(fileData1);
         fileData2 = await fileService.findById(files[1].id, '');
-        print(fileData2.length);
       }else if(files.length == 1) {
         fileData1 = await fileService.findById(files[0].id, '');
-        print(fileData1.length);
       }else if(files.length == 1) {
 
     }
 
     } catch (error) {
       print("Error fetching Files: $error");
+      // Handle error if needed
+    }
+
+    try {
+
+      List<ProdutoDTO> produtosDestacados = await produtoService.findProdutosDestaquesByIdVendedor(vendedor_Id, token);
+
+      ProdutosDestacados = [];
+      for (var produto in produtosDestacados) {
+
+        ProdutosDestacados.add(produto);
+      }
+
+      print(ProdutosDestacados.length.toString() +" Produtos Destacados");
+
+    } catch (error) {
+      print("Error fetching Produtos Destacados: $error");
       // Handle error if needed
     }
 

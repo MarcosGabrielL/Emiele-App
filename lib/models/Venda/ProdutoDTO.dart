@@ -1,36 +1,64 @@
+import 'package:jurisconexao_cliente/models/files/FileDB.dart';
+
 class ProdutoDTO {
-  String id;
+  int id;
   String codigo;
   String descricao;
   String precoun;
-  String ventrada;
-  int quantidade;
+  double quantidade;
   String tipo;
-  String unidade;
-  String unidadeTributavel;
   String data;
   String loja;
-  double subTotal;
-  String vendedorId;
+  String vendedor_id;
   List<String> urls;
 
   ProdutoDTO({
-    required  this.id,
+    required this.id,
     required this.codigo,
     required this.descricao,
     required this.precoun,
-    required this.ventrada,
     required this.quantidade,
     required this.tipo,
-    required this.unidade,
-    required this.unidadeTributavel,
     required this.data,
     required this.loja,
-    required this.subTotal,
-    required this.vendedorId,
+    required this.vendedor_id,
     required this.urls,
   });
 
-  static fromJson(item) {}
-}
+  // Convert ProdutoDTO object to a Map (JSON)
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'codigo': codigo,
+      'descricao': descricao,
+      'precoun': precoun,
+      'quantidade': quantidade,
+      'tipo': tipo,
+      'data': data,
+      'loja': loja,
+      'vendedor_id': vendedor_id,
+      'urls': urls,
+    };
+  }
 
+  // Create ProdutoDTO object from a Map (JSON)
+  factory ProdutoDTO.fromJson(Map<String, dynamic> json) {
+    return ProdutoDTO(
+      id: json['id'],
+      codigo: json['codigo'],
+      descricao: json['descricao'],
+      precoun: json['precoun'],
+      quantidade: json['quantidade'],
+      tipo: json['tipo'],
+      data: json['data'],
+      loja: json['loja'],
+      vendedor_id: json['vendedor_id'],
+      urls: (json['urls'] as List<dynamic>).map((url) => url.toString()).toList(),
+    );
+  }
+
+  @override
+  String toString() {
+    return 'ProdutoDTO(id: $id, codigo: $codigo, descricao: $descricao, precoun: $precoun, quantidade: $quantidade, tipo: $tipo, data: $data, loja: $loja, vendedor_id: $vendedor_id, urls: $urls)';
+  }
+}

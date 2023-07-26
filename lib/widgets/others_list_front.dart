@@ -50,7 +50,7 @@ class ListFront extends StatelessWidget {
                   child: Column(
                     children: [
                       SpecialParaVoce(),
-                      SizedBox(height: getProportionateScreenWidth(10)),
+                      SizedBox(height: getProportionateScreenWidth(40)),
                       PopularSearchs(),
                     ],
                   ),

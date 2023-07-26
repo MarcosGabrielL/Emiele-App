@@ -120,5 +120,12 @@ class FileService {
     }
   }
 
+    List<List<int>> parseUrls(dynamic urlsJson) {
+    if (urlsJson is List) {
+      return List<List<int>>.from(urlsJson.map((url) => List<int>.from(url)));
+    } else {
+      return [];
+    }
+  }
 
 }

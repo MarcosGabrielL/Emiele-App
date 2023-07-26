@@ -1,10 +1,10 @@
 class FileDB {
   int id;
   String name;
-  String idpost;
+  String? idpost;
   String type;
   dynamic data;
-  String idvendedor;
+  String? idvendedor ;
 
   FileDB({
     required this.id,

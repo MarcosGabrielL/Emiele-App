@@ -12,6 +12,7 @@ import 'package:jurisconexao_cliente/widgets/category_selector.dart';
 import 'package:jurisconexao_cliente/widgets/favorits_categories.dart';
 import 'package:jurisconexao_cliente/widgets/info_categories.dart';
 import 'package:jurisconexao_cliente/widgets/others_list_front.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'components/bottomnavigate_bar.dart';
 import 'components/config/service/Config.dart';
 import 'components/config/size_config.dart';
@@ -70,15 +71,8 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    checkLoginStatus();
   }
 
-  Future<void> checkLoginStatus() async {
-    isLoggedIn = await authManager.checkLoginStatus();
-    isFirstTime = await authManager.checkisFirstTimeStatus();
-
-    setState(() {}); // Update the state to reflect the login status change
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -173,6 +167,18 @@ class _MyHomePageState extends State<MyHomePage> {
     SizeConfig sizes = SizeConfig();
     sizes.init(context);
 
+    isLoggedIn = await authManager.checkLoginStatus();
+    isFirstTime = await authManager.checkisFirstTimeStatus();
+    print("isLoggedIn"+isLoggedIn.toString());
+    print("isFirstTime"+isFirstTime.toString());
+    //setState(() {}); // Update the state to reflect the login status change
+
+    SharedPreferences _preferences = await SharedPreferences.getInstance();
+    if(_preferences.containsKey("loggedUser")){
+      user = await authManager.getUserByEmail(_preferences.get("loggedUser").toString());
+      print("Usuario" + user.toString());
+    }
+
     ConfigService configService = ConfigService(); // Create an instance of ConfigService
     AnuncioService anuncioService = AnuncioService();
     FileService fileService = FileService();
@@ -218,17 +224,6 @@ class _MyHomePageState extends State<MyHomePage> {
       print("Error fetching Files: $error");
       // Handle error if needed
     }
-
-    /*try {
-      List<ProdutoDTO> produtosDestacados = await produtoService.findProdutosDestaquesByIdVendedor(vendedor_Id, token);
-      ProdutosDestacados = [];
-      for (var produto in produtosDestacados) {
-      }
-      print(ProdutosDestacados.length.toString() +" Produtos Destacados");
-    } catch (error) {
-      print("Error fetching Produtos Destacados: $error");
-      // Handle error if needed
-    }*/
 
     try {
 

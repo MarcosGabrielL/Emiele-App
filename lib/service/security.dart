@@ -7,6 +7,8 @@ import 'package:jurisconexao_cliente/models/auth_request_register.dart';
 import 'package:jurisconexao_cliente/service/SnackBar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../models/User.dart';
+
 class AuthService {
   final String baseUrl =
       'https://jurisconexao-service-auth-production.up.railway.app';
@@ -58,6 +60,7 @@ class AuthService {
         SharedPreferences _preferences = await SharedPreferences.getInstance();
         isLoggedIn = true;
         await _preferences.setBool(isLoggedInKey, true);
+        await _preferences.setString(loggedUser,email);
 
         Message.showSnackBar(context, response.statusCode);
 
@@ -127,9 +130,9 @@ class AuthService {
   Future<bool> checkisFirstTimeStatus() async {
     _preferences = await SharedPreferences.getInstance();
 
-    //Teste para login
-    /* _preferences.setBool(isFirstTimeKey, true);
-      * */
+    /**Teste para login **/
+    // _preferences.setBool(isFirstTimeKey, true);
+
 
     return _preferences.getBool(isFirstTimeKey) ?? true;
   }
@@ -216,5 +219,24 @@ class AuthService {
       throw Exception('Failed to connect to the server: $e');
     }
   }
+
+  Future<UserModel> getUserByEmail(String email) async {
+    final String endpoint = "/user/$email";
+    final Uri uri = Uri.parse(baseUrl + endpoint);
+
+    try {
+      final response = await http.get(uri);
+
+      if (response.statusCode == 200) {
+        final jsonResponse = json.decode(response.body);
+        return UserModel.fromJson(jsonResponse);
+      } else {
+        throw Exception('Failed to load user data');
+      }
+    } catch (e) {
+      throw Exception('Error: $e');
+    }
+  }
+
 
 }

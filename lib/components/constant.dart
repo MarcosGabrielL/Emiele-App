@@ -5,6 +5,7 @@ import 'package:jurisconexao_cliente/components/config/size_config.dart';
 
 import '../models/Product.dart';
 import '../models/TrackOrderModal.dart';
+import '../models/User.dart';
 import '../models/Venda/Produto.dart';
 import '../models/Venda/ProdutoDTO.dart';
 import '../models/cartModal.dart';
@@ -21,7 +22,7 @@ Uint8List fileData1 = Uint8List(0);
 Uint8List fileData2 = Uint8List(0);
 Color kPrimaryColor =  const Color(0xFFDB0035);
 Color kSecondaryColor = Color(0xFF979797);
-
+UserModel user = new UserModel(email: '', password: '', firstName: '', lastName: '', tipo: '', instancia: '');
 List<Product> ProdutosDestacados = [];
 List<Product>  ProdutosDetalhes = [];
 

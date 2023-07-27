@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../components/config/size_config.dart';
+import '../../../components/constant.dart';
 import '../../../components/product_card.dart';
 import '../../../models/Product.dart';
 import 'section_title.dart';
@@ -21,10 +22,10 @@ class PopularProducts extends StatelessWidget {
           child: Row(
             children: [
               ...List.generate(
-                demoProducts.length,
+                ProdutosDetalhes.length,
                     (index) {
-                  if (demoProducts[index].isPopular)
-                    return ProductCard(product: demoProducts[index]);
+                  if (ProdutosDetalhes[index].destaque)
+                    return ProductCard(product: ProdutosDetalhes[index]);
 
                   return SizedBox
                       .shrink(); // here by default width and height is 0

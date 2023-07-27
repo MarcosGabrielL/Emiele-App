@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../components/config/size_config.dart';
 import '../../../components/constant.dart';
 import '../../../components/rounded_icon_btn.dart';
+import '../../../models/Cores.dart';
 import '../../../models/Product.dart';
 
 class ColorDots extends StatelessWidget {
@@ -23,9 +24,9 @@ class ColorDots extends StatelessWidget {
       child: Row(
         children: [
           ...List.generate(
-            product.colors.length,
+            product.cores.length,
                 (index) => ColorDot(
-              color: product.colors[index],
+              color: product.cores[index].toString(),
               isSelected: index == selectedColor,
             ),
           ),
@@ -53,7 +54,7 @@ class ColorDot extends StatelessWidget {
     this.isSelected = false,
   }) : super(key: key);
 
-  final Color color;
+  final String color;
   final bool isSelected;
 
   @override
@@ -71,7 +72,7 @@ class ColorDot extends StatelessWidget {
       ),
       child: DecoratedBox(
         decoration: BoxDecoration(
-          color: color,
+          color: Color(int.parse(color.replaceAll('#', '0xFF'))),
           shape: BoxShape.circle,
         ),
       ),

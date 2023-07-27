@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import '../components/config/environment.dart';
+import '../models/Product.dart';
 import '../models/Venda/ProdutoDTO.dart';
 
 
@@ -111,6 +112,16 @@ class ProdutoService {
       final data = json.decode(response.body) as List;
 
       return data.map((json) => ProdutoDTO.fromJson(json as Map<String, dynamic>)).toList();
+    } else {
+      throw Exception('Failed to fetch products by vendor ID');
+    }
+  }
+
+  Future<List<Product>> findProdutosDetalhesByIdVendedor(int idvendedor, int idcliente, String token) async {
+    final response = await http.get(Uri.parse('$baseUrl/produtos/destaque/produtodetails/by/vendedor/cliente?idvendedor=$idvendedor&idcliente=$idcliente&token=$token'));
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body) as List;
+      return data.map((json) => Product.fromJson(json as Map<String, dynamic>)).toList();
     } else {
       throw Exception('Failed to fetch products by vendor ID');
     }

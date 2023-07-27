@@ -5,9 +5,9 @@ import '../../../components/config/size_config.dart';
 import '../../../components/constant.dart';
 
 class CustomAppBar extends StatelessWidget {
-  final double rating;
+  final bool favorito;
 
-  CustomAppBar({required this.rating});
+  CustomAppBar({required this.favorito});
 
   @override
   // AppBar().preferredSize.height provide us the height that appy on our app bar
@@ -50,14 +50,18 @@ class CustomAppBar extends StatelessWidget {
               child: Row(
                 children: [
                   Text(
-                    "$rating",
+                    "",
                     style: const TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
                   const SizedBox(width: 5),
-                  SvgPicture.asset("assets/icons/Star Icon.svg"),
+                  SvgPicture.asset(
+                      favorito ? "assets/icons/Heart Icon_2.svg":
+                      "assets/icons/Heart Icon.svg"
+
+                  ),
                 ],
               ),
             )

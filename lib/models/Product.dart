@@ -1,103 +1,73 @@
-import 'package:flutter/material.dart';
+import 'Cores.dart';
 
 class Product {
-  final int id;
-  final String title, description;
-  final List<String> images;
-  final List<Color> colors;
-  final double rating, price;
-  final bool isFavourite, isPopular;
+  int id;
+  String codigo;
+  String descricao;
+  String precoun;
+  double quantidade;
+  String tipo;
+  String data;
+  String loja;
+  String vendedorId;
+  List<String> urls;
+  List<Cores> cores;
+  bool favorito;
+  bool destaque;
 
   Product({
     required this.id,
-    required this.images,
-    required this.colors,
-    this.rating = 0.0,
-    this.isFavourite = false,
-    this.isPopular = false,
-    required this.title,
-    required this.price,
-    required this.description,
+    required this.codigo,
+    required this.descricao,
+    required this.precoun,
+    required this.quantidade,
+    required this.tipo,
+    required this.data,
+    required this.loja,
+    required this.vendedorId,
+    required this.urls,
+    required this.cores,
+    required this.favorito,
+    required this.destaque,
   });
+
+  // Método para criar uma instância de Product a partir de um mapa (JSON)
+  factory Product.fromJson(Map<String, dynamic> json) {
+    return Product(
+      id: json['id'],
+      codigo: json['codigo'],
+      descricao: json['descricao'],
+      precoun: json['precoun'],
+      quantidade: json['quantidade'].toDouble(),
+      tipo: json['tipo'],
+      data: json['data'],
+      loja: json['loja'],
+      vendedorId: json['vendedor_id'],
+      urls: json['urls'] != null ? List<String>.from(json['urls']) : [],
+      cores: json['cores'] != null
+          ? List<Cores>.from(json['cores'].map((color) => Cores.fromJson(color)))
+          : [],
+      favorito: json['favorito'] ?? false,
+      destaque: json['destaque'] ?? false,
+    );
+  }
+
+  // Método para converter a instância de Product em um mapa (JSON)
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'codigo': codigo,
+      'descricao': descricao,
+      'precoun': precoun,
+      'quantidade': quantidade,
+      'tipo': tipo,
+      'data': data,
+      'loja': loja,
+      'vendedor_id': vendedorId,
+      'cores': cores.map((color) => color.toJson()).toList(),
+      'favorito': favorito,
+      'destaque': destaque,
+      'urls': urls,
+    };
+  }
 }
-
-// Our demo Products
-
-List<Product> demoProducts = [
-  Product(
-    id: 1,
-    images: [
-      "assets/images/Image Banner 3.png",
-      "assets/images/Image Banner 3.png",
-      "assets/images/Image Banner 3.png",
-      "assets/images/ps4_console_white_4.png",
-    ],
-    colors: [
-      Color(0xFFF6625E),
-      Color(0xFF836DB8),
-      Color(0xFFDECB9C),
-      Colors.white,
-    ],
-    title: "Wireless Controller for PS4™",
-    price: 64.99,
-    description: description,
-    rating: 4.8,
-    isFavourite: true,
-    isPopular: true,
-  ),
-  Product(
-    id: 2,
-    images: [
-      "assets/images/Image Popular Product 2.png",
-    ],
-    colors: [
-      Color(0xFFF6625E),
-      Color(0xFF836DB8),
-      Color(0xFFDECB9C),
-      Colors.white,
-    ],
-    title: "Nike Sport White - Man Pant",
-    price: 50.5,
-    description: description,
-    rating: 4.1,
-    isPopular: true,
-  ),
-  Product(
-    id: 3,
-    images: [
-      "assets/images/glap.png",
-    ],
-    colors: [
-      Color(0xFFF6625E),
-      Color(0xFF836DB8),
-      Color(0xFFDECB9C),
-      Colors.white,
-    ],
-    title: "Gloves XC Omega - Polygon",
-    price: 36.55,
-    description: description,
-    rating: 4.1,
-    isFavourite: true,
-    isPopular: true,
-  ),
-  Product(
-    id: 4,
-    images: [
-      "assets/images/wireless headset.png",
-    ],
-    colors: [
-      Color(0xFFF6625E),
-      Color(0xFF836DB8),
-      Color(0xFFDECB9C),
-      Colors.white,
-    ],
-    title: "Logitech Head",
-    price: 20.20,
-    description: description,
-    rating: 4.1,
-    isFavourite: true,
-  ),
-];
-
-const String description =
-    "Wireless Controller for PS4™ gives you what you want in your gaming from over precision control your games to sharing …";

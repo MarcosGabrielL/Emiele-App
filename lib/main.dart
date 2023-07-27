@@ -1,7 +1,6 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:jurisconexao_cliente/pages/CircularProgress.dart';
 import 'package:jurisconexao_cliente/pages/login.dart';
 import 'package:jurisconexao_cliente/screens/home/components/home_header.dart';
 import 'package:jurisconexao_cliente/screens/splash/splash_screen.dart';
@@ -20,6 +19,7 @@ import 'components/constant.dart';
 import '../../../models/Cor.dart';
 import 'dart:convert';
 import 'models/Anuncio.dart';
+import 'models/Product.dart';
 import 'models/Venda/Produto.dart';
 import 'models/Venda/ProdutoDTO.dart';
 import 'models/files/FileDB.dart';
@@ -219,20 +219,35 @@ class _MyHomePageState extends State<MyHomePage> {
       // Handle error if needed
     }
 
-    try {
-
+    /*try {
       List<ProdutoDTO> produtosDestacados = await produtoService.findProdutosDestaquesByIdVendedor(vendedor_Id, token);
-
       ProdutosDestacados = [];
       for (var produto in produtosDestacados) {
-
-        ProdutosDestacados.add(produto);
       }
-
       print(ProdutosDestacados.length.toString() +" Produtos Destacados");
-
     } catch (error) {
       print("Error fetching Produtos Destacados: $error");
+      // Handle error if needed
+    }*/
+
+    try {
+
+      List<Product> produtosDetallhes = await produtoService.findProdutosDetalhesByIdVendedor(vendedor_Id,1, token);
+
+      ProdutosDestacados = [];
+      ProdutosDetalhes = [];
+      for (var produto in produtosDetallhes) {
+        //print(produto.toJson());
+        if(produto.destaque){
+          ProdutosDestacados.add(produto);
+        }
+        ProdutosDetalhes.add(produto);
+      }
+
+      print(produtosDetallhes.length.toString() +" Produtos no Total");
+
+    } catch (error) {
+      print("Error fetching Produtos Detalhes: $error");
       // Handle error if needed
     }
 

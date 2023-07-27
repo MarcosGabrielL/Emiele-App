@@ -35,6 +35,9 @@ class Message {
       case 05:
         snackBarMessage ='Codigo de Verificação Invalido';
         break;
+      case 06:
+        snackBarMessage ='Sem detalhes Adicionais';
+        break;
       case 401:
         snackBarMessage = 'Não Autorizado: A solicitação requer autenticação do cliente ou as credenciais fornecidas não são válidas';
         break;

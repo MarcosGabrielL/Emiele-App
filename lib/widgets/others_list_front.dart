@@ -4,6 +4,7 @@ import 'package:jurisconexao_cliente/screens/chat_screen.dart';
 import 'package:jurisconexao_cliente/widgets/popular_cards.dart';
 
 import '../components/config/size_config.dart';
+import '../screens/details/details_screen.dart';
 import 'cards_horizontal.dart';
 
 class ListFront extends StatelessWidget {
@@ -28,13 +29,7 @@ class ListFront extends StatelessWidget {
             itemBuilder: (BuildContext context, int index) {
               final Message chat = chats[index];
               return GestureDetector(
-                onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => ChatScreen(
-                      user: chat.sender,
-                    ),
-                  ),
+                onTap: () => (
                 ),
                 child: Container(
                   margin: EdgeInsets.only(top: 5.0, bottom: 5.0, right: 0.0),

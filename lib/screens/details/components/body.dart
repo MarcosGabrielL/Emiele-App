@@ -7,7 +7,7 @@ import 'color_dots.dart';
 import 'product_description.dart';
 import 'top_rounded_container.dart';
 import 'product_images.dart';
-
+import 'package:jurisconexao_cliente/service/SnackBar.dart';
 class Body extends StatelessWidget {
   final Product product;
 
@@ -24,7 +24,7 @@ class Body extends StatelessWidget {
             children: [
               ProductDescription(
                 product: product,
-                pressOnSeeMore: () {},
+                pressOnSeeMore: () {Message.showSnackBar(context, 06);},
               ),
               TopRoundedContainer(
                 color: Color(0xFFF6F7F9),
@@ -41,7 +41,7 @@ class Body extends StatelessWidget {
                           top: getProportionateScreenWidth(15),
                         ),
                         child: DefaultButton(
-                          text: "Add To Cart",
+                          text: "Adicionar ao Carrinho",
                           press: () {},
                         ),
                       ),

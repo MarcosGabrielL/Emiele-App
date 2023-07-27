@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 
 import '../../../components/config/size_config.dart';
@@ -28,7 +31,9 @@ class _ProductImagesState extends State<ProductImages> {
             aspectRatio: 1,
             child: Hero(
               tag: widget.product.id.toString(),
-              child: Image.asset(widget.product.images[selectedImage]),
+              child: Image.memory(
+                Uint8List.fromList(Base64Decoder().convert(widget.product.urls[selectedImage]))
+              ),
             ),
           ),
         ),
@@ -36,7 +41,7 @@ class _ProductImagesState extends State<ProductImages> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ...List.generate(widget.product.images.length,
+            ...List.generate(widget.product.urls.length,
                     (index) => buildSmallProductPreview(index)),
           ],
         )
@@ -63,7 +68,7 @@ class _ProductImagesState extends State<ProductImages> {
           border: Border.all(
               color: kPrimaryColor.withOpacity(selectedImage == index ? 1 : 0)),
         ),
-        child: Image.asset(widget.product.images[index]),
+        child: Image.memory(Uint8List.fromList(Base64Decoder().convert(widget.product.urls[index]))),
       ),
     );
   }

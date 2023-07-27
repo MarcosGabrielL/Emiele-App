@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 
 import '../../../components/config/size_config.dart';
 import '../components/constant.dart';
+import '../screens/details/details_screen.dart';
 
 class PopularSearchs extends StatelessWidget {
   const PopularSearchs({
@@ -29,7 +30,8 @@ class PopularSearchs extends StatelessWidget {
                 file: Uint8List.fromList(Base64Decoder().convert(ProdutosDestacados[i].urls[0])),
                 category: ProdutosDestacados[i].descricao,
                 numOfBrands: ProdutosDestacados[i].precoun,
-                press: () {},
+                press: () {navigateToDetailsScreen(context, i, true);} //1 para destacados
+
               ),
           ),
 
@@ -37,6 +39,15 @@ class PopularSearchs extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+
+  void navigateToDetailsScreen(BuildContext context, int id, bool destaque) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => DetailsScreen(id: id, isdestaque: destaque),
+      ),
     );
   }
 }
@@ -116,4 +127,7 @@ class SpecialOfferCard extends StatelessWidget {
       ),
     );
   }
-}
+
+
+
+  }

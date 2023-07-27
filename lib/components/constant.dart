@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:jurisconexao_cliente/components/config/size_config.dart';
 
+import '../models/Product.dart';
 import '../models/TrackOrderModal.dart';
 import '../models/Venda/Produto.dart';
 import '../models/Venda/ProdutoDTO.dart';
@@ -21,7 +22,8 @@ Uint8List fileData2 = Uint8List(0);
 Color kPrimaryColor =  const Color(0xFFDB0035);
 Color kSecondaryColor = Color(0xFF979797);
 
-List<ProdutoDTO> ProdutosDestacados = [];
+List<Product> ProdutosDestacados = [];
+List<Product>  ProdutosDetalhes = [];
 
 const kPrimaryLightColor = Color(0xFFFFECDF);
 const kPrimaryGradientColor = LinearGradient(

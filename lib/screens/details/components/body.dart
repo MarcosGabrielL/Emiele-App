@@ -2,17 +2,30 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:jurisconexao_cliente/models/Cart.dart';
+import 'package:jurisconexao_cliente/screens/cart/cart_screen.dart';
 
 import '../../../components/config/size_config.dart';
 import '../../../components/constant.dart';
 import '../../../components/default_button.dart';
 import '../../../components/rounded_icon_btn.dart';
+import '../../../components/util/Cart.dart';
 import '../../../models/Product.dart';
 import 'color_dots.dart';
 import 'product_description.dart';
 import 'top_rounded_container.dart';
 import 'product_images.dart';
 import 'package:jurisconexao_cliente/service/SnackBar.dart';
+
+class NavigationHelper {
+  static void navigateToCartScreen(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => CartScreen(),
+      ),
+    );
+  }
+}
 class Body extends StatefulWidget {
   final Product product;
   late int quantidade;
@@ -164,7 +177,12 @@ class _BodyState extends State<Body> {
                         child: DefaultButton(
                           text: "Adicionar ao Carrinho",
                           press: () {
-                            carrinho.add(Cart(product: widget.product, numOfItem: widget.quantidade));
+
+                            carrinho = CartUtil.addOrUpdateCartItem(carrinho,Cart(product: widget.product, numOfItem: widget.quantidade));
+                            Message.showSnackBar(context, 07);
+                            NavigationHelper.navigateToCartScreen(context);
+
+                            //Navigator.pop(context); // Voltar para a tela anterior
                             },
                         ),
                       ),

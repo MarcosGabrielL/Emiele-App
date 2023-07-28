@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../components/config/size_config.dart';
 import '../../../components/constant.dart';
 import '../../../components/default_button.dart';
+import '../../../components/util/Cart.dart';
 
 class CheckoutCard extends StatelessWidget {
   const CheckoutCard({
@@ -50,7 +51,7 @@ class CheckoutCard extends StatelessWidget {
                   child: SvgPicture.asset("assets/icons/receipt.svg"),
                 ),
                 Spacer(),
-                Text("Add voucher code"),
+                Text("CUPOM DESCONTO"),
                 const SizedBox(width: 10),
                 Icon(
                   Icons.arrow_forward_ios,
@@ -65,10 +66,10 @@ class CheckoutCard extends StatelessWidget {
               children: [
                 Text.rich(
                   TextSpan(
-                    text: "Total:\n",
+                    text: "Total (" + CartUtil.calculateNumTotalItens(carrinho).toString() + ") :\n",
                     children: [
                       TextSpan(
-                        text: "\$337.15",
+                        text: "R\$ " + CartUtil.calculateValorTotalItens(carrinho).toString() ,
                         style: TextStyle(fontSize: 16, color: Colors.black),
                       ),
                     ],
@@ -77,7 +78,7 @@ class CheckoutCard extends StatelessWidget {
                 SizedBox(
                   width: getProportionateScreenWidth(190),
                   child: DefaultButton(
-                    text: "Check Out",
+                    text: "Continuar",
                     press: () {},
                   ),
                 ),

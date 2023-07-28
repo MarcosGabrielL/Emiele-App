@@ -38,6 +38,9 @@ class Message {
       case 06:
         snackBarMessage ='Sem detalhes Adicionais';
         break;
+      case 07:
+        snackBarMessage ='Produto Adicionado ao Carrinho com Sucesso';
+        break;
       case 401:
         snackBarMessage = 'Não Autorizado: A solicitação requer autenticação do cliente ou as credenciais fornecidas não são válidas';
         break;

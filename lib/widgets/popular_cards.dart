@@ -97,7 +97,7 @@ class SpecialOfferCard extends StatelessWidget {
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,
                           colors: [
-                            Colors.black.withOpacity(1),
+                            kSecondaryColor.withOpacity(1),
                             Colors.transparent, // Adicione aqui a cor inicial do gradiente (transparente, se quiser que comece do topo)
                              // Adicione aqui a cor final do gradiente
                           ],

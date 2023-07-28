@@ -10,10 +10,4 @@ class Cart {
   Cart({required this.product, required this.numOfItem});
 }
 
-// Demo data for our cart
-
-List<Cart> demoCarts = [
-  Cart(product: ProdutosDetalhes[0], numOfItem: 2),
-  Cart(product: ProdutosDetalhes[1], numOfItem: 1),
-  Cart(product: ProdutosDetalhes[3], numOfItem: 1),
-];
+ 

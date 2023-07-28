@@ -1,10 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:jurisconexao_cliente/screens/otp/otp_screen.dart';
 
 import '../../../components/config/size_config.dart';
 import '../../../components/constant.dart';
 import '../../../components/default_button.dart';
 import '../../../components/util/Cart.dart';
+import '../../Location/LocationScreen.dart';
+
+class NavigationHelper {
+  static void navigateToCartScreen(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => LocationScreen(),
+      ),
+    );
+  }
+}
 
 class CheckoutCard extends StatelessWidget {
   const CheckoutCard({
@@ -79,7 +92,7 @@ class CheckoutCard extends StatelessWidget {
                   width: getProportionateScreenWidth(190),
                   child: DefaultButton(
                     text: "Continuar",
-                    press: () {},
+                    press: () {NavigationHelper.navigateToCartScreen(context);},
                   ),
                 ),
               ],

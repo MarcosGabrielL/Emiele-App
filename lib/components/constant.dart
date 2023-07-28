@@ -3,12 +3,15 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:jurisconexao_cliente/components/config/size_config.dart';
 
+import '../models/Cart.dart';
 import '../models/Product.dart';
 import '../models/TrackOrderModal.dart';
 import '../models/User.dart';
 import '../models/Venda/Produto.dart';
 import '../models/Venda/ProdutoDTO.dart';
+import '../models/Vendedor.dart';
 import '../models/cartModal.dart';
+import '../models/files/FileDB.dart';
 import '../models/paymentModal.dart';
 import '../models/recommendedModal.dart';
 import '../models/reviewModal.dart';
@@ -20,12 +23,14 @@ String kTitulo = '';
 String kSubTitulo = '';
 Uint8List fileData1 = Uint8List(0);
 Uint8List fileData2 = Uint8List(0);
-Color kPrimaryColor =  const Color(0xFFDB0035);
+Color kPrimaryColor =   Color(0xFFDB0035);
 Color kSecondaryColor = Color(0xFF979797);
 UserModel user = new UserModel(email: '', password: '', firstName: '', lastName: '', tipo: '', instancia: '');
+Vendedor vendedor = new Vendedor();
 List<Product> ProdutosDestacados = [];
 List<Product>  ProdutosDetalhes = [];
-
+List<FileDB> logov = [];//new FileDB(id: 0, name: '', idpost: '', type: '', data: null, idvendedor: '');
+List<Cart> carrinho = [];
 const kPrimaryLightColor = Color(0xFFFFECDF);
 const kPrimaryGradientColor = LinearGradient(
   begin: Alignment.topLeft,

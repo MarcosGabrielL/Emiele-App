@@ -26,17 +26,23 @@ class _ProductImagesState extends State<ProductImages> {
     return Column(
       children: [
         SizedBox(
-          width: getProportionateScreenWidth(238),
+          width: getProportionateScreenWidth(228),
           child: AspectRatio(
-            aspectRatio: 1,
+            aspectRatio: 1, // Mantém a proporção quadrada
             child: Hero(
               tag: widget.product.id.toString(),
-              child: Image.memory(
-                Uint8List.fromList(Base64Decoder().convert(widget.product.urls[selectedImage]))
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(20), // Arredonda os cantos
+                child: Image.memory(
+                  Uint8List.fromList(Base64Decoder().convert(widget.product.urls[selectedImage])),
+                  fit: BoxFit.cover, // Faz a imagem ocupar todo o espaço do ClipRRect
+                ),
               ),
             ),
           ),
         ),
+
+        SizedBox(height: getProportionateScreenWidth(10)),
         // SizedBox(height: getProportionateScreenWidth(20)),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,

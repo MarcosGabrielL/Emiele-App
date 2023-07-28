@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:jurisconexao_cliente/components/my_button.dart';
@@ -84,8 +87,8 @@ class _MyFormState extends State<RegisterPage> {
             Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset(
-                    'assets/images/logo.png',
+                  Image.memory(
+                    Uint8List.fromList(Base64Decoder().convert(logov[0].data)),
                     width: 100,
                     height: 100,
                   ),

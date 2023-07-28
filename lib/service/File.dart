@@ -128,4 +128,25 @@ class FileService {
     }
   }
 
+  Future<List<FileDB>> findVendedorLogo(dynamic id, String token) async {
+    final String url = '$baseUrlVendas/filelist/loja/$id';
+
+    try {
+      final response = await http.get(
+          Uri.parse(url), headers: {'Authorization': 'Bearer $token'});
+
+      if (response.statusCode == 200) {
+        final List<dynamic> data = json.decode(response.body);
+        return data.map((item) => FileDB.fromJson(item))
+            .toList(); // Implemente o método fromJson para converter o mapa em uma instância de FileDB
+      } else {
+        // Trate o erro aqui, se necessário
+        throw Exception('Falha ao buscar arquivos do vendedor por ID');
+      }
+    } catch (e) {
+      // Trate o erro aqui, se necessário
+      throw Exception('Erro ao realizar a solicitação HTTP: $e');
+    }
+  }
+
 }

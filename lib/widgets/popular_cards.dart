@@ -8,6 +8,18 @@ import 'package:flutter/material.dart';
 import '../../../components/config/size_config.dart';
 import '../components/constant.dart';
 import '../screens/details/details_screen.dart';
+class NavigationHelper {
+  static void navigateToDetailsScreen(BuildContext context, int id, bool destaque) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => DetailsScreen(id: id, isdestaque: destaque),
+      ),
+    );
+  }
+}
+
+
 
 class PopularSearchs extends StatelessWidget {
   const PopularSearchs({
@@ -28,28 +40,18 @@ class PopularSearchs extends StatelessWidget {
             ProdutosDestacados.length,
                 (i) => SpecialOfferCard(
                 file: Uint8List.fromList(Base64Decoder().convert(ProdutosDestacados[i].urls[0])),
-                category: ProdutosDestacados[i].descricao,
+                category: ProdutosDestacados[i].codigo,
                 numOfBrands: ProdutosDestacados[i].precoun,
-                press: () {navigateToDetailsScreen(context, i, true);} //1 para destacados
-
-              ),
+                  press: () => NavigationHelper.navigateToDetailsScreen(context, i, true),
+                ),
           ),
-
-
           ),
         ),
       ],
     );
   }
 
-  void navigateToDetailsScreen(BuildContext context, int id, bool destaque) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (_) => DetailsScreen(id: id, isdestaque: destaque),
-      ),
-    );
-  }
+
 }
 
 class SpecialOfferCard extends StatelessWidget {
@@ -79,14 +81,32 @@ class SpecialOfferCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
             child: Stack(
               children: [
-                ClipRect(
-                  child: Image.memory(
-                    file,
-                    width: double.infinity,
-                    height: double.infinity,
-                    fit: BoxFit.cover,
-                  ),
+                Stack(
+                  children: [
+                    ClipRect(
+                      child: Image.memory(
+                        file,
+                        width: double.infinity,
+                        height: double.infinity,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            Colors.black.withOpacity(1),
+                            Colors.transparent, // Adicione aqui a cor inicial do gradiente (transparente, se quiser que comece do topo)
+                             // Adicione aqui a cor final do gradiente
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
+
                 Container(
                   decoration: BoxDecoration(
                     gradient: LinearGradient(

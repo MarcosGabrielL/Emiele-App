@@ -1,5 +1,5 @@
 class Environment {
-  static const String baseUrl = 'https://emiele-service-gerenciador.herokuapp.com';
+  static const String baseUrl = 'http://192.168.0.26:8081';
   static const String baseUrlEventos = 'http://192.168.0.26:8083';
   static const String baseUrlVendas = 'http://192.168.0.26:8084';
   static const String baseUrlConfig = 'http://192.168.0.26:8085';

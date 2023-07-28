@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:jurisconexao_cliente/components/my_button.dart';
 import 'package:jurisconexao_cliente/components/my_textfield.dart';
@@ -7,12 +10,17 @@ import 'package:jurisconexao_cliente/pages/register.dart';
 import 'package:jurisconexao_cliente/service/security.dart';
 import 'package:jurisconexao_cliente/service/validating.dart';
 
+import '../components/constant.dart';
 import '../screens/forgot_password/forgot_password_screen.dart';
 
 class LoginPage extends StatelessWidget {
   static var routeName;
 
   LoginPage({super.key});
+
+
+
+
 
   // text editing controllers
   final usernameController = TextEditingController();
@@ -49,21 +57,22 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: SafeArea(
+    return GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        child: Scaffold(
+        backgroundColor: Colors.white,
+        body: SafeArea(
         child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const SizedBox(height: 90),
-
+        child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+        const SizedBox(height: 90),
               // logo
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset(
-                    'assets/images/logo.png',
+                  Image.memory(
+              Uint8List.fromList(Base64Decoder().convert(logov[0].data)),
                     width: 130,
                     height: 130,
                   ),
@@ -202,17 +211,18 @@ class LoginPage extends StatelessWidget {
                     child: const Text(
                       'Registre-se',
                       style: TextStyle(
-                        color: Color(0xFFDB0035),
+                        //color: kPrimaryColor,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
                 ],
               )
-            ],
-          ),
+        ],
         ),
-      ),
+        ),
+        ),
+        ),
     );
   }
 }

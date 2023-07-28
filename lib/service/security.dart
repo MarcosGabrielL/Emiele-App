@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:jurisconexao_cliente/components/config/environment.dart';
 import 'package:jurisconexao_cliente/models/auth_request_auth.dart';
 import 'package:jurisconexao_cliente/models/auth_request_register.dart';
 import 'package:jurisconexao_cliente/service/SnackBar.dart';
@@ -10,8 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../models/User.dart';
 
 class AuthService {
-  final String baseUrl =
-      'https://jurisconexao-service-auth-production.up.railway.app';
+  final String baseUrl = Environment.baseUrl;
   final String isLoggedInKey = 'isLoggedIn';
   final String loggedUser = 'LoggedUser';
   final String isFirstTimeKey = 'isFirstTime';

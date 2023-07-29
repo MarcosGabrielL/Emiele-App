@@ -65,9 +65,11 @@ class MyApp extends StatelessWidget {
   }
 
   Future<bool> fetchConfig(BuildContext context) async {
-    AuthService authManager = AuthService();
-    bool isLoggedIn = false; // Variable to control if the user is logged in
-    bool isFirstTime = true;
+
+    if(!idfectched) {
+      AuthService authManager = AuthService();
+      bool isLoggedIn = false; // Variable to control if the user is logged in
+      bool isFirstTime = true;
 
 
       SizeConfig sizes = SizeConfig();
@@ -84,7 +86,7 @@ class MyApp extends StatelessWidget {
         //print(vendedor);
         logov = await fileService.findVendedorLogo(vendedor_Id, "");
         for (var logo in logov) {
-         // print("logo: "+ logo.toString());
+          // print("logo: "+ logo.toString());
         }
       } catch (error) {
         print("Error fetching Vendedor: $error");
@@ -92,11 +94,14 @@ class MyApp extends StatelessWidget {
       }
 
       try {
-        List<CorModel> colors = await configService.findColorsByIdVendedor(vendedor_Id, token);
+        List<CorModel> colors = await configService.findColorsByIdVendedor(
+            vendedor_Id, token);
         for (var color in colors) {
-         // print(color.toString());
-          kPrimaryColor = Color(int.parse(color.primaryColor.replaceAll('#', '0xFF')));
-          kSecondaryColor = Color(int.parse(color.secondary.replaceAll('#', '0xFF')));
+          // print(color.toString());
+          kPrimaryColor =
+              Color(int.parse(color.primaryColor.replaceAll('#', '0xFF')));
+          kSecondaryColor =
+              Color(int.parse(color.secondary.replaceAll('#', '0xFF')));
         }
       } catch (error) {
         //print("Error fetching colors: $error");
@@ -105,21 +110,21 @@ class MyApp extends StatelessWidget {
 
       isLoggedIn = await authManager.checkLoginStatus();
       isFirstTime = await authManager.checkisFirstTimeStatus();
-      print("isLoggedIn"+isLoggedIn.toString());
-      print("isFirstTime"+isFirstTime.toString());
+      print("isLoggedIn" + isLoggedIn.toString());
+      print("isFirstTime" + isFirstTime.toString());
       //setState(() {}); // Update the state to reflect the login status change
 
       SharedPreferences _preferences = await SharedPreferences.getInstance();
-      if(_preferences.containsKey("loggedUser")) {
+      if (_preferences.containsKey("loggedUser")) {
         user = await authManager.getUserByEmail(
             _preferences.get("loggedUser").toString());
         //print("Usuario" + user.toString());
       }
 
 
-
       try {
-        List<Anuncio> anuncios = await anuncioService.findAnuncioByIdVendedor(vendedor_Id, token);
+        List<Anuncio> anuncios = await anuncioService.findAnuncioByIdVendedor(
+            vendedor_Id, token);
         for (var anuncio in anuncios) {
           //print(anuncio.toString());
           kTitulo = anuncio.titulo;
@@ -131,45 +136,45 @@ class MyApp extends StatelessWidget {
       }
 
       try {
-
-        List<FileDB> files = await fileService.findBannersByIdVendedor(vendedor_Id, token);
-        if(files.length > 1) {
+        List<FileDB> files = await fileService.findBannersByIdVendedor(
+            vendedor_Id, token);
+        if (files.length > 1) {
           fileData1 = await fileService.findById(files[0].id, '');
           //print(fileData1);
           fileData2 = await fileService.findById(files[1].id, '');
-        }else if(files.length == 1) {
+        } else if (files.length == 1) {
           fileData1 = await fileService.findById(files[0].id, '');
-        }else if(files.length == 1) {
+        } else if (files.length == 1) {
 
         }
-
       } catch (error) {
         print("Error fetching Files: $error");
         // Handle error if needed
       }
 
       try {
-
-        List<Product> produtosDetallhes = await produtoService.findProdutosDetalhesByIdVendedor(vendedor_Id,1, token);
+        List<Product> produtosDetallhes = await produtoService
+            .findProdutosDetalhesByIdVendedor(vendedor_Id, 1, token);
 
         ProdutosDestacados = [];
         ProdutosDetalhes = [];
         for (var produto in produtosDetallhes) {
           //print(produto.toJson());
-          if(produto.destaque){
+          if (produto.destaque) {
             ProdutosDestacados.add(produto);
           }
           ProdutosDetalhes.add(produto);
         }
 
-        print(produtosDetallhes.length.toString() +" Produtos no Total");
-
+        print(produtosDetallhes.length.toString() + " Produtos no Total");
       } catch (error) {
         print("Error fetching Produtos Detalhes: $error");
         // Handle error if needed
       }
-
-      return true;
+      idfectched = true;
+      return idfectched;
+    }
+    return idfectched;
 
     }
 }

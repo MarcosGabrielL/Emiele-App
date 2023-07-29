@@ -31,6 +31,7 @@ List<Product> ProdutosDestacados = [];
 List<Product>  ProdutosDetalhes = [];
 List<FileDB> logov = [];//new FileDB(id: 0, name: '', idpost: '', type: '', data: null, idvendedor: '');
 List<Cart> carrinho = [];
+bool idfectched = false;
 const kPrimaryLightColor = Color(0xFFFFECDF);
 const kPrimaryGradientColor = LinearGradient(
   begin: Alignment.topLeft,

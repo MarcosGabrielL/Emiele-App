@@ -13,7 +13,7 @@ class NavigationHelper {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (_) => LocationScreen(),
+        builder: (_) => MapScreen(),
       ),
     );
   }
